@@ -311,6 +311,7 @@ vlog -work axi_crossbar_v2_1_37  -incr -v2k5 "+incdir+../../../../Zynq7010Oscill
 
 vlog -work xil_defaultlib  -incr -v2k5 "+incdir+../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl" "+incdir+../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/6cfa/hdl" "+incdir+../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/f0b6/hdl/verilog" "+incdir+../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/a8e4/hdl/verilog" "+incdir+../../../../../../FPGA/2025.1/Vivado/data/rsb/busdef" "+incdir+../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5431/hdl/verilog" "+incdir+../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/4e08/hdl/verilog" "+incdir+../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/537f/hdl/verilog" "+incdir+../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d41f/hdl/verilog" "+incdir+E:/FPGA/2025.1/Vivado/data/xilinx_vip/include" -l xilinx_vip -l xpm -l xil_defaultlib -l axi_datamover_v5_1_37 -l axi_sg_v4_1_21 -l axi_dma_v7_1_36 -l fifo_generator_v13_2_13 -l axi_vdma_v6_3_23 -l proc_sys_reset_v5_0_17 -l axi_infrastructure_v1_1_0 -l axi_vip_v1_1_21 -l processing_system7_vip_v1_0_23 -l axi_lite_ipif_v3_0_4 -l v_tc_v6_1_14 -l v_vid_in_axi4s_v4_0_11 -l v_axi4s_vid_out_v4_0_20 -l v_tc_v6_2_10 -l xlconcat_v2_1_7 -l xlconstant_v1_1_10 -l smartconnect_v1_0 -l axi_register_slice_v2_1_35 -l generic_baseblocks_v2_1_2 -l axi_data_fifo_v2_1_35 -l axi_crossbar_v2_1_37 -l gigantic_mux -l axi_protocol_converter_v2_1_36 -l axi_clock_converter_v2_1_34 -l blk_mem_gen_v8_4_11 -l axi_dwidth_converter_v2_1_36 \
 "../../../bd/design_1/ip/design_1_axi_mem_intercon_imp_xbar_0/sim/design_1_axi_mem_intercon_imp_xbar_0.v" \
+"../../../bd/design_1/ip/design_1_system_ila_0_0/bd_0/sim/bd_f60c.v" \
 "../../../bd/design_1/ip/design_1_system_ila_0_0/bd_0/ip/ip_0/sim/bd_f60c_ila_lib_0.v" \
 
 vlog -work gigantic_mux  -incr -v2k5 "+incdir+../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl" "+incdir+../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/ec67/hdl" "+incdir+../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/6cfa/hdl" "+incdir+../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/f0b6/hdl/verilog" "+incdir+../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/a8e4/hdl/verilog" "+incdir+../../../../../../FPGA/2025.1/Vivado/data/rsb/busdef" "+incdir+../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5431/hdl/verilog" "+incdir+../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/4e08/hdl/verilog" "+incdir+../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/537f/hdl/verilog" "+incdir+../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d41f/hdl/verilog" "+incdir+E:/FPGA/2025.1/Vivado/data/xilinx_vip/include" -l xilinx_vip -l xpm -l xil_defaultlib -l axi_datamover_v5_1_37 -l axi_sg_v4_1_21 -l axi_dma_v7_1_36 -l fifo_generator_v13_2_13 -l axi_vdma_v6_3_23 -l proc_sys_reset_v5_0_17 -l axi_infrastructure_v1_1_0 -l axi_vip_v1_1_21 -l processing_system7_vip_v1_0_23 -l axi_lite_ipif_v3_0_4 -l v_tc_v6_1_14 -l v_vid_in_axi4s_v4_0_11 -l v_axi4s_vid_out_v4_0_20 -l v_tc_v6_2_10 -l xlconcat_v2_1_7 -l xlconstant_v1_1_10 -l smartconnect_v1_0 -l axi_register_slice_v2_1_35 -l generic_baseblocks_v2_1_2 -l axi_data_fifo_v2_1_35 -l axi_crossbar_v2_1_37 -l gigantic_mux -l axi_protocol_converter_v2_1_36 -l axi_clock_converter_v2_1_34 -l blk_mem_gen_v8_4_11 -l axi_dwidth_converter_v2_1_36 \
@@ -324,8 +325,8 @@ vlog -work xil_defaultlib  -incr -v2k5 "+incdir+../../../../Zynq7010Oscilloscope
 "../../../bd/design_1/ip/design_1_system_ila_0_0/bd_0/ip/ip_4/sim/bd_f60c_slot_1_b_0.v" \
 "../../../bd/design_1/ip/design_1_system_ila_0_0/bd_0/ip/ip_5/sim/bd_f60c_slot_1_ar_0.v" \
 "../../../bd/design_1/ip/design_1_system_ila_0_0/bd_0/ip/ip_6/sim/bd_f60c_slot_1_r_0.v" \
-"../../../bd/design_1/ip/design_1_system_ila_0_0/bd_0/sim/bd_f60c.v" \
 "../../../bd/design_1/ip/design_1_system_ila_0_0/sim/design_1_system_ila_0_0.v" \
+"../../../bd/design_1/ip/design_1_system_ila_1_0/bd_0/sim/bd_365d.v" \
 "../../../bd/design_1/ip/design_1_system_ila_1_0/bd_0/ip/ip_0/sim/bd_365d_ila_lib_0.v" \
 "../../../bd/design_1/ip/design_1_system_ila_1_0/bd_0/ip/ip_1/bd_365d_g_inst_0_gigantic_mux.v" \
 "../../../bd/design_1/ip/design_1_system_ila_1_0/bd_0/ip/ip_1/sim/bd_365d_g_inst_0.v" \
@@ -339,7 +340,6 @@ vlog -work xil_defaultlib  -incr -v2k5 "+incdir+../../../../Zynq7010Oscilloscope
 "../../../bd/design_1/ip/design_1_system_ila_1_0/bd_0/ip/ip_9/sim/bd_365d_slot_1_b_0.v" \
 "../../../bd/design_1/ip/design_1_system_ila_1_0/bd_0/ip/ip_10/sim/bd_365d_slot_1_ar_0.v" \
 "../../../bd/design_1/ip/design_1_system_ila_1_0/bd_0/ip/ip_11/sim/bd_365d_slot_1_r_0.v" \
-"../../../bd/design_1/ip/design_1_system_ila_1_0/bd_0/sim/bd_365d.v" \
 "../../../bd/design_1/ip/design_1_system_ila_1_0/sim/design_1_system_ila_1_0.v" \
 "../../../bd/design_1/sim/design_1.v" \
 

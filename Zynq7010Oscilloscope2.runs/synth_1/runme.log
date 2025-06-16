@@ -8,7 +8,7 @@
   **** SW Build 6140274 on Thu May 22 00:12:29 MDT 2025
   **** IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
   **** SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
-  **** Start of session at: Mon Jun 16 09:26:18 2025
+  **** Start of session at: Tue Jun 17 00:14:38 2025
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 
@@ -21,7 +21,7 @@ It is recommended to migrate these utility IPs to inline hdl  using the command 
 More information on inline hdl is available in UG994.
 Utility IP Component Instances:
  design_1_xlconcat_0_2
-add_files: Time (s): cpu = 00:00:04 ; elapsed = 00:00:08 . Memory (MB): peak = 635.328 ; gain = 146.297
+add_files: Time (s): cpu = 00:00:06 ; elapsed = 00:00:16 . Memory (MB): peak = 636.602 ; gain = 148.746
 Command: synth_design -top design_1_wrapper -part xc7z010clg400-1
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010'
@@ -29,9 +29,9 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010
 INFO: [Device 21-403] Loading part xc7z010clg400-1
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 23540
+INFO: [Synth 8-7075] Helper process launched with PID 34804
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:12 . Memory (MB): peak = 1330.242 ; gain = 491.832
+Starting RTL Elaboration : Time (s): cpu = 00:00:11 ; elapsed = 00:00:23 . Memory (MB): peak = 1332.320 ; gain = 493.199
 ---------------------------------------------------------------------------------
 WARNING: [Synth 8-10507] attribute 'X_INTERFACE_MODE' is already specified; last one will take precedence [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_7/synth/bd_afc3_aroutsw_0.sv:94]
 WARNING: [Synth 8-10507] attribute 'X_INTERFACE_MODE' is already specified; last one will take precedence [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_7/synth/bd_afc3_aroutsw_0.sv:95]
@@ -168,6 +168,444 @@ WARNING: [Synth 8-9112] actual for formal port 'rst' is neither a static name no
 WARNING: [Synth 8-9112] actual for formal port 's1_clkout0' is neither a static name nor a globally static expression [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/9097/src/axi_dynclk.vhd:227]
 WARNING: [Synth 8-9112] actual for formal port 's1_clkfbout' is neither a static name nor a globally static expression [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/9097/src/axi_dynclk.vhd:228]
 WARNING: [Synth 8-9112] actual for formal port 's1_lock' is neither a static name nor a globally static expression [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/9097/src/axi_dynclk.vhd:230]
+WARNING: [Synth 8-7071] port 'M03_AXI_awprot' of module 'design_1_axi_smc_0' is unconnected for instance 'axi_smc' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:504]
+WARNING: [Synth 8-7071] port 'M03_AXI_wstrb' of module 'design_1_axi_smc_0' is unconnected for instance 'axi_smc' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:504]
+WARNING: [Synth 8-7071] port 'M03_AXI_arprot' of module 'design_1_axi_smc_0' is unconnected for instance 'axi_smc' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:504]
+WARNING: [Synth 8-7071] port 'M04_AXI_awprot' of module 'design_1_axi_smc_0' is unconnected for instance 'axi_smc' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:504]
+WARNING: [Synth 8-7071] port 'M04_AXI_arprot' of module 'design_1_axi_smc_0' is unconnected for instance 'axi_smc' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:504]
+WARNING: [Synth 8-7023] instance 'axi_smc' of module 'design_1_axi_smc_0' has 135 connections declared, but only 130 given [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:504]
+INFO: [Synth 8-638] synthesizing module 'design_1_axi_vdma_0_0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/synth/design_1_axi_vdma_0_0.vhd:106]
+	Parameter C_S_AXI_LITE_ADDR_WIDTH bound to: 9 - type: integer 
+	Parameter C_S_AXI_LITE_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_DLYTMR_RESOLUTION bound to: 125 - type: integer 
+	Parameter C_PRMRY_IS_ACLK_ASYNC bound to: 0 - type: integer 
+	Parameter C_ENABLE_VIDPRMTR_READS bound to: 1 - type: integer 
+	Parameter C_DYNAMIC_RESOLUTION bound to: 1 - type: integer 
+	Parameter C_NUM_FSTORES bound to: 1 - type: integer 
+	Parameter C_USE_FSYNC bound to: 1 - type: integer 
+	Parameter C_USE_MM2S_FSYNC bound to: 0 - type: integer 
+	Parameter C_USE_S2MM_FSYNC bound to: 2 - type: integer 
+	Parameter C_FLUSH_ON_FSYNC bound to: 1 - type: integer 
+	Parameter C_INCLUDE_INTERNAL_GENLOCK bound to: 1 - type: integer 
+	Parameter C_INCLUDE_SG bound to: 0 - type: integer 
+	Parameter C_M_AXI_SG_ADDR_WIDTH bound to: 32 - type: integer 
+	Parameter C_M_AXI_SG_DATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_INCLUDE_MM2S bound to: 1 - type: integer 
+	Parameter C_MM2S_GENLOCK_MODE bound to: 1 - type: integer 
+	Parameter C_MM2S_GENLOCK_NUM_MASTERS bound to: 1 - type: integer 
+	Parameter C_MM2S_GENLOCK_REPEAT_EN bound to: 0 - type: integer 
+	Parameter C_MM2S_SOF_ENABLE bound to: 1 - type: integer 
+	Parameter C_INCLUDE_MM2S_DRE bound to: 1 - type: integer 
+	Parameter C_INCLUDE_MM2S_SF bound to: 0 - type: integer 
+	Parameter C_MM2S_LINEBUFFER_DEPTH bound to: 4096 - type: integer 
+	Parameter C_MM2S_LINEBUFFER_THRESH bound to: 4 - type: integer 
+	Parameter C_MM2S_MAX_BURST_LENGTH bound to: 16 - type: integer 
+	Parameter C_M_AXI_MM2S_ADDR_WIDTH bound to: 32 - type: integer 
+	Parameter C_M_AXI_MM2S_DATA_WIDTH bound to: 64 - type: integer 
+	Parameter C_M_AXIS_MM2S_TDATA_WIDTH bound to: 24 - type: integer 
+	Parameter C_M_AXIS_MM2S_TUSER_BITS bound to: 1 - type: integer 
+	Parameter C_INCLUDE_S2MM bound to: 0 - type: integer 
+	Parameter C_S2MM_GENLOCK_MODE bound to: 0 - type: integer 
+	Parameter C_S2MM_GENLOCK_NUM_MASTERS bound to: 1 - type: integer 
+	Parameter C_S2MM_GENLOCK_REPEAT_EN bound to: 1 - type: integer 
+	Parameter C_S2MM_SOF_ENABLE bound to: 1 - type: integer 
+	Parameter C_INCLUDE_S2MM_DRE bound to: 0 - type: integer 
+	Parameter C_INCLUDE_S2MM_SF bound to: 1 - type: integer 
+	Parameter C_S2MM_LINEBUFFER_DEPTH bound to: 512 - type: integer 
+	Parameter C_S2MM_LINEBUFFER_THRESH bound to: 4 - type: integer 
+	Parameter C_S2MM_MAX_BURST_LENGTH bound to: 8 - type: integer 
+	Parameter C_M_AXI_S2MM_ADDR_WIDTH bound to: 32 - type: integer 
+	Parameter C_M_AXI_S2MM_DATA_WIDTH bound to: 64 - type: integer 
+	Parameter C_S_AXIS_S2MM_TDATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_S_AXIS_S2MM_TUSER_BITS bound to: 1 - type: integer 
+	Parameter C_ENABLE_DEBUG_ALL bound to: 0 - type: integer 
+	Parameter C_ENABLE_DEBUG_INFO_0 bound to: 0 - type: integer 
+	Parameter C_ENABLE_DEBUG_INFO_1 bound to: 0 - type: integer 
+	Parameter C_ENABLE_DEBUG_INFO_2 bound to: 0 - type: integer 
+	Parameter C_ENABLE_DEBUG_INFO_3 bound to: 0 - type: integer 
+	Parameter C_ENABLE_DEBUG_INFO_4 bound to: 0 - type: integer 
+	Parameter C_ENABLE_DEBUG_INFO_5 bound to: 0 - type: integer 
+	Parameter C_ENABLE_DEBUG_INFO_6 bound to: 1 - type: integer 
+	Parameter C_ENABLE_DEBUG_INFO_7 bound to: 1 - type: integer 
+	Parameter C_ENABLE_DEBUG_INFO_8 bound to: 0 - type: integer 
+	Parameter C_ENABLE_DEBUG_INFO_9 bound to: 0 - type: integer 
+	Parameter C_ENABLE_DEBUG_INFO_10 bound to: 0 - type: integer 
+	Parameter C_ENABLE_DEBUG_INFO_11 bound to: 0 - type: integer 
+	Parameter C_ENABLE_DEBUG_INFO_12 bound to: 0 - type: integer 
+	Parameter C_ENABLE_DEBUG_INFO_13 bound to: 0 - type: integer 
+	Parameter C_ENABLE_DEBUG_INFO_14 bound to: 1 - type: integer 
+	Parameter C_ENABLE_DEBUG_INFO_15 bound to: 1 - type: integer 
+	Parameter C_INSTANCE bound to: axi_vdma - type: string 
+	Parameter C_SELECT_XPM bound to: 0 - type: integer 
+	Parameter C_ENABLE_VERT_FLIP bound to: 0 - type: integer 
+	Parameter C_FAMILY bound to: zynq - type: string 
+INFO: [Synth 8-3491] module 'axi_vdma' declared at 'e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:68582' bound to instance 'U0' of component 'axi_vdma' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/synth/design_1_axi_vdma_0_0.vhd:350]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:69021]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_rst_module' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:16221]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_reset' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:14734]
+	Parameter DEST_SYNC_FF bound to: 4 - type: integer 
+	Parameter INIT_SYNC_FF bound to: 0 - type: integer 
+	Parameter REG_OUTPUT bound to: 0 - type: integer 
+	Parameter RST_USED bound to: 0 - type: integer 
+	Parameter SIM_ASSERT_CHK bound to: 0 - type: integer 
+INFO: [Synth 8-3491] module 'xpm_cdc_pulse' declared at 'E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:714' bound to instance 'LITE_RESET_CDC_I' of component 'xpm_cdc_pulse' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:14942]
+	Parameter DEST_SYNC_FF bound to: 4 - type: integer 
+	Parameter INIT_SYNC_FF bound to: 0 - type: integer 
+	Parameter SIM_ASSERT_CHK bound to: 0 - type: integer 
+	Parameter SRC_INPUT_REG bound to: 1 - type: integer 
+INFO: [Synth 8-3491] module 'xpm_cdc_single' declared at 'E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:152' bound to instance 'LITE_IDLE_CDC_I' of component 'xpm_cdc_single' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:14988]
+	Parameter DEST_SYNC_FF bound to: 4 - type: integer 
+	Parameter INIT_SYNC_FF bound to: 0 - type: integer 
+	Parameter SIM_ASSERT_CHK bound to: 0 - type: integer 
+	Parameter SRC_INPUT_REG bound to: 1 - type: integer 
+INFO: [Synth 8-3491] module 'xpm_cdc_single' declared at 'E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:152' bound to instance 'LITE_MIN_CDC_I' of component 'xpm_cdc_single' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:15055]
+	Parameter DEST_SYNC_FF bound to: 4 - type: integer 
+	Parameter INIT_SYNC_FF bound to: 0 - type: integer 
+	Parameter REG_OUTPUT bound to: 0 - type: integer 
+	Parameter RST_USED bound to: 0 - type: integer 
+	Parameter SIM_ASSERT_CHK bound to: 0 - type: integer 
+INFO: [Synth 8-3491] module 'xpm_cdc_pulse' declared at 'E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:714' bound to instance 'LITE_CLR_CDC_I' of component 'xpm_cdc_pulse' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:15097]
+	Parameter DEST_SYNC_FF bound to: 4 - type: integer 
+	Parameter INIT_SYNC_FF bound to: 0 - type: integer 
+	Parameter REG_OUTPUT bound to: 0 - type: integer 
+	Parameter RST_USED bound to: 0 - type: integer 
+	Parameter SIM_ASSERT_CHK bound to: 0 - type: integer 
+INFO: [Synth 8-3491] module 'xpm_cdc_pulse' declared at 'E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:714' bound to instance 'AXIS_RESET_CDC_I' of component 'xpm_cdc_pulse' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:15147]
+	Parameter DEST_SYNC_FF bound to: 4 - type: integer 
+	Parameter INIT_SYNC_FF bound to: 0 - type: integer 
+	Parameter SIM_ASSERT_CHK bound to: 0 - type: integer 
+	Parameter SRC_INPUT_REG bound to: 1 - type: integer 
+INFO: [Synth 8-3491] module 'xpm_cdc_single' declared at 'E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:152' bound to instance 'AXIS_IDLE_CDC_I' of component 'xpm_cdc_single' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:15194]
+	Parameter DEST_SYNC_FF bound to: 4 - type: integer 
+	Parameter INIT_SYNC_FF bound to: 0 - type: integer 
+	Parameter SIM_ASSERT_CHK bound to: 0 - type: integer 
+	Parameter SRC_INPUT_REG bound to: 1 - type: integer 
+INFO: [Synth 8-3491] module 'xpm_cdc_single' declared at 'E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:152' bound to instance 'AXIS_MIN_CDC_I' of component 'xpm_cdc_single' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:15256]
+	Parameter DEST_SYNC_FF bound to: 4 - type: integer 
+	Parameter INIT_SYNC_FF bound to: 0 - type: integer 
+	Parameter REG_OUTPUT bound to: 0 - type: integer 
+	Parameter RST_USED bound to: 0 - type: integer 
+	Parameter SIM_ASSERT_CHK bound to: 0 - type: integer 
+INFO: [Synth 8-3491] module 'xpm_cdc_pulse' declared at 'E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:714' bound to instance 'AXIS_CLR_CDC_I' of component 'xpm_cdc_pulse' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:15299]
+	Parameter DEST_SYNC_FF bound to: 4 - type: integer 
+	Parameter INIT_SYNC_FF bound to: 0 - type: integer 
+	Parameter SIM_ASSERT_CHK bound to: 0 - type: integer 
+	Parameter SRC_INPUT_REG bound to: 1 - type: integer 
+INFO: [Synth 8-3491] module 'xpm_cdc_single' declared at 'E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:152' bound to instance 'HARD_RESET_CDC_I' of component 'xpm_cdc_single' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:15769]
+	Parameter DEST_SYNC_FF bound to: 4 - type: integer 
+	Parameter INIT_SYNC_FF bound to: 0 - type: integer 
+	Parameter SIM_ASSERT_CHK bound to: 0 - type: integer 
+	Parameter SRC_INPUT_REG bound to: 1 - type: integer 
+INFO: [Synth 8-3491] module 'xpm_cdc_single' declared at 'E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:152' bound to instance 'AXIS_RESET_CDC_I' of component 'xpm_cdc_single' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:15901]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_reset' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:14734]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_rst_module' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:16221]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_reg_if' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:39626]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_lite_if' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:16708]
+	Parameter DEST_SYNC_FF bound to: 4 - type: integer 
+	Parameter INIT_SYNC_FF bound to: 0 - type: integer 
+	Parameter REG_OUTPUT bound to: 0 - type: integer 
+	Parameter RST_USED bound to: 1 - type: integer 
+	Parameter SIM_ASSERT_CHK bound to: 0 - type: integer 
+INFO: [Synth 8-3491] module 'xpm_cdc_pulse' declared at 'E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:714' bound to instance 'LITE_WVALID_MM2S_CDC_I' of component 'xpm_cdc_pulse' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:17956]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_lite_if' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:16708]
+	Parameter DEST_SYNC_FF bound to: 3 - type: integer 
+	Parameter INIT_SYNC_FF bound to: 0 - type: integer 
+	Parameter SIM_ASSERT_CHK bound to: 0 - type: integer 
+	Parameter SRC_INPUT_REG bound to: 1 - type: integer 
+INFO: [Synth 8-3491] module 'xpm_cdc_single' declared at 'E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:152' bound to instance 'MM2S_INTRPT_CROSSING_I' of component 'xpm_cdc_single' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:39844]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_reg_if' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:39626]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_intrpt' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:40326]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_intrpt' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:40326]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_mm2s_axis_dwidth_converter' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:67723]
+	Parameter C_S_AXIS_TDATA_WIDTH bound to: 32 - type: integer 
+	Parameter C_M_AXIS_TDATA_WIDTH bound to: 24 - type: integer 
+	Parameter C_AXIS_TID_WIDTH bound to: 1 - type: integer 
+	Parameter C_AXIS_TDEST_WIDTH bound to: 1 - type: integer 
+	Parameter C_S_AXIS_TUSER_WIDTH bound to: 4 - type: integer 
+	Parameter C_M_AXIS_TUSER_WIDTH bound to: 3 - type: integer 
+	Parameter C_FAMILY bound to: zynq - type: string 
+INFO: [Synth 8-3491] module 'axi_vdma_v6_3_23_axis_dwidth_converter_v1_0_axis_dwidth_converter' declared at 'e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.v:1930' bound to instance 'MM2S_AXIS_DWIDTH_CONVERTER_I' of component 'axi_vdma_v6_3_23_axis_dwidth_converter_v1_0_axis_dwidth_converter' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:67814]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_mm2s_axis_dwidth_converter' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:67723]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_reg_module' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:38785]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_register' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:18449]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_register' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:18449]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_regdirect' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:20259]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_regdirect' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:20259]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_reg_mux' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:29316]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_reg_mux' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:29316]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_reg_module' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:38785]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_mngr' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:63367]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_sm' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:61047]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_sm' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:61047]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_cmdsts_if' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:62256]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_cmdsts_if' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:62256]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_sts_mngr' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:62757]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_sts_mngr' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:62757]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_vidreg_module' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:55268]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_vregister' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:53192]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_vregister' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:53192]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_vaddrreg_mux' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:54757]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_vaddrreg_mux' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:54757]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_vidreg_module' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:55268]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_genlock_mngr' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:57783]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_genlock_mux' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:56537]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_genlock_mux' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:56537]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_greycoder' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:57506]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_greycoder' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:57506]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_genlock_mngr' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:57783]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_mngr' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:63367]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_fsync_gen' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:52331]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_fsync_gen' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:52331]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_vid_cdc' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:13230]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_vid_cdc' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:13230]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_sof_gen' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:40930]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_sof_gen' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:40930]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_mm2s_linebuf' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:46006]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_sfifo' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:41717]
+	Parameter FIFO_MEMORY_TYPE bound to: auto - type: string 
+	Parameter FIFO_WRITE_DEPTH bound to: 4096 - type: integer 
+	Parameter WRITE_DATA_WIDTH bound to: 38 - type: integer 
+	Parameter READ_MODE bound to: fwft - type: string 
+	Parameter FIFO_READ_LATENCY bound to: 0 - type: integer 
+	Parameter FULL_RESET_VALUE bound to: 0 - type: integer 
+	Parameter USE_ADV_FEATURES bound to: 1717 - type: string 
+	Parameter READ_DATA_WIDTH bound to: 38 - type: integer 
+	Parameter WR_DATA_COUNT_WIDTH bound to: 13 - type: integer 
+	Parameter PROG_FULL_THRESH bound to: 10 - type: integer 
+	Parameter RD_DATA_COUNT_WIDTH bound to: 13 - type: integer 
+	Parameter PROG_EMPTY_THRESH bound to: 10 - type: integer 
+	Parameter DOUT_RESET_VALUE bound to: 0 - type: string 
+	Parameter ECC_MODE bound to: no_ecc - type: string 
+	Parameter WAKEUP_TIME bound to: 0 - type: integer 
+INFO: [Synth 8-3491] module 'xpm_fifo_sync' declared at 'E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1975' bound to instance 'xpm_fifo_sync_inst' of component 'xpm_fifo_sync' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:41924]
+INFO: [Synth 8-6059] Synth Info: [XPM_MEMORY 20-1] MEMORY_PRIMITIVE (0) instructs Vivado Synthesis to choose the memory primitive type. Depending on their values, other XPM_MEMORY parameters may preclude the choice of certain memory primitive types. Review XPM_MEMORY documentation and parameter values to understand any limitations, or set MEMORY_PRIMITIVE to a different value.   [E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv:522]
+INFO: [Synth 8-226] default block is never used [E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1220]
+INFO: [Synth 8-226] default block is never used [E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1287]
+INFO: [Synth 8-226] default block is never used [E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1309]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_sfifo' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:41717]
+INFO: [Synth 8-638] synthesizing module 'axi_vdma_skid_buf' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:41171]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_skid_buf' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:41171]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma_mm2s_linebuf' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:46006]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover__parameterized0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:55430]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_mm2s_full_wrap' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:53569]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_reset__parameterized0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:259]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_reset__parameterized0' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:259]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_cmd_status__parameterized0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:2913]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_fifo__parameterized7' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:2109]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_v5_1_37_srl_fifo__parameterized5' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:1881]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_v5_1_37_srl_fifo__parameterized5' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:1881]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_fifo__parameterized7' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:2109]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_fifo__parameterized8' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:2109]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_v5_1_37_srl_fifo__parameterized6' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:1881]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_v5_1_37_srl_fifo__parameterized6' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:1881]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_fifo__parameterized8' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:2109]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_cmd_status__parameterized0' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:2913]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_rd_status_cntl' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:13919]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_rd_status_cntl' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:13919]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_pcc' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:7613]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_strb_gen2__parameterized1' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:4545]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_strb_gen2__parameterized1' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:4545]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_strb_gen2__parameterized2' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:4545]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_strb_gen2__parameterized2' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:4545]
+INFO: [Synth 8-226] default block is never used [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:9687]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_pcc' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:7613]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_addr_cntl__parameterized0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:10191]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_addr_cntl__parameterized0' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:10191]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_rddata_cntl' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:12364]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_rdmux' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:10866]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_rdmux' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:10866]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_fifo__parameterized9' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:2109]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_v5_1_37_srl_fifo__parameterized7' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:1881]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_v5_1_37_srl_fifo__parameterized7' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:1881]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_fifo__parameterized9' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:2109]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_rddata_cntl' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:12364]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_rd_sf' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:20342]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_fifo__parameterized10' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:2109]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_v5_1_37_srl_fifo__parameterized8' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:1881]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_v5_1_37_srl_fifo__parameterized8' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:1881]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_fifo__parameterized10' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:2109]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_sfifo_autord__parameterized1' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:1372]
+	Parameter FIFO_MEMORY_TYPE bound to: block - type: string 
+	Parameter FIFO_WRITE_DEPTH bound to: 128 - type: integer 
+	Parameter WRITE_DATA_WIDTH bound to: 75 - type: integer 
+	Parameter READ_MODE bound to: fwft - type: string 
+	Parameter FIFO_READ_LATENCY bound to: 0 - type: integer 
+	Parameter FULL_RESET_VALUE bound to: 1 - type: integer 
+	Parameter USE_ADV_FEATURES bound to: 1F1F - type: string 
+	Parameter READ_DATA_WIDTH bound to: 75 - type: integer 
+	Parameter WR_DATA_COUNT_WIDTH bound to: 8 - type: integer 
+	Parameter PROG_FULL_THRESH bound to: 10 - type: integer 
+	Parameter RD_DATA_COUNT_WIDTH bound to: 8 - type: integer 
+	Parameter PROG_EMPTY_THRESH bound to: 10 - type: integer 
+	Parameter DOUT_RESET_VALUE bound to: 0 - type: string 
+	Parameter ECC_MODE bound to: no_ecc - type: string 
+	Parameter WAKEUP_TIME bound to: 0 - type: integer 
+INFO: [Synth 8-3491] module 'xpm_fifo_sync' declared at 'E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1975' bound to instance 'I_SYNC_FIFOGEN_FIFO' of component 'xpm_fifo_sync' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:1498]
+INFO: [Synth 8-226] default block is never used [E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1220]
+INFO: [Synth 8-226] default block is never used [E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1287]
+INFO: [Synth 8-226] default block is never used [E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1309]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_sfifo_autord__parameterized1' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:1372]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_rd_sf' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:20342]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_mm2s_dre' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:30527]
+INFO: [Synth 8-226] default block is never used [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:35763]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_dre_mux2_1_x_n' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:30032]
+INFO: [Synth 8-226] default block is never used [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:30048]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_dre_mux2_1_x_n' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:30032]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_dre_mux4_1_x_n' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:30173]
+INFO: [Synth 8-226] default block is never used [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:30189]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_dre_mux4_1_x_n' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:30173]
+INFO: [Synth 8-226] default block is never used [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:35992]
+INFO: [Synth 8-226] default block is never used [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:36039]
+INFO: [Synth 8-226] default block is never used [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:36086]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_mm2s_dre' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:30527]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_mm2s_full_wrap' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:53569]
+INFO: [Synth 8-638] synthesizing module 'axi_datamover_s2mm_omit_wrap' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:49625]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover_s2mm_omit_wrap' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:49625]
+INFO: [Synth 8-256] done synthesizing module 'axi_datamover__parameterized0' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/d44a/hdl/axi_datamover_v5_1_vh_rfs.vhd:55430]
+INFO: [Synth 8-256] done synthesizing module 'axi_vdma' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5fb3/hdl/axi_vdma_v6_3_rfs.vhd:69021]
+INFO: [Synth 8-256] done synthesizing module 'design_1_axi_vdma_0_0' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_axi_vdma_0_0/synth/design_1_axi_vdma_0_0.vhd:106]
+WARNING: [Synth 8-7071] port 'mm2s_frame_ptr_out' of module 'design_1_axi_vdma_0_0' is unconnected for instance 'axi_vdma_0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:635]
+WARNING: [Synth 8-7071] port 'm_axis_mm2s_tkeep' of module 'design_1_axi_vdma_0_0' is unconnected for instance 'axi_vdma_0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:635]
+WARNING: [Synth 8-7023] instance 'axi_vdma_0' of module 'design_1_axi_vdma_0_0' has 42 connections declared, but only 40 given [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:635]
+WARNING: [Synth 8-7071] port 'M_AXI_GP0_ARESETN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:505]
+WARNING: [Synth 8-7071] port 'M_AXI_GP1_ARESETN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:505]
+WARNING: [Synth 8-7071] port 'S_AXI_GP0_ARESETN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:505]
+WARNING: [Synth 8-7071] port 'S_AXI_GP1_ARESETN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:505]
+WARNING: [Synth 8-7071] port 'S_AXI_ACP_ARESETN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:505]
+WARNING: [Synth 8-7071] port 'S_AXI_HP0_ARESETN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:505]
+WARNING: [Synth 8-7071] port 'S_AXI_HP1_ARESETN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:505]
+WARNING: [Synth 8-7071] port 'S_AXI_HP2_ARESETN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:505]
+WARNING: [Synth 8-7071] port 'S_AXI_HP3_ARESETN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:505]
+WARNING: [Synth 8-7071] port 'DMA0_RSTN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:505]
+WARNING: [Synth 8-7071] port 'DMA1_RSTN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:505]
+WARNING: [Synth 8-7071] port 'DMA2_RSTN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:505]
+WARNING: [Synth 8-7071] port 'DMA3_RSTN' of module 'processing_system7_v5_5_processing_system7' is unconnected for instance 'inst' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:505]
+WARNING: [Synth 8-7023] instance 'inst' of module 'processing_system7_v5_5_processing_system7' has 685 connections declared, but only 672 given [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_processing_system7_0_0/synth/design_1_processing_system7_0_0.v:505]
+WARNING: [Synth 8-7071] port 'I2C0_SDA_O' of module 'design_1_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:676]
+WARNING: [Synth 8-7071] port 'I2C0_SDA_T' of module 'design_1_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:676]
+WARNING: [Synth 8-7071] port 'I2C0_SCL_O' of module 'design_1_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:676]
+WARNING: [Synth 8-7071] port 'I2C0_SCL_T' of module 'design_1_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:676]
+WARNING: [Synth 8-7071] port 'USB0_PORT_INDCTL' of module 'design_1_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:676]
+WARNING: [Synth 8-7071] port 'USB0_VBUS_PWRSELECT' of module 'design_1_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:676]
+WARNING: [Synth 8-7071] port 'S_AXI_HP0_RCOUNT' of module 'design_1_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:676]
+WARNING: [Synth 8-7071] port 'S_AXI_HP0_WCOUNT' of module 'design_1_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:676]
+WARNING: [Synth 8-7071] port 'S_AXI_HP0_RACOUNT' of module 'design_1_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:676]
+WARNING: [Synth 8-7071] port 'S_AXI_HP0_WACOUNT' of module 'design_1_processing_system7_0_0' is unconnected for instance 'processing_system7_0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:676]
+WARNING: [Synth 8-7023] instance 'processing_system7_0' of module 'design_1_processing_system7_0_0' has 119 connections declared, but only 109 given [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:676]
+INFO: [Synth 8-638] synthesizing module 'design_1_rgb2dvi_0_0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_0_0/synth/design_1_rgb2dvi_0_0.vhd:73]
+	Parameter kGenerateSerialClk bound to: 0 - type: bool 
+	Parameter kClkPrimitive bound to: MMCM - type: string 
+	Parameter kRstActiveHigh bound to: 0 - type: bool 
+	Parameter kClkRange bound to: 1 - type: integer 
+INFO: [Synth 8-3491] module 'rgb2dvi' declared at 'e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5c79/src/rgb2dvi.vhd:61' bound to instance 'U0' of component 'rgb2dvi' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_0_0/synth/design_1_rgb2dvi_0_0.vhd:126]
+INFO: [Synth 8-638] synthesizing module 'rgb2dvi' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5c79/src/rgb2dvi.vhd:91]
+INFO: [Synth 8-638] synthesizing module 'ResetBridge' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5c79/src/SyncAsyncReset.vhd:72]
+INFO: [Synth 8-638] synthesizing module 'SyncAsync' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5c79/src/SyncAsync.vhd:72]
+INFO: [Synth 8-256] done synthesizing module 'SyncAsync' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5c79/src/SyncAsync.vhd:72]
+INFO: [Synth 8-256] done synthesizing module 'ResetBridge' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5c79/src/SyncAsyncReset.vhd:72]
+INFO: [Synth 8-638] synthesizing module 'OutputSERDES' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5c79/src/OutputSERDES.vhd:76]
+	Parameter IOSTANDARD bound to: TMDS_33 - type: string 
+INFO: [Synth 8-113] binding component instance 'OutputBuffer' to cell 'OBUFDS' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5c79/src/OutputSERDES.vhd:83]
+	Parameter DATA_RATE_OQ bound to: DDR - type: string 
+	Parameter DATA_RATE_TQ bound to: SDR - type: string 
+	Parameter DATA_WIDTH bound to: 10 - type: integer 
+	Parameter SERDES_MODE bound to: MASTER - type: string 
+	Parameter TBYTE_CTL bound to: FALSE - type: string 
+	Parameter TBYTE_SRC bound to: FALSE - type: string 
+	Parameter TRISTATE_WIDTH bound to: 1 - type: integer 
+INFO: [Synth 8-113] binding component instance 'SerializerMaster' to cell 'OSERDESE2' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5c79/src/OutputSERDES.vhd:92]
+	Parameter DATA_RATE_OQ bound to: DDR - type: string 
+	Parameter DATA_RATE_TQ bound to: SDR - type: string 
+	Parameter DATA_WIDTH bound to: 10 - type: integer 
+	Parameter SERDES_MODE bound to: SLAVE - type: string 
+	Parameter TBYTE_CTL bound to: FALSE - type: string 
+	Parameter TBYTE_SRC bound to: FALSE - type: string 
+	Parameter TRISTATE_WIDTH bound to: 1 - type: integer 
+INFO: [Synth 8-113] binding component instance 'SerializerSlave' to cell 'OSERDESE2' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5c79/src/OutputSERDES.vhd:135]
+INFO: [Synth 8-256] done synthesizing module 'OutputSERDES' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5c79/src/OutputSERDES.vhd:76]
+INFO: [Synth 8-638] synthesizing module 'TMDS_Encoder' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5c79/src/TMDS_Encoder.vhd:80]
+INFO: [Synth 8-256] done synthesizing module 'TMDS_Encoder' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5c79/src/TMDS_Encoder.vhd:80]
+INFO: [Synth 8-256] done synthesizing module 'rgb2dvi' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5c79/src/rgb2dvi.vhd:91]
+INFO: [Synth 8-256] done synthesizing module 'design_1_rgb2dvi_0_0' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_0_0/synth/design_1_rgb2dvi_0_0.vhd:73]
+INFO: [Synth 8-638] synthesizing module 'design_1_proc_sys_reset_0_0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_proc_sys_reset_0_0/synth/design_1_proc_sys_reset_0_0.vhd:74]
+	Parameter C_FAMILY bound to: zynq - type: string 
+	Parameter C_EXT_RST_WIDTH bound to: 4 - type: integer 
+	Parameter C_AUX_RST_WIDTH bound to: 4 - type: integer 
+	Parameter C_EXT_RESET_HIGH bound to: 1'b0 
+	Parameter C_AUX_RESET_HIGH bound to: 1'b0 
+	Parameter C_NUM_BUS_RST bound to: 1 - type: integer 
+	Parameter C_NUM_PERP_RST bound to: 1 - type: integer 
+	Parameter C_NUM_INTERCONNECT_ARESETN bound to: 1 - type: integer 
+	Parameter C_NUM_PERP_ARESETN bound to: 1 - type: integer 
+INFO: [Synth 8-3491] module 'proc_sys_reset' declared at 'e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/9438/hdl/proc_sys_reset_v5_0_vh_rfs.vhd:1243' bound to instance 'U0' of component 'proc_sys_reset' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_proc_sys_reset_0_0/synth/design_1_proc_sys_reset_0_0.vhd:139]
+INFO: [Synth 8-638] synthesizing module 'proc_sys_reset__parameterized1' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/9438/hdl/proc_sys_reset_v5_0_vh_rfs.vhd:1302]
+	Parameter INIT bound to: 1'b1 
+INFO: [Synth 8-113] binding component instance 'FDRE_inst' to cell 'FDRE' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/9438/hdl/proc_sys_reset_v5_0_vh_rfs.vhd:1371]
+	Parameter INIT bound to: 1'b1 
+INFO: [Synth 8-113] binding component instance 'FDRE_BSR' to cell 'FDRE' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/9438/hdl/proc_sys_reset_v5_0_vh_rfs.vhd:1387]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'FDRE_BSR_N' to cell 'FDRE' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/9438/hdl/proc_sys_reset_v5_0_vh_rfs.vhd:1413]
+	Parameter INIT bound to: 1'b1 
+INFO: [Synth 8-113] binding component instance 'FDRE_PER' to cell 'FDRE' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/9438/hdl/proc_sys_reset_v5_0_vh_rfs.vhd:1436]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-113] binding component instance 'FDRE_PER_N' to cell 'FDRE' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/9438/hdl/proc_sys_reset_v5_0_vh_rfs.vhd:1460]
+INFO: [Synth 8-638] synthesizing module 'lpf__parameterized0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/9438/hdl/proc_sys_reset_v5_0_vh_rfs.vhd:821]
+INFO: [Synth 8-3491] module 'SRL16' declared at 'E:/FPGA/2025.1/Vivado/scripts/rt/data/unisim_comp.v:158596' bound to instance 'POR_SRL_I' of component 'SRL16' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/9438/hdl/proc_sys_reset_v5_0_vh_rfs.vhd:873]
+	Parameter DEST_SYNC_FF bound to: 4 - type: integer 
+	Parameter INIT_SYNC_FF bound to: 0 - type: integer 
+	Parameter SIM_ASSERT_CHK bound to: 0 - type: integer 
+	Parameter SRC_INPUT_REG bound to: 0 - type: integer 
+INFO: [Synth 8-3491] module 'xpm_cdc_single' declared at 'E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:152' bound to instance 'ACT_LO_EXT' of component 'xpm_cdc_single' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/9438/hdl/proc_sys_reset_v5_0_vh_rfs.vhd:968]
+	Parameter DEST_SYNC_FF bound to: 4 - type: integer 
+	Parameter INIT_SYNC_FF bound to: 0 - type: integer 
+	Parameter SIM_ASSERT_CHK bound to: 0 - type: integer 
+	Parameter SRC_INPUT_REG bound to: 0 - type: integer 
+INFO: [Synth 8-3491] module 'xpm_cdc_single' declared at 'E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv:152' bound to instance 'ACT_LO_AUX' of component 'xpm_cdc_single' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/9438/hdl/proc_sys_reset_v5_0_vh_rfs.vhd:1015]
+INFO: [Synth 8-256] done synthesizing module 'lpf__parameterized0' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/9438/hdl/proc_sys_reset_v5_0_vh_rfs.vhd:821]
+INFO: [Synth 8-256] done synthesizing module 'proc_sys_reset__parameterized1' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/9438/hdl/proc_sys_reset_v5_0_vh_rfs.vhd:1302]
+INFO: [Synth 8-256] done synthesizing module 'design_1_proc_sys_reset_0_0' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_proc_sys_reset_0_0/synth/design_1_proc_sys_reset_0_0.vhd:74]
+WARNING: [Synth 8-7071] port 'mb_reset' of module 'design_1_proc_sys_reset_0_0' is unconnected for instance 'rst_clk_32M_0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:799]
+WARNING: [Synth 8-7071] port 'bus_struct_reset' of module 'design_1_proc_sys_reset_0_0' is unconnected for instance 'rst_clk_32M_0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:799]
+WARNING: [Synth 8-7071] port 'peripheral_reset' of module 'design_1_proc_sys_reset_0_0' is unconnected for instance 'rst_clk_32M_0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:799]
+WARNING: [Synth 8-7071] port 'interconnect_aresetn' of module 'design_1_proc_sys_reset_0_0' is unconnected for instance 'rst_clk_32M_0' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:799]
+WARNING: [Synth 8-7023] instance 'rst_clk_32M_0' of module 'design_1_proc_sys_reset_0_0' has 10 connections declared, but only 6 given [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:799]
+INFO: [Synth 8-638] synthesizing module 'design_1_rst_ps7_0_100M_1' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_rst_ps7_0_100M_1/synth/design_1_rst_ps7_0_100M_1.vhd:74]
+	Parameter C_FAMILY bound to: zynq - type: string 
+	Parameter C_EXT_RST_WIDTH bound to: 4 - type: integer 
+	Parameter C_AUX_RST_WIDTH bound to: 4 - type: integer 
+	Parameter C_EXT_RESET_HIGH bound to: 1'b0 
+	Parameter C_AUX_RESET_HIGH bound to: 1'b0 
+	Parameter C_NUM_BUS_RST bound to: 1 - type: integer 
+	Parameter C_NUM_PERP_RST bound to: 1 - type: integer 
+	Parameter C_NUM_INTERCONNECT_ARESETN bound to: 1 - type: integer 
+	Parameter C_NUM_PERP_ARESETN bound to: 1 - type: integer 
+INFO: [Synth 8-3491] module 'proc_sys_reset' declared at 'e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/9438/hdl/proc_sys_reset_v5_0_vh_rfs.vhd:1243' bound to instance 'U0' of component 'proc_sys_reset' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_rst_ps7_0_100M_1/synth/design_1_rst_ps7_0_100M_1.vhd:139]
+INFO: [Synth 8-256] done synthesizing module 'design_1_rst_ps7_0_100M_1' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_rst_ps7_0_100M_1/synth/design_1_rst_ps7_0_100M_1.vhd:74]
+WARNING: [Synth 8-7071] port 'mb_reset' of module 'design_1_rst_ps7_0_100M_1' is unconnected for instance 'rst_ps7_0_100M' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:806]
+WARNING: [Synth 8-7071] port 'bus_struct_reset' of module 'design_1_rst_ps7_0_100M_1' is unconnected for instance 'rst_ps7_0_100M' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:806]
+WARNING: [Synth 8-7071] port 'peripheral_reset' of module 'design_1_rst_ps7_0_100M_1' is unconnected for instance 'rst_ps7_0_100M' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:806]
+WARNING: [Synth 8-7071] port 'interconnect_aresetn' of module 'design_1_rst_ps7_0_100M_1' is unconnected for instance 'rst_ps7_0_100M' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:806]
+WARNING: [Synth 8-7023] instance 'rst_ps7_0_100M' of module 'design_1_rst_ps7_0_100M_1' has 10 connections declared, but only 6 given [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:806]
+INFO: [Synth 8-638] synthesizing module 'design_1_rst_ps7_0_142M_1' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_rst_ps7_0_142M_1/synth/design_1_rst_ps7_0_142M_1.vhd:74]
+	Parameter C_FAMILY bound to: zynq - type: string 
+	Parameter C_EXT_RST_WIDTH bound to: 4 - type: integer 
+	Parameter C_AUX_RST_WIDTH bound to: 4 - type: integer 
+	Parameter C_EXT_RESET_HIGH bound to: 1'b0 
+	Parameter C_AUX_RESET_HIGH bound to: 1'b0 
+	Parameter C_NUM_BUS_RST bound to: 1 - type: integer 
+	Parameter C_NUM_PERP_RST bound to: 1 - type: integer 
+	Parameter C_NUM_INTERCONNECT_ARESETN bound to: 1 - type: integer 
+	Parameter C_NUM_PERP_ARESETN bound to: 1 - type: integer 
+INFO: [Synth 8-3491] module 'proc_sys_reset' declared at 'e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/9438/hdl/proc_sys_reset_v5_0_vh_rfs.vhd:1243' bound to instance 'U0' of component 'proc_sys_reset' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_rst_ps7_0_142M_1/synth/design_1_rst_ps7_0_142M_1.vhd:139]
+INFO: [Synth 8-256] done synthesizing module 'design_1_rst_ps7_0_142M_1' (0#1) [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_rst_ps7_0_142M_1/synth/design_1_rst_ps7_0_142M_1.vhd:74]
+WARNING: [Synth 8-7071] port 'mb_reset' of module 'design_1_rst_ps7_0_142M_1' is unconnected for instance 'rst_ps7_0_142M' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:813]
+WARNING: [Synth 8-7071] port 'bus_struct_reset' of module 'design_1_rst_ps7_0_142M_1' is unconnected for instance 'rst_ps7_0_142M' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:813]
+WARNING: [Synth 8-7071] port 'peripheral_reset' of module 'design_1_rst_ps7_0_142M_1' is unconnected for instance 'rst_ps7_0_142M' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:813]
+WARNING: [Synth 8-7071] port 'interconnect_aresetn' of module 'design_1_rst_ps7_0_142M_1' is unconnected for instance 'rst_ps7_0_142M' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:813]
+WARNING: [Synth 8-7023] instance 'rst_ps7_0_142M' of module 'design_1_rst_ps7_0_142M_1' has 10 connections declared, but only 6 given [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:813]
+WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/synth/design_1.v:820]
+WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_system_ila_0_0/synth/design_1_system_ila_0_0.v:336]
+WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_system_ila_0_0/bd_0/synth/bd_f60c.v:210]
 WARNING: [Synth 8-7071] port 'clk_nobuf' of module 'ila_v6_2_18_ila' is unconnected for instance 'inst' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_system_ila_0_0/bd_0/ip/ip_0/synth/bd_f60c_ila_lib_0.v:3251]
 WARNING: [Synth 8-7071] port 'clkdiv_out' of module 'ila_v6_2_18_ila' is unconnected for instance 'inst' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_system_ila_0_0/bd_0/ip/ip_0/synth/bd_f60c_ila_lib_0.v:3251]
 WARNING: [Synth 8-7071] port 'trig_in' of module 'ila_v6_2_18_ila' is unconnected for instance 'inst' [e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_system_ila_0_0/bd_0/ip/ip_0/synth/bd_f60c_ila_lib_0.v:3251]
@@ -626,18 +1064,18 @@ WARNING: [Synth 8-7129] Port In101[0] in module xlconcat_v2_1_7_xlconcat__parame
 WARNING: [Synth 8-7129] Port In102[0] in module xlconcat_v2_1_7_xlconcat__parameterized0 is either unconnected or has no load
 INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:30 ; elapsed = 00:01:05 . Memory (MB): peak = 2375.477 ; gain = 1537.066
+Finished RTL Elaboration : Time (s): cpu = 00:00:40 ; elapsed = 00:02:04 . Memory (MB): peak = 2380.824 ; gain = 1541.703
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:31 ; elapsed = 00:01:06 . Memory (MB): peak = 2375.477 ; gain = 1537.066
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:40 ; elapsed = 00:02:05 . Memory (MB): peak = 2380.824 ; gain = 1541.703
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:31 ; elapsed = 00:01:06 . Memory (MB): peak = 2375.477 ; gain = 1537.066
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:40 ; elapsed = 00:02:05 . Memory (MB): peak = 2380.824 ; gain = 1541.703
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:02 ; elapsed = 00:00:04 . Memory (MB): peak = 2412.152 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:04 . Memory (MB): peak = 2380.824 ; gain = 0.000
 INFO: [Netlist 29-17] Analyzing 653 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -820,29 +1258,29 @@ Resolution: To avoid this warning, move constraints listed in [.Xil/design_1_wra
 INFO: [Project 1-1714] 159 XPM XDC files have been applied to the design.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.038 . Memory (MB): peak = 2690.320 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.042 . Memory (MB): peak = 2691.086 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 462 instances were transformed.
   CFGLUT5 => CFGLUT5 (SRL16E, SRLC32E): 392 instances
   CFGLUT5 => SRLC32E: 66 instances
   SRL16 => SRL16E: 4 instances
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.562 . Memory (MB): peak = 2690.320 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.867 . Memory (MB): peak = 2691.086 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:51 ; elapsed = 00:01:45 . Memory (MB): peak = 2690.320 ; gain = 1851.910
+Finished Constraint Validation : Time (s): cpu = 00:00:54 ; elapsed = 00:02:56 . Memory (MB): peak = 2691.086 ; gain = 1851.965
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z010clg400-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:51 ; elapsed = 00:01:45 . Memory (MB): peak = 2690.320 ; gain = 1851.910
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:54 ; elapsed = 00:02:56 . Memory (MB): peak = 2691.086 ; gain = 1851.965
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:52 ; elapsed = 00:01:46 . Memory (MB): peak = 2690.320 ; gain = 1851.910
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:55 ; elapsed = 00:02:57 . Memory (MB): peak = 2691.086 ; gain = 1851.965
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'gen_rst_ic.curr_wrst_state_reg' in module 'xpm_fifo_rst'
 INFO: [Synth 8-802] inferred FSM for state register 'gen_rst_ic.curr_rrst_state_reg' in module 'xpm_fifo_rst'
@@ -1722,7 +2160,7 @@ INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'slave_attachment'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:59 ; elapsed = 00:01:59 . Memory (MB): peak = 2690.320 ; gain = 1851.910
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:59 ; elapsed = 00:03:15 . Memory (MB): peak = 2691.086 ; gain = 1851.965
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5775] Found 'rw_addr_collision' attribute set to 'no' on SDP RAM gen_wr_a.gen_word_narrow.mem_reg. Setting write mode to NO_CHANGE 
 INFO: [Synth 8-5775] Found 'rw_addr_collision' attribute set to 'no' on SDP RAM gen_wr_a.gen_word_narrow.mem_reg. Setting write mode to NO_CHANGE 
@@ -1993,9 +2431,9 @@ INFO: [Synth 8-3333] propagating constant 1 across sequential element (system_il
 INFO: [Synth 8-3333] propagating constant 1 across sequential element (system_ila_0/inst/ila_lib/inst/ila_core_inst/\u_ila_regs/N_DDR_MODE.PROBE_STATUS[15].probe_width_reg /\I_EN_STAT_EQ1.U_STAT/xsdb_reg_reg[5] )
 INFO: [Synth 8-3333] propagating constant 1 across sequential element (system_ila_0/inst/ila_lib/inst/ila_core_inst/\u_ila_regs/N_DDR_MODE.PROBE_STATUS[7].probe_width_reg /\I_EN_STAT_EQ1.U_STAT/xsdb_reg_reg[5] )
 INFO: [Synth 8-3333] propagating constant 1 across sequential element (system_ila_0/inst/ila_lib/inst/ila_core_inst/\u_ila_regs/reg_0 /\I_EN_STAT_EQ1.U_STAT/xsdb_reg_reg[6] )
-INFO: [Synth 8-3333] propagating constant 1 across sequential element (system_ila_0/inst/ila_lib/inst/ila_core_inst/\u_ila_regs/slaveRegDo_ff8_reg[7] )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (system_ila_0/inst/ila_lib/inst/ila_core_inst/\u_ila_regs/slaveRegDo_ff8_reg[8] )
 INFO: [Synth 8-3333] propagating constant 1 across sequential element (system_ila_0/inst/ila_lib/inst/ila_core_inst/\u_ila_regs/reg_1 /\I_EN_STAT_EQ1.U_STAT/xsdb_reg_reg[12] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (system_ila_0/inst/ila_lib/inst/ila_core_inst/\u_ila_regs/slaveRegDo_ff8_reg[13] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (system_ila_0/inst/ila_lib/inst/ila_core_inst/\u_ila_regs/slaveRegDo_ff8_reg[15] )
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (system_ila_0/inst/ila_lib/inst/ila_core_inst/\u_ila_regs/CNT_WIDTH_STATUS[0].cnt_width_reg /\I_EN_STAT_EQ1.U_STAT/xsdb_reg_reg[15] )
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (system_ila_0/inst/ila_lib/inst/ila_core_inst/\u_ila_regs/CNT_WIDTH_STATUS[1].cnt_width_reg /\I_EN_STAT_EQ1.U_STAT/xsdb_reg_reg[15] )
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (system_ila_0/inst/ila_lib/inst/ila_core_inst/\u_ila_regs/CNT_WIDTH_STATUS[2].cnt_width_reg /\I_EN_STAT_EQ1.U_STAT/xsdb_reg_reg[15] )
@@ -2060,7 +2498,7 @@ INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instan
 INFO: [Synth 8-7067] Removed DRAM instance axi_mem_intercon/m00_couplers/auto_pc/inst/gen_axi4_axi3.axi3_conv_inst/USE_READ.USE_SPLIT_R.read_addr_inst/USE_R_CHANNEL.cmd_queue/inst/fifo_gen_inst/i_0/i_0/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gdm.dm_gen.dm/RAM_reg_0_31_0_0 from module partition__73 due to constant propagation
 INFO: [Common 17-14] Message 'Synth 8-3333' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:20 ; elapsed = 00:02:38 . Memory (MB): peak = 2690.320 ; gain = 1851.910
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:15 ; elapsed = 00:04:04 . Memory (MB): peak = 2691.086 ; gain = 1851.965
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5775] Found 'rw_addr_collision' attribute set to 'no' on SDP RAM gen_wr_a.gen_word_narrow.mem_reg. Setting write mode to NO_CHANGE 
 INFO: [Synth 8-5775] Found 'rw_addr_collision' attribute set to 'no' on SDP RAM gen_wr_a.gen_word_narrow.mem_reg. Setting write mode to NO_CHANGE 
@@ -2080,7 +2518,7 @@ INFO: [Synth 8-5578] Moved timing constraint from pin 'design_1_i/rgb2dvi_0/U0/S
 INFO: [Synth 8-5783] Moving clock source from hierarchical pin 'design_1_i/rgb2dvi_0/U0/PixelClk' to 'design_1_i/rgb2dvi_0/U0/DataEncoders[1].DataSerializeri_3/PixelClk'
 INFO: [Synth 8-5819] Moved 2 constraints on hierarchical pins to their respective driving/loading pins
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:25 ; elapsed = 00:02:48 . Memory (MB): peak = 2690.320 ; gain = 1851.910
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:18 ; elapsed = 00:04:17 . Memory (MB): peak = 2691.086 ; gain = 1851.965
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
@@ -2098,14 +2536,14 @@ INFO: [Synth 8-5775] Found 'rw_addr_collision' attribute set to 'no' on SDP RAM 
 INFO: [Synth 8-5775] Found 'rw_addr_collision' attribute set to 'no' on SDP RAM gen_wr_a.gen_word_narrow.mem_reg. Setting write mode to NO_CHANGE 
 INFO: [Synth 8-5775] Found 'rw_addr_collision' attribute set to 'no' on SDP RAM gen_wr_a.gen_word_narrow.mem_reg. Setting write mode to NO_CHANGE 
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:01:27 ; elapsed = 00:02:53 . Memory (MB): peak = 2690.320 ; gain = 1851.910
+Finished Timing Optimization : Time (s): cpu = 00:01:20 ; elapsed = 00:04:26 . Memory (MB): peak = 2691.086 ; gain = 1851.965
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-7052] The timing for the instance design_1_i/i_1/ad9280_sample_0/inst/ad9280_sample_v1_0_S00_AXI_inst/sample_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/gen_sdpram.xpm_memory_base_inst/gen_wr_a.gen_word_narrow.mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:01:30 ; elapsed = 00:03:06 . Memory (MB): peak = 2690.320 ; gain = 1851.910
+Finished Technology Mapping : Time (s): cpu = 00:01:22 ; elapsed = 00:04:40 . Memory (MB): peak = 2691.086 ; gain = 1851.965
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -2307,37 +2745,37 @@ WARNING: [Synth 8-5396] Clock pin C has keep related attribute (keep/mark_debug/
 WARNING: [Synth 8-5396] Clock pin C has keep related attribute (keep/mark_debug/dont_touch) which could create extra logic on its net [E:/FPGA/2025.1/Vivado/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:1522]
 INFO: [Common 17-14] Message 'Synth 8-5396' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:01:34 ; elapsed = 00:03:13 . Memory (MB): peak = 2690.320 ; gain = 1851.910
+Finished IO Insertion : Time (s): cpu = 00:01:24 ; elapsed = 00:04:50 . Memory (MB): peak = 2691.086 ; gain = 1851.965
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:01:34 ; elapsed = 00:03:13 . Memory (MB): peak = 2690.320 ; gain = 1851.910
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:24 ; elapsed = 00:04:51 . Memory (MB): peak = 2691.086 ; gain = 1851.965
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:35 ; elapsed = 00:03:15 . Memory (MB): peak = 2690.320 ; gain = 1851.910
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:25 ; elapsed = 00:04:54 . Memory (MB): peak = 2691.086 ; gain = 1851.965
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:01:35 ; elapsed = 00:03:15 . Memory (MB): peak = 2690.320 ; gain = 1851.910
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:25 ; elapsed = 00:04:54 . Memory (MB): peak = 2691.086 ; gain = 1851.965
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:01:35 ; elapsed = 00:03:15 . Memory (MB): peak = 2690.320 ; gain = 1851.910
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:25 ; elapsed = 00:04:54 . Memory (MB): peak = 2691.086 ; gain = 1851.965
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:01:35 ; elapsed = 00:03:16 . Memory (MB): peak = 2690.320 ; gain = 1851.910
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:25 ; elapsed = 00:04:55 . Memory (MB): peak = 2691.086 ; gain = 1851.965
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -2359,14 +2797,14 @@ Report Cell Usage:
 |4     |BUFR       |     1|
 |5     |CARRY4     |   425|
 |6     |CFGLUT5    |   458|
-|7     |LUT1       |   861|
-|8     |LUT2       |  1604|
-|9     |LUT3       |  1963|
-|10    |LUT4       |  1630|
-|11    |LUT5       |  1501|
-|12    |LUT6       |  3909|
+|7     |LUT1       |   862|
+|8     |LUT2       |  1599|
+|9     |LUT3       |  1968|
+|10    |LUT4       |  1632|
+|11    |LUT5       |  1497|
+|12    |LUT6       |  3914|
 |13    |MMCME2_ADV |     1|
-|14    |MUXF7      |   379|
+|14    |MUXF7      |   376|
 |15    |MUXF8      |    17|
 |16    |OSERDESE2  |     8|
 |18    |PS7        |     1|
@@ -2386,20 +2824,20 @@ Report Cell Usage:
 |43    |OBUFDS     |     4|
 +------+-----------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:01:35 ; elapsed = 00:03:16 . Memory (MB): peak = 2690.320 ; gain = 1851.910
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:25 ; elapsed = 00:04:55 . Memory (MB): peak = 2691.086 ; gain = 1851.965
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 2847 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:48 ; elapsed = 00:02:44 . Memory (MB): peak = 2690.320 ; gain = 1537.066
-Synthesis Optimization Complete : Time (s): cpu = 00:01:35 ; elapsed = 00:03:16 . Memory (MB): peak = 2690.320 ; gain = 1851.910
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:34 ; elapsed = 00:04:15 . Memory (MB): peak = 2691.086 ; gain = 1541.703
+Synthesis Optimization Complete : Time (s): cpu = 00:01:25 ; elapsed = 00:04:56 . Memory (MB): peak = 2691.086 ; gain = 1851.965
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.823 . Memory (MB): peak = 2690.320 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 1328 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.961 . Memory (MB): peak = 2691.086 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 1325 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Chipscope 16-324] Core: design_1_i/system_ila_0/inst/ila_lib UUID: cd4c83c8-23a6-596d-99ad-09be1335c6b0 
 INFO: [Chipscope 16-324] Core: design_1_i/system_ila_1/inst/ila_lib UUID: 1ac8c4c2-d1ac-5faa-b5d9-9a6ca09c91e7 
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.018 . Memory (MB): peak = 2690.320 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.029 . Memory (MB): peak = 2706.340 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 466 instances were transformed.
   CFGLUT5 => CFGLUT5 (SRL16E, SRLC32E): 392 instances
@@ -2407,13 +2845,13 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 4 instances
   SRL16 => SRL16E: 4 instances
 
-Synth Design complete | Checksum: 8afb1ada
+Synth Design complete | Checksum: 57e321bb
 INFO: [Common 17-83] Releasing license: Synthesis
 1263 Infos, 645 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:01:43 ; elapsed = 00:03:33 . Memory (MB): peak = 2690.320 ; gain = 2054.992
-Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.039 . Memory (MB): peak = 2690.320 ; gain = 0.000
+synth_design: Time (s): cpu = 00:01:29 ; elapsed = 00:05:20 . Memory (MB): peak = 2706.340 ; gain = 2069.738
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.058 . Memory (MB): peak = 2706.340 ; gain = 0.000
 INFO: [Common 17-1381] The checkpoint 'E:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.runs/synth_1/design_1_wrapper.dcp' has been generated.
-write_checkpoint: Time (s): cpu = 00:00:03 ; elapsed = 00:00:07 . Memory (MB): peak = 2690.320 ; gain = 0.000
+write_checkpoint: Time (s): cpu = 00:00:03 ; elapsed = 00:00:08 . Memory (MB): peak = 2706.340 ; gain = 0.000
 INFO: [Vivado 12-24828] Executing command : report_utilization -file design_1_wrapper_utilization_synth.rpt -pb design_1_wrapper_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Mon Jun 16 09:30:12 2025...
+INFO: [Common 17-206] Exiting Vivado at Tue Jun 17 00:20:29 2025...

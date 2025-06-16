@@ -435,7 +435,7 @@
             "value": "100.000000"
           },
           "PCW_ACT_FPGA1_PERIPHERAL_FREQMHZ": {
-            "value": "142.857132"
+            "value": "166.666672"
           },
           "PCW_ACT_FPGA2_PERIPHERAL_FREQMHZ": {
             "value": "32.258064"
@@ -525,7 +525,7 @@
             "value": "100000000"
           },
           "PCW_CLK1_FREQ": {
-            "value": "142857132"
+            "value": "166666672"
           },
           "PCW_CLK2_FREQ": {
             "value": "32258063"
@@ -840,7 +840,7 @@
             "value": "100"
           },
           "PCW_FPGA1_PERIPHERAL_FREQMHZ": {
-            "value": "142"
+            "value": "160"
           },
           "PCW_FPGA2_PERIPHERAL_FREQMHZ": {
             "value": "32"
@@ -3473,8 +3473,8 @@
         "ports": [
           "processing_system7_0/FCLK_CLK2",
           "adc_clk",
-          "ad9280_sample_0/adc_clk",
-          "rst_clk_32M_0/slowest_sync_clk"
+          "rst_clk_32M_0/slowest_sync_clk",
+          "ad9280_sample_0/adc_clk"
         ]
       },
       "processing_system7_0_FCLK_RESET0_N": {

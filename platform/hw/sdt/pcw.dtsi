@@ -42,7 +42,7 @@
 			xlnx,pcw-mio-5-direction = "inout";
 			xlnx,pcw-p2f-dmac1-intr = <0>;
 			xlnx,pcw-sd0-grp-cd-enable = <1>;
-			xlnx,pcw-act-fpga1-peripheral-freqmhz = <0x883d3ac>;
+			xlnx,pcw-act-fpga1-peripheral-freqmhz = <0x9ef21b0>;
 			xlnx,pcw-mio-24-iotype = "HSTL , 1.8V";
 			xlnx,pcw-ddr-port1-hpr-enable = <0>;
 			xlnx,pcw-cpu-peripheral-clksrc = "ARM , PLL";
@@ -149,7 +149,7 @@
 			xlnx,pcw-nand-cycles-t-rc = <11>;
 			xlnx,pcw-nand-nand-io = "<Select>";
 			xlnx,pcw-nor-grp-sram-cs0-enable = <0>;
-			xlnx,pcw-clk1-freq = <142857132>;
+			xlnx,pcw-clk1-freq = <166666672>;
 			xlnx,pcw-mio-48-slew = "slow";
 			xlnx,pcw-m-axi-gp0-freqmhz = <100>;
 			xlnx,pcw-ttc0-clk2-peripheral-divisor0 = <1>;
@@ -426,7 +426,7 @@
 			xlnx,pcw-use-cross-trigger = <0>;
 			xlnx,pcw-mio-14-direction = "inout";
 			xlnx,pcw-s-axi-acp-freqmhz = <10>;
-			xlnx,pcw-fclk1-peripheral-divisor0 = <7>;
+			xlnx,pcw-fclk1-peripheral-divisor0 = <6>;
 			xlnx,pcw-fclk1-peripheral-divisor1 = <1>;
 			xlnx,pcw-ttc0-ttc0-io = "<Select>";
 			xlnx,pcw-spi1-grp-ss2-io = "<Select>";
@@ -730,7 +730,7 @@
 			xlnx,pcw-mio-29-pullup = "enabled";
 			xlnx,pcw-mio-30-pullup = "enabled";
 			xlnx,trace-internal-width = <2>;
-			xlnx,pcw-s-axi-hp0-freqmhz = <142>;
+			xlnx,pcw-s-axi-hp0-freqmhz = <166>;
 			xlnx,pcw-mio-7-direction = "out";
 			xlnx,pcw-i2c0-reset-enable = <0>;
 			xlnx,pcw-mio-53-slew = "slow";
@@ -789,7 +789,7 @@
 			xlnx,pcw-mio-23-slew = "fast";
 			xlnx,pcw-uiparam-ddr-train-data-eye = <1>;
 			xlnx,pcw-p2f-can0-intr = <0>;
-			xlnx,pcw-fpga1-peripheral-freqmhz = <142>;
+			xlnx,pcw-fpga1-peripheral-freqmhz = <160>;
 			xlnx,pcw-s-axi-acp-id-width = <3>;
 			xlnx,pcw-smc-peripheral-clksrc = "IO , PLL";
 			xlnx,pcw-mio-19-slew = "fast";

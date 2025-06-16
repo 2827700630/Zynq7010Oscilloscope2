@@ -2,10 +2,10 @@
 <Root MajorVersion="0" MinorVersion="43">
   <CompositeFile CompositeFileTopName="bd_365d" CanBeSetAsTop="true" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1750037129"/>
-    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1750037129"/>
-    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1750037129"/>
-    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1750037129"/>
+    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1750090385"/>
+    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1750090385"/>
+    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1750090385"/>
+    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1750090385"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="synth\bd_365d.v" Type="Verilog">
         <Properties IsEditable="false" IsVisible="true" IsNetlistSimulation="false" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
@@ -28,6 +28,12 @@
         <UsedIn Val="OUT_OF_CONTEXT"/>
         <ProcessingOrder Val="NORMAL"/>
       </File>
+      <File Name="sim\bd_365d.protoinst">
+        <Properties IsEditable="false" IsVisible="true" IsNetlistSimulation="false" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SIMULATION"/>
+        <ProcessingOrder Val="NORMAL"/>
+      </File>
       <File Name="hw_handoff\design_1_system_ila_1_0.hwh" Type="HwHandoff">
         <Properties IsEditable="false" IsVisible="true" IsNetlistSimulation="false" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
         <Library Name="xil_defaultlib"/>
@@ -38,12 +44,6 @@
         <Properties IsEditable="false" IsVisible="true" IsNetlistSimulation="false" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="HW_HANDOFF"/>
-        <ProcessingOrder Val="NORMAL"/>
-      </File>
-      <File Name="sim\bd_365d.protoinst">
-        <Properties IsEditable="false" IsVisible="true" IsNetlistSimulation="false" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
-        <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SIMULATION"/>
         <ProcessingOrder Val="NORMAL"/>
       </File>
     </FileCollection>
