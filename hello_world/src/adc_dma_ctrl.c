@@ -6,12 +6,22 @@
 #include "wave/wave.h"
 #include "string.h"
 
+/* 状态码定义 */
+#ifndef XST_NO_DATA
+#define XST_NO_DATA 3 /* 没有新数据需要处理 */
+#endif
+
+#ifndef XST_TIMEOUT
+#define XST_TIMEOUT 4 /* 操作超时 */
+#endif
+
 u8 DmaRxBuffer[MAX_DMA_LEN] __attribute__((aligned(64))); // DMA S2Mm接收缓冲区
 u8 GridBuffer[WAVE_LEN];								  // 网格缓冲区
 u8 WaveBuffer[WAVE_LEN];								  // 波形缓冲区
 XAxiDma AxiDma;											  // DMA控制器
 volatile int s2mm_flag;									  // S2Mm中断标志
 volatile int dma_done;									  // DMA传输完成标志
+
 /*
  * 函数声明
  */
@@ -19,25 +29,29 @@ int XAxiDma_Initial(u16 DeviceId, u16 IntrID, XAxiDma *XAxiDma, XScuGic *Instanc
 void Dma_Interrupt_Handler(void *CallBackRef);
 void frame_copy(u32 width, u32 height, u32 stride, int hor_x, int ver_y, u8 *frame, u8 *CanvasBufferPtr);
 void ad9280_sample(u32 adc_addr, u32 adc_len);
+
 /**
- * 初始化DMA，绘制网格和波形，启动ADC采样
+ * ADC波形显示初始化函数
  *
  * @param width 是帧宽度
  * @param frame 是显示帧指针
  * @param stride 是帧跨度
  * @param InstancePtr 是GIC指针
+ * @return XST_SUCCESS 如果成功，否则 XST_FAILURE
  */
-int XAxiDma_Adc_Wave(u32 width, u8 *frame, u32 stride, XScuGic *InstancePtr)
+int XAxiDma_Adc_Init(u32 width, u8 *frame, u32 stride, XScuGic *InstancePtr)
 {
 	int Status;
-	u32 wave_width = width;
 
 	xil_printf("[初始化] 开始ADC波形显示初始化\r\n");
-	xil_printf("[配置] 波形宽度: %d, 高度: %d\r\n", wave_width, WAVE_HEIGHT);
+	xil_printf("[配置] 波形宽度: %d, 高度: %d\r\n", width, WAVE_HEIGHT);
 	xil_printf("[配置] ADC采集长度: %d, ADC基地址: 0x%08X\r\n", ADC_CAPTURELEN, AD9280_BASE);
 
+	// 初始化标志
 	s2mm_flag = 1;
 	dma_done = 0;
+
+	// 初始化DMA
 	Status = XAxiDma_Initial(DMA_DEV_ID, S2MM_INTR_ID, &AxiDma, InstancePtr);
 	if (Status != XST_SUCCESS)
 	{
@@ -46,80 +60,94 @@ int XAxiDma_Adc_Wave(u32 width, u8 *frame, u32 stride, XScuGic *InstancePtr)
 	}
 	xil_printf("[初始化] DMA初始化成功\r\n");
 
-	/* 网格覆盖 */
-	draw_grid(wave_width, WAVE_HEIGHT, GridBuffer);
+	// 绘制网格（一次性）
+	draw_grid(width, WAVE_HEIGHT, GridBuffer);
 	xil_printf("[初始化] 网格绘制完成\r\n");
 
-	// 添加性能统计
+	return XST_SUCCESS;
+}
+
+/**
+ * ADC波形显示更新函数（单次更新）
+ *
+ * @param width 是帧宽度
+ * @param frame 是显示帧指针
+ * @param stride 是帧跨度
+ * @return XST_SUCCESS 如果成功，XST_FAILURE 如果失败，XST_TIMEOUT 如果超时
+ */
+int XAxiDma_Adc_Update(u32 width, u8 *frame, u32 stride)
+{
+	int Status;
 	static u32 frame_count = 0;
 
-	while (1)
+	// 检查是否需要更新
+	if (!s2mm_flag)
 	{
-		if (s2mm_flag)
+		return XST_NO_DATA; // 没有新数据需要处理
+	}
+
+	// 清除标志并开始处理
+	s2mm_flag = 0;
+	dma_done = 0;
+	frame_count++;
+
+	// 复制网格到波形缓冲区
+	memcpy(WaveBuffer, GridBuffer, WAVE_LEN);
+
+	// 绘制波形
+	draw_wave(width, WAVE_HEIGHT, (void *)DmaRxBuffer, WaveBuffer, UNSIGNEDCHAR, ADC_BITS, YELLOW, ADC_COE);
+
+	// 将画布复制到帧缓冲区
+	frame_copy(width, WAVE_HEIGHT, stride, WAVE_START_COLUMN, WAVE_START_ROW, frame, WaveBuffer);
+
+	// 性能统计（每100帧显示一次）
+	if (frame_count % 100 == 0)
+	{
+		xil_printf("[性能] 已更新%d帧波形\r\n", frame_count);
+	}
+
+	// 开始下一次ADC采样
+	ad9280_sample(AD9280_BASE, ADC_CAPTURELEN);
+
+	// 启动DMA传输
+	Status = XAxiDma_SimpleTransfer(&AxiDma, (UINTPTR)DmaRxBuffer,
+									ADC_CAPTURELEN, XAXIDMA_DEVICE_TO_DMA);
+	if (Status != XST_SUCCESS)
+	{
+		xil_printf("[错误] DMA传输启动失败: %d\r\n", Status);
+		s2mm_flag = 1; // 设置标志重新尝试
+		return XST_FAILURE;
+	}
+
+	// 等待中断信号（非阻塞等待）
+	int timeout_count = 0;
+	while (!dma_done && timeout_count < 2000)
+	{
+		usleep(1000); // 等待1ms
+		timeout_count++;
+
+		// 每100ms打印一次等待状态
+		if (timeout_count % 100 == 0)
 		{
-			/* 清除s2mm_flag */
-			s2mm_flag = 0;
-			dma_done = 0;
-
-			frame_count++;
-
-			/* 将网格复制到波形缓冲区 */
-			memcpy(WaveBuffer, GridBuffer, WAVE_LEN);
-			/* 波形覆盖 */
-			draw_wave(wave_width, WAVE_HEIGHT, (void *)DmaRxBuffer, WaveBuffer, UNSIGNEDCHAR, ADC_BITS, YELLOW, ADC_COE);
-			/* 将画布复制到帧缓冲区 */
-			frame_copy(wave_width, WAVE_HEIGHT, stride, WAVE_START_COLUMN, WAVE_START_ROW, frame, WaveBuffer);
-
-			// 每100帧显示一次性能统计
-			if (frame_count % 100 == 0)
-			{
-				xil_printf("[性能] 已更新%d帧波形\r\n", frame_count);
-			}
-
-			/* 延迟10ms，减少系统负载 */
-			usleep(10000);
-			/* 开始采样 */
-			ad9280_sample(AD9280_BASE, ADC_CAPTURELEN);
-
-			/* 启动从AD9280到DDR3的DMA传输 */
-			Status = XAxiDma_SimpleTransfer(&AxiDma, (UINTPTR)DmaRxBuffer,
-											ADC_CAPTURELEN, XAXIDMA_DEVICE_TO_DMA);
-			if (Status != XST_SUCCESS)
-			{
-				xil_printf("[错误] DMA传输启动失败: %d\r\n", Status);
-				s2mm_flag = 1; // 重新尝试
-				continue;
-			}
-
-			/* 等待中断信号，最多等待2秒 */
-			int timeout_count = 0;
-			while (!dma_done && timeout_count < 2000)
-			{
-				usleep(1000); // 等待1ms
-				timeout_count++;
-
-				/* 每100ms打印一次等待状态 */
-				if (timeout_count % 100 == 0)
-				{
-					xil_printf("[DMA] 等待中断... (%dms)\r\n", timeout_count);
-				}
-			}
-
-			if (!dma_done)
-			{
-				xil_printf("[警告] DMA传输超时，尝试重置\r\n");
-				/* 重置DMA */
-				XAxiDma_Reset(&AxiDma);
-				while (!XAxiDma_ResetIsDone(&AxiDma))
-				{
-					/* 等待重置完成 */
-				}
-				/* 重新启用中断 */
-				XAxiDma_IntrEnable(&AxiDma, XAXIDMA_IRQ_IOC_MASK, XAXIDMA_DEVICE_TO_DMA);
-				s2mm_flag = 1; // 重置标志，继续下一次循环
-			}
+			xil_printf("[DMA] 等待中断... (%dms)\r\n", timeout_count);
 		}
 	}
+
+	if (!dma_done)
+	{
+		xil_printf("[警告] DMA传输超时，尝试重置\r\n");
+		// 重置DMA
+		XAxiDma_Reset(&AxiDma);
+		while (!XAxiDma_ResetIsDone(&AxiDma))
+		{
+			// 等待重置完成
+		}
+		// 重新启用中断
+		XAxiDma_IntrEnable(&AxiDma, XAXIDMA_IRQ_IOC_MASK, XAXIDMA_DEVICE_TO_DMA);
+		s2mm_flag = 1; // 重置标志
+		return XST_TIMEOUT;
+	}
+
 	return XST_SUCCESS;
 }
 

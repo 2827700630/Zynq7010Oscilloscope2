@@ -38,18 +38,17 @@
 /*				全局变量									*/
 /* -------------------------------------------------------- */
 
-//显示驱动结构体
+// 显示驱动结构体
 DisplayCtrl dispCtrl;
 XAxiVdma vdma;
 
-//视频数据帧缓冲区
+// 视频数据帧缓冲区
 u8 frameBuf[DISPLAY_NUM_FRAMES][DEMO_MAX_FRAME] __attribute__((aligned(64)));
 u8 *pFrames[DISPLAY_NUM_FRAMES]; // 指向帧缓冲区的指针数组
 
 // 中断结构体和函数
 XScuGic INST;
 int SetInterruptInit(XScuGic *InstancePtr, u16 IntrID);
-
 
 /// @brief 主函数
 /// @param 无
@@ -112,17 +111,54 @@ int main(void)
 
 	usleep(1000); // 等待1秒钟
 
-	// 启动ADC波形显示
-	Status = XAxiDma_Adc_Wave(dispCtrl.vMode.width, dispCtrl.framePtr[dispCtrl.curFrame], dispCtrl.stride, &INST);
+	// 初始化ADC波形显示模块
+	Status = XAxiDma_Adc_Init(dispCtrl.vMode.width, dispCtrl.framePtr[dispCtrl.curFrame], dispCtrl.stride, &INST);
 	if (Status != XST_SUCCESS)
 	{
-		xil_printf("ADC Running Failed\r\n");
+		xil_printf("ADC Initialization Failed\r\n");
+		cleanup_platform();
+		return -1;
 	}
 
+	xil_printf("[主循环] 开始实时波形显示循环\r\n");
+
+	// 主循环 - 在main函数中进行实时波形更新
+	while (1)
+	{
+		Status = XAxiDma_Adc_Update(dispCtrl.vMode.width, dispCtrl.framePtr[dispCtrl.curFrame], dispCtrl.stride);
+
+		switch (Status)
+		{
+		case XST_SUCCESS:
+			// 波形更新成功，继续循环
+			break;
+
+		case XST_NO_DATA:
+			// 没有新数据，短暂等待
+			usleep(1000); // 等待1ms
+			break;
+
+		case XST_TIMEOUT:
+			xil_printf("[主循环] DMA超时，继续重试\r\n");
+			break;
+
+		case XST_FAILURE:
+			xil_printf("[主循环] DMA传输失败，继续重试\r\n");
+			break;
+
+		default:
+			xil_printf("[主循环] 未知状态: %d\r\n", Status);
+			break;
+		}
+
+		// 适当的循环延迟，避免过度占用CPU
+		usleep(10000); // 等待10ms，约100FPS的更新率
+	}
+
+	// 注意：这段代码永远不会执行到，因为主循环是无限的
 	cleanup_platform();
 	return 0;
 }
-
 
 /**
  *  @brief DemoPrintTest - 在帧缓冲区中打印测试图案
