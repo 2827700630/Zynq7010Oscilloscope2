@@ -1,0 +1,22 @@
+vhdl xil_defaultlib  \
+"../../../bd/design_1/ip/design_1_axi_dma_0_1/sim/design_1_axi_dma_0_1.vhd" \
+"../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/9097/src/axi_dynclk_S00_AXI.vhd" \
+"../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/9097/src/axi_dynclk.vhd" \
+"../../../bd/design_1/ip/design_1_axi_dynclk_0_0/sim/design_1_axi_dynclk_0_0.vhd" \
+"../../../bd/design_1/ip/design_1_axi_vdma_0_0/sim/design_1_axi_vdma_0_0.vhd" \
+"../../../bd/design_1/ip/design_1_proc_sys_reset_0_0/sim/design_1_proc_sys_reset_0_0.vhd" \
+"../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5c79/src/ClockGen.vhd" \
+"../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5c79/src/SyncAsync.vhd" \
+"../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5c79/src/SyncAsyncReset.vhd" \
+"../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5c79/src/DVI_Constants.vhd" \
+"../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5c79/src/OutputSERDES.vhd" \
+"../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5c79/src/TMDS_Encoder.vhd" \
+"../../../../Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ipshared/5c79/src/rgb2dvi.vhd" \
+"../../../bd/design_1/ip/design_1_rgb2dvi_0_0/sim/design_1_rgb2dvi_0_0.vhd" \
+"../../../bd/design_1/ip/design_1_rst_ps7_0_100M_1/sim/design_1_rst_ps7_0_100M_1.vhd" \
+"../../../bd/design_1/ip/design_1_rst_ps7_0_142M_1/sim/design_1_rst_ps7_0_142M_1.vhd" \
+"../../../bd/design_1/ip/design_1_v_tc_0_0/sim/design_1_v_tc_0_0.vhd" \
+"../../../bd/design_1/ip/design_1_axi_smc_0/bd_0/ip/ip_1/sim/bd_afc3_psr_aclk_0.vhd" \
+
+# Do not sort compile order
+nosort

@@ -1,0 +1,7 @@
+//arch = zynq; split = false; format = BIN
+the_ROM_image:
+{
+	[bootloader]E:\FPGAproject\Zynq7010Oscilloscope2\platform\export\platform\sw\boot\fsbl.elf
+	E:\FPGAproject\Zynq7010Oscilloscope2\hello_world\_ide\bitstream\design_1_wrapper.bit
+	E:\FPGAproject\Zynq7010Oscilloscope2\hello_world\build\hello_world.elf
+}

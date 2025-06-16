@@ -1,0 +1,4 @@
+domain_path: E:\FPGAproject\Zynq7010Oscilloscope2\platform\zynq_fsbl\zynq_fsbl_bsp
+app_src_dir: E:\FPGA\2025.1\Vitis\data\embeddedsw\lib\sw_apps\zynq_fsbl
+template: zynq_fsbl
+lang: c
