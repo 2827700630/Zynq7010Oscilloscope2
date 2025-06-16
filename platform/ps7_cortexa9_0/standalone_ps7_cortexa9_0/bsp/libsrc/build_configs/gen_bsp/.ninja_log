@@ -172,3 +172,5 @@
 94411	96523	7717949124765547	libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/xiltimer.c.obj	bf35b28e8ed730c5
 95698	96915	7717949128698475	libsrc/standalone/src/libxilstandalone.a	10bcfe47978da707
 96523	97820	7717949137790840	libsrc/xiltimer/src/libxiltimer.a	aae03ce7b62b49ee
+11	663	0	libsrc/CMakeFiles/combined	d67fabeb867550b7
+11	663	0	E:/FPGAproject/Zynq7010Oscilloscope2/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/CMakeFiles/combined	d67fabeb867550b7

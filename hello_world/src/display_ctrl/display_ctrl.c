@@ -329,7 +329,7 @@ int DisplayInitialize(DisplayCtrl *dispPtr, XAxiVdma *vdma, u16 vtcId, u32 dynCl
 	}
 	dispPtr->state = DISPLAY_STOPPED;
 	dispPtr->stride = stride;
-	dispPtr->vMode = VMODE_1280x720;
+	dispPtr->vMode = VMODE_1920x1080; //在这里设置分辨率，byd设置藏这么深
 
 	ClkFindParams(dispPtr->vMode.freq, &clkMode);
 
