@@ -37,12 +37,12 @@
 #define ADC_BYTE           1              /* ADC数据字节数 */
 #define ADC_BITS           8
 /*
- *波形定义
+ *波形定义 - 全屏显示优化
  */
-#define WAVE_LEN            1920*400*3     /* 波形总长度（字节） */
-#define WAVE_START_ROW      100            /* 网格和波形在帧中的起始行 */
-#define WAVE_START_COLUMN   0              /* 网格和波形在帧中的起始列 */
-#define WAVE_HEIGHT         400   		   /* 网格和波形高度（增大以便观察） */
+#define WAVE_LEN            1920*1080*3    /* 波形总长度（字节）- 占满全屏 */
+#define WAVE_START_ROW      0              /* 网格和波形在帧中的起始行 - 从顶部开始 */
+#define WAVE_START_COLUMN   0              /* 网格和波形在帧中的起始列 - 从左边开始 */
+#define WAVE_HEIGHT         1080   		   /* 网格和波形高度 - 占满全屏高度 */
 /*
  *函数定义
  */
