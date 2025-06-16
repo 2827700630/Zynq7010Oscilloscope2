@@ -157,18 +157,11 @@ drv_info:
     driver: axidma
     ip_name: axi_dma
     path: E:\FPGA\2025.1\Vitis\data\embeddedsw\XilinxProcessorIPLib\drivers\axidma_v9_19
-    examples:
-      xaxidma_example_simple_poll.c: []
-      xaxidma_example_simple_intr.c: []
-      xaxidma_example_selftest.c: []
   axi_dynclk_0: None
   axi_vdma_0:
     driver: axivdma
     ip_name: axi_vdma
     path: E:\FPGA\2025.1\Vitis\data\embeddedsw\XilinxProcessorIPLib\drivers\axivdma_v6_16
-    examples:
-      xaxivdma_example_intr.c: []
-      xaxivdma_example_selftest.c: []
   ps7_afi_0: None
   ps7_afi_1: None
   ps7_afi_2: None
@@ -182,63 +175,29 @@ drv_info:
     driver: devcfg
     ip_name: ps7_dev_cfg
     path: E:\FPGA\2025.1\Vitis\data\embeddedsw\XilinxProcessorIPLib\drivers\devcfg_v3_8
-    examples:
-      xdevcfg_interrupt_example.c: []
-      xdevcfg_polled_example.c: []
-      xdevcfg_reg_readback_example.c: []
-      xdevcfg_selftest_example.c: []
   ps7_dma_ns: None
   ps7_dma_s:
     driver: dmaps
     ip_name: ps7_dma
     path: E:\FPGA\2025.1\Vitis\data\embeddedsw\XilinxProcessorIPLib\drivers\dmaps_v2_11
-    examples:
-      xdmaps_example_w_intr.c: []
   ps7_ethernet_0:
     driver: emacps
     ip_name: ps7_ethernet
     path: E:\FPGA\2025.1\Vitis\data\embeddedsw\XilinxProcessorIPLib\drivers\emacps_v3_22
-    examples:
-      xemacps_example_intr_dma.c:
-      - xemacps_example_util.c
-      - xemacps_example.h
   ps7_globaltimer_0: None
   ps7_gpio_0:
     driver: gpiops
     ip_name: ps7_gpio
     path: E:\FPGA\2025.1\Vitis\data\embeddedsw\XilinxProcessorIPLib\drivers\gpiops_v3_14
-    examples:
-      xgpiops_intr_example.c: []
-      xgpiops_polled_example.c: []
   ps7_gpv_0: None
   ps7_i2c_0:
     driver: iicps
     ip_name: ps7_i2c
     path: E:\FPGA\2025.1\Vitis\data\embeddedsw\XilinxProcessorIPLib\drivers\iicps_v3_21
-    examples:
-      xiicps_eeprom_intr_example.c: []
-      xiicps_eeprom_polled_example.c: []
-      xiicps_intr_master_example.c: []
-      xiicps_intr_multi_master_example.c: []
-      xiicps_intr_slave_example.c: []
-      xiicps_polled_master_example.c: []
-      xiicps_polled_multi_master_example.c: []
-      xiicps_polled_slave_example.c: []
-      xiicps_repeated_start_example.c: []
-      xiicps_selftest_example.c: []
-      xiicps_slave_monitor_example.c: []
-      xiicps_smbus_intr_master_example.c: []
-      xiicps_smbus_intr_slave_example.c: []
-      xiicps_smbus_polled_master_example.c: []
-      xiicps_smbus_polled_slave_example.c: []
   ps7_intc_dist_0:
     driver: scugic
     ip_name: ps7_intc_dist
     path: E:\FPGA\2025.1\Vitis\data\embeddedsw\XilinxProcessorIPLib\drivers\scugic_v5_5
-    examples:
-      xscugic_example.c: []
-      xscugic_low_level_example.c: []
-      xscugic_tapp_example.c: []
   ps7_iop_bus_config_0: None
   ps7_ocmc_0: None
   ps7_pl310_0: None
@@ -247,79 +206,36 @@ drv_info:
     driver: qspips
     ip_name: ps7_qspi
     path: E:\FPGA\2025.1\Vitis\data\embeddedsw\XilinxProcessorIPLib\drivers\qspips_v3_14
-    examples:
-      xqspips_flash_intr_example.c: []
-      xqspips_flash_polled_example.c: []
-      xqspips_dual_flash_lqspi_example.c: []
-      xqspips_dual_flash_stack_lqspi_example.c: []
-      xqspips_flash_lqspi_example.c: []
-      xqspips_g128_flash_example.c: []
-      xqspips_selftest_example.c: []
   ps7_scuc_0: None
   ps7_scutimer_0:
     driver: scutimer
     ip_name: ps7_scutimer
     path: E:\FPGA\2025.1\Vitis\data\embeddedsw\XilinxProcessorIPLib\drivers\scutimer_v2_7
-    examples:
-      xscutimer_polled_example.c: []
-      xscutimer_intr_example.c: []
   ps7_scuwdt_0:
     driver: scuwdt
     ip_name: ps7_scuwdt
     path: E:\FPGA\2025.1\Vitis\data\embeddedsw\XilinxProcessorIPLib\drivers\scuwdt_v2_6
-    examples:
-      xscuwdt_intr_example.c: []
-      xscuwdt_polled_example.c: []
   ps7_sd_0:
     driver: sdps
     ip_name: ps7_sdio
     path: E:\FPGA\2025.1\Vitis\data\embeddedsw\XilinxProcessorIPLib\drivers\sdps_v4_4
-    examples:
-      xsdps_raw_example.c: []
   ps7_slcr_0: None
   ps7_uart_1:
     driver: uartps
     ip_name: ps7_uart
     path: E:\FPGA\2025.1\Vitis\data\embeddedsw\XilinxProcessorIPLib\drivers\uartps_v3_16
-    examples:
-      xuartps_hello_world_example.c: []
-      xuartps_intr_example.c: []
-      xuartps_low_echo_example.c: []
-      xuartps_polled_example.c: []
-      xuartps_selftest_example.c: []
   ps7_usb_0:
     driver: usbps
     ip_name: ps7_usb
     path: E:\FPGA\2025.1\Vitis\data\embeddedsw\XilinxProcessorIPLib\drivers\usbps_v2_9
-    examples:
-      xusbps_intr_example.c:
-      - xusbps_class_storage.c
-      - xusbps_class_storage.h
-      - xusbps_ch9_storage.c
-      - xusbps_ch9_storage.h
-      - xusbps_ch9.c
-      - xusbps_ch9.h
-      xusbps_audio_example.c:
-      - xusbps_ch9_audio.c
-      - xusbps_ch9_audio.h
-      - xusbps_ch9.c
-      - xusbps_ch9.h
-      - xusbps_class_audio.c
-      - xusbps_class_audio.h
-      - xusbps_audiodata.h
   ps7_xadc_0:
     driver: xadcps
     ip_name: ps7_xadc
     path: E:\FPGA\2025.1\Vitis\data\embeddedsw\XilinxProcessorIPLib\drivers\xadcps_v2_7
-    examples:
-      xadcps_intr_example.c: []
-      xadcps_polled_printf_example.c: []
   v_tc_0:
     driver: vtc
     ip_name: v_tc
     path: E:\FPGA\2025.1\Vitis\data\embeddedsw\XilinxProcessorIPLib\drivers\vtc_v8_7
-    examples:
-      vtc_selftest_example.c: []
 lib_info:
   xiltimer:
     path: E:\FPGA\2025.1\Vitis\data\embeddedsw\lib\sw_services\xiltimer_v2_2

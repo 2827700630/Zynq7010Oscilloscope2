@@ -16,7 +16,7 @@
 		clocking1: clocking1 {
 			compatible = "xlnx,fclk";
 			assigned-clocks = <&clkc 16>;
-			assigned-clock-rates = <142000000>;
+			assigned-clock-rates = <160000000>;
 			#clock-cells = <0>;
 			clock-output-names = "fabric_clk";
 			clocks = <&clkc 16>;

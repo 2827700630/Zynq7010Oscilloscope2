@@ -37,11 +37,9 @@
 #define DEMO_PATTERN_2 2
 #define DEMO_PATTERN_3 3
 
-
-
 #define BYTES_PIXEL 3
 
-#define DEMO_MAX_FRAME (1920*1080*BYTES_PIXEL)
+#define DEMO_MAX_FRAME (1920 * 1080 * BYTES_PIXEL)
 #define DEMO_STRIDE (1920 * BYTES_PIXEL)
 
 /* ------------------------------------------------------------ */

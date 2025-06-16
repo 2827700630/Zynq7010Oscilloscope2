@@ -61,11 +61,11 @@ create_waiver -internal -scope -type CDC -id {CDC-1} -user "axi_vdma" -tags "960
 current_instance
 current_instance design_1_i/processing_system7_0/inst
 set_property src_info {type:SCOPED_XDC file:4 line:21 export:INPUT save:INPUT read:READ} [current_design]
-set_input_jitter clk_fpga_2 0.93
-set_property src_info {type:SCOPED_XDC file:4 line:24 export:INPUT save:INPUT read:READ} [current_design]
 set_input_jitter clk_fpga_0 0.3
+set_property src_info {type:SCOPED_XDC file:4 line:24 export:INPUT save:INPUT read:READ} [current_design]
+set_input_jitter clk_fpga_2 0.93
 set_property src_info {type:SCOPED_XDC file:4 line:27 export:INPUT save:INPUT read:READ} [current_design]
-set_input_jitter clk_fpga_1 0.21
+set_input_jitter clk_fpga_1 0.18
 set_property src_info {type:SCOPED_XDC file:4 line:37 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN "C11" [get_ports "MIO[53]"]
 set_property src_info {type:SCOPED_XDC file:4 line:44 export:INPUT save:INPUT read:READ} [current_design]

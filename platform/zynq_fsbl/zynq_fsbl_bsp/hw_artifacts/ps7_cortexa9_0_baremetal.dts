@@ -826,7 +826,7 @@
                 clocking1: clocking1 {
                         compatible = "xlnx,fclk";
                         assigned-clocks = <&clkc 0x10>;
-                        assigned-clock-rates = <0x876bf80>;
+                        assigned-clock-rates = <0x9896800>;
                         #clock-cells = <0x0>;
                         clock-output-names = "fabric_clk";
                         clocks = <&clkc 0x10>;

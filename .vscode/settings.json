@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "adc_dma_ctrl.h": "c"
+        "adc_dma_ctrl.h": "c",
+        "platform.h": "c",
+        "xparameters.h": "c"
     }
 }

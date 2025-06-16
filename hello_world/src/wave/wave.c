@@ -44,8 +44,8 @@
  */
 void draw_wave(u32 width, u32 height,  void *BufferPtr, u8 *CanvasBufferPtr, u8 Sign, u8 Bits, u8 color, u16 coe)
 {
-	u8 last_data ;
-	u8 curr_data ;
+	u16 last_data ;  // 改为u16以支持更大的高度范围
+	u16 curr_data ;  // 改为u16以支持更大的高度范围
 	u32 i ;
 	int j ;
 	u8 wRed, wBlue, wGreen;
@@ -59,9 +59,11 @@ void draw_wave(u32 width, u32 height,  void *BufferPtr, u8 *CanvasBufferPtr, u8 
 	else
 		ShortBufferPtr = (short *)BufferPtr ;
 
-
-
-	float data_coe = 1.00/coe ;
+	// 优化缩放系数，使8位ADC数据(0-255)充分利用1080像素高度
+	// 缩放因子：1080/256 ≈ 4.22，为了更好的显示效果，使用4.0
+	float height_scale = (float)height / 256.0;  // 动态缩放因子
+	float data_coe = height_scale / coe ;
+	
 	switch(color)
 	{
 	case 0 : wRed = 255; wGreen = 255;	wBlue = 0;	    break ;     //黄色
@@ -82,32 +84,39 @@ void draw_wave(u32 width, u32 height,  void *BufferPtr, u8 *CanvasBufferPtr, u8 
 
 	for(i = 0; i < width ; i++)
 	{
-		/* 将字符数据转换为u8 */
+		/* 将字符数据转换为适应新高度的范围 */
 		if (i == 0)
 		{
 			if(Sign == UNSIGNEDCHAR || Sign == CHAR)
 			{
-				last_data = (u8)(CharBufferPtr[i] + adder)*data_coe ;
-				curr_data = (u8)(CharBufferPtr[i] + adder)*data_coe ;
+				last_data = (u16)((CharBufferPtr[i] + adder) * data_coe) ;
+				curr_data = (u16)((CharBufferPtr[i] + adder) * data_coe) ;
 			}
 			else
 			{
-				last_data = (u8)((u16)(ShortBufferPtr[i] + adder)*data_coe) ;
-				curr_data = (u8)((u16)(ShortBufferPtr[i] + adder)*data_coe) ;
+				last_data = (u16)((ShortBufferPtr[i] + adder) * data_coe) ;
+				curr_data = (u16)((ShortBufferPtr[i] + adder) * data_coe) ;
 			}
 		}
 		else
 		{
 			if(Sign == UNSIGNEDCHAR || Sign == CHAR)
 			{
-				last_data = (u8)(CharBufferPtr[i-1] + adder)*data_coe ;
-				curr_data = (u8)(CharBufferPtr[i] + adder)*data_coe ;
+				last_data = (u16)((CharBufferPtr[i-1] + adder) * data_coe) ;
+				curr_data = (u16)((CharBufferPtr[i] + adder) * data_coe) ;
 			}
 			else
 			{
-				last_data = (u8)((u16)(ShortBufferPtr[i-1] + adder)*data_coe) ;
-				curr_data = (u8)((u16)(ShortBufferPtr[i] + adder)*data_coe) ;
-			}		}		/* 比较上一个数据值和当前数据值，在两点之间绘制点 */
+				last_data = (u16)((ShortBufferPtr[i-1] + adder) * data_coe) ;
+				curr_data = (u16)((ShortBufferPtr[i] + adder) * data_coe) ;
+			}
+		}
+		
+		// 限制数据范围，防止越界
+		if (last_data >= height) last_data = height - 1;
+		if (curr_data >= height) curr_data = height - 1;
+		
+		/* 比较上一个数据值和当前数据值，在两点之间绘制点 */
 		if (curr_data >= last_data)
 		{
 			for (j = 0 ; j < (curr_data - last_data + 1) ; j++)
@@ -148,8 +157,9 @@ void draw_point(u8 *PointBufferPtr, u32 hor_x, u32 ver_y, u32 width, u8 wBlue, u
  *@param height             画布高度
  *@param CanvasBufferPtr    画布缓冲区指针
  *
- *@note  在水平方向上，每32条垂直线，每4个点绘制一个点
- *       在垂直方向上，每32个水平点，每4个点绘制一个点
+ *@note  优化为全屏1920x1080显示：
+ *       水平方向：每120像素一条垂直主线(16条)，每24像素一条垂直细线
+ *       垂直方向：每108像素一条水平主线(10条)，每27像素一条水平细线
  */
 void draw_grid(u32 width, u32 height, u8 *CanvasBufferPtr)
 {
@@ -158,21 +168,39 @@ void draw_grid(u32 width, u32 height, u8 *CanvasBufferPtr)
 	u8 wRed, wBlue, wGreen;
 	/*
 	 * 在画布上覆盖网格，背景设置为黑色，网格颜色为灰色
+	 * 全屏优化：主网格线更亮，辅助网格线较暗
 	 */
 	for(ycoi = 0; ycoi < height; ycoi++)
 	{
 		for(xcoi = 0; xcoi < width; xcoi++)
-		{			if (((ycoi == 0 || (ycoi+1)%32 == 0) && (xcoi == 0 || (xcoi+1)%4 == 0))
-					|| ((xcoi == 0 || (xcoi+1)%32 == 0) && (ycoi+1)%4 == 0))
+		{
+			// 主网格线（每120x108像素）
+			if (((ycoi % 108 == 0) && (xcoi % 6 == 0)) || ((xcoi % 120 == 0) && (ycoi % 6 == 0)))
 			{
-				/* 灰色 */
-				wRed = 150;
-				wGreen = 150;
-				wBlue = 150;
+				/* 亮灰色主网格线 */
+				wRed = 120;
+				wGreen = 120;
+				wBlue = 120;
+			}
+			// 辅助网格线（每24x27像素）
+			else if (((ycoi % 27 == 0) && (xcoi % 3 == 0)) || ((xcoi % 24 == 0) && (ycoi % 3 == 0)))
+			{
+				/* 暗灰色辅助网格线 */
+				wRed = 60;
+				wGreen = 60;
+				wBlue = 60;
+			}
+			// 中心十字线（示波器风格）
+			else if ((ycoi == height/2) || (xcoi == width/2))
+			{
+				/* 更亮的中心线 */
+				wRed = 180;
+				wGreen = 180;
+				wBlue = 180;
 			}
 			else
 			{
-				/* 黑色 */
+				/* 黑色背景 */
 				wRed = 0;
 				wGreen = 0;
 				wBlue = 0;
