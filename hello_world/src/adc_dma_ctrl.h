@@ -13,7 +13,10 @@
  */
 #define MAX_DMA_LEN		   0x800000      /* DMA最大长度（字节） */
 #define DMA_DEV_ID		   0
-#define S2MM_INTR_ID       XPAR_FABRIC_AXI_DMA_0_INTR
+/* 中断ID计算：ZYNQ IRQ_F2P基址 + xlconcat端口偏移 */
+#define ZYNQ_IRQ_F2P_BASE_ID   61              /* ZYNQ Fabric-to-PS中断基础ID */
+#define DMA_XLCONCAT_PORT      2               /* DMA连接在xlconcat的In2端口 */
+#define S2MM_INTR_ID           (ZYNQ_IRQ_F2P_BASE_ID + DMA_XLCONCAT_PORT)  /* 61+2=63 */
 
 /* 设备ID兼容性定义 - 如果xparameters.h中缺失 */
 #ifndef XPAR_XAXIDMA_0_DEVICE_ID
@@ -44,5 +47,13 @@
  *函数定义
  */
 int XAxiDma_Adc_Wave(u32 width, u8 *frame, u32 stride, XScuGic *InstancePtr);
+int XAxiDma_SimpleTest(XAxiDma *AxiDmaInst);
+int XAxiDma_Initial(u16 DeviceId, u16 IntrID, XAxiDma *XAxiDma, XScuGic *InstancePtr);
+
+/*
+ *全局变量声明
+ */
+extern volatile int s2mm_flag;
+extern volatile int dma_done;
 
 

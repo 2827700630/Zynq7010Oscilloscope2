@@ -26,6 +26,10 @@ XAxiDma AxiDma;
  */
 volatile int s2mm_flag;
 /*
+ * DMA传输完成标志
+ */
+volatile int dma_done;
+/*
  * 函数声明
  */
 int XAxiDma_Initial(u16 DeviceId, u16 IntrID, XAxiDma *XAxiDma, XScuGic *InstancePtr);
@@ -51,6 +55,7 @@ int XAxiDma_Adc_Wave(u32 width, u8 *frame, u32 stride, XScuGic *InstancePtr)
 	xil_printf("[配置] ADC采集长度: %d, ADC基地址: 0x%08X\r\n", ADC_CAPTURELEN, AD9280_BASE);
 
 	s2mm_flag = 1;
+	dma_done = 0;
 	Status = XAxiDma_Initial(DMA_DEV_ID, S2MM_INTR_ID, &AxiDma, InstancePtr);
 	if (Status != XST_SUCCESS)
 	{
@@ -73,6 +78,7 @@ int XAxiDma_Adc_Wave(u32 width, u8 *frame, u32 stride, XScuGic *InstancePtr)
 		{
 			/* 清除s2mm_flag */
 			s2mm_flag = 0;
+			dma_done = 0;
 
 			frame_count++;
 			adc_sample_count++;
@@ -83,18 +89,6 @@ int XAxiDma_Adc_Wave(u32 width, u8 *frame, u32 stride, XScuGic *InstancePtr)
 			draw_wave(wave_width, WAVE_HEIGHT, (void *)DmaRxBuffer, WaveBuffer, UNSIGNEDCHAR, ADC_BITS, YELLOW, ADC_COE);
 			/* 将画布复制到帧缓冲区 */
 			frame_copy(wave_width, WAVE_HEIGHT, stride, WAVE_START_COLUMN, WAVE_START_ROW, frame, WaveBuffer);
-
-			// // 每100次ADC采集通过串口发送原始数据
-			// if (adc_sample_count % 10 == 0)
-			// {
-			// 	// 直接发送前256字节的原始ADC数据（十六进制格式，无其他格式化）
-			// 	u32 send_length = (ADC_CAPTURELEN > 256) ? 256 : ADC_CAPTURELEN;
-			// 	for (u32 i = 0; i < send_length; i++)
-			// 	{
-			// 		xil_printf("%02X ", DmaRxBuffer[i]);
-			// 	}
-			// 	// xil_printf("\r\n");
-			// }
 
 			// 每100帧显示一次性能统计
 			if (frame_count % 100 == 0)
@@ -107,43 +101,40 @@ int XAxiDma_Adc_Wave(u32 width, u8 *frame, u32 stride, XScuGic *InstancePtr)
 			/* 开始采样 */
 			ad9280_sample(AD9280_BASE, ADC_CAPTURELEN);
 
-			/* 启动从AD9280到DDR3的DMA传输 */ Status = XAxiDma_SimpleTransfer(&AxiDma, (UINTPTR)DmaRxBuffer,
-																			  ADC_CAPTURELEN, XAXIDMA_DEVICE_TO_DMA);
+			/* 启动从AD9280到DDR3的DMA传输 */
+			Status = XAxiDma_SimpleTransfer(&AxiDma, (UINTPTR)DmaRxBuffer,
+											ADC_CAPTURELEN, XAXIDMA_DEVICE_TO_DMA);
 			if (Status != XST_SUCCESS)
 			{
+				xil_printf("[错误] DMA传输启动失败: %d\r\n", Status);
 				s2mm_flag = 1; // 重新尝试
 				continue;
 			}
 
-			// 超高频轮询DMA状态（每1ms检查一次，优化波形连续性）
-			for (int i = 0; i < 2000; i++)
-			{				  // 最多等待2秒
+			/* 等待中断信号，最多等待2秒 */
+			int timeout_count = 0;
+			while (!dma_done && timeout_count < 2000)
+			{
 				usleep(1000); // 等待1ms
-
-				// 检查DMA状态
-				u32 dma_sr = XAxiDma_ReadReg(AxiDma.RegBase, XAXIDMA_RX_OFFSET + XAXIDMA_SR_OFFSET); // 检查IOC完成位
-				if (dma_sr & 0x1000)
-				{ // IOC中断标志位
-					// 清除中断标志
-					XAxiDma_IntrAckIrq(&AxiDma, XAXIDMA_IRQ_IOC_MASK, XAXIDMA_DEVICE_TO_DMA);
-
-					// 使数据缓存无效
-					Xil_DCacheInvalidateRange((INTPTR)DmaRxBuffer, ADC_CAPTURELEN);
-
-					// 设置完成标志，继续正常流程
-					s2mm_flag = 1;
-					break;
-				}
-
-				// 每100次（100ms）打印一次状态，减少串口输出干扰
-				if (i % 100 == 99)
+				timeout_count++;
+				
+				/* 每100ms打印一次等待状态 */
+				if (timeout_count % 100 == 0)
 				{
-					xil_printf("[DMA] 等待中... (%dms)\r\n", (i + 1));
+					xil_printf("[DMA] 等待中断... (%dms)\r\n", timeout_count);
 				}
 			}
-			if (!s2mm_flag)
+			
+			if (!dma_done)
 			{
-				xil_printf("[警告] DMA传输超时，尝试简化传输\r\n");
+				xil_printf("[警告] DMA传输超时，尝试重置\r\n");
+				/* 重置DMA */
+				XAxiDma_Reset(&AxiDma);
+				while (!XAxiDma_ResetIsDone(&AxiDma)) {
+					/* 等待重置完成 */
+				}
+				/* 重新启用中断 */
+				XAxiDma_IntrEnable(&AxiDma, XAXIDMA_IRQ_IOC_MASK, XAXIDMA_DEVICE_TO_DMA);
 				s2mm_flag = 1; // 重置标志，继续下一次循环
 			}
 		}
@@ -158,8 +149,8 @@ int XAxiDma_Adc_Wave(u32 width, u8 *frame, u32 stride, XScuGic *InstancePtr)
  */
 void ad9280_sample(u32 adc_addr, u32 adc_len)
 {
-	// 快速配置模式，减少调试输出以提高实时性
-	u32 reg2;
+		// 快速配置模式，减少调试输出以提高实时性
+		// u32 reg2;  // 注释掉未使用的变量
 
 	// 复位并配置长度
 	AD9280_SAMPLE_mWriteReg(adc_addr, AD9280_START, 0);
@@ -217,36 +208,55 @@ int XAxiDma_Initial(u16 DeviceId, u16 IntrID, XAxiDma *XAxiDma, XScuGic *Instanc
 {
 	XAxiDma_Config *CfgPtr;
 	int Status;
+	
+	xil_printf("[DMA初始化] 开始初始化DMA设备ID: %d, 中断ID: %d\r\n", DeviceId, IntrID);
+	
 	/* 初始化XAxiDma设备 */
 	CfgPtr = XAxiDma_LookupConfig(DeviceId);
 	if (!CfgPtr)
 	{
-		xil_printf("No config found for %d\r\n", DeviceId);
+		xil_printf("[错误] 找不到设备ID %d 的配置\r\n", DeviceId);
 		return XST_FAILURE;
 	}
+	
+	xil_printf("[DMA初始化] DMA基地址: 0x%08X\r\n", (u32)CfgPtr->BaseAddr);
 
 	Status = XAxiDma_CfgInitialize(XAxiDma, CfgPtr);
 	if (Status != XST_SUCCESS)
 	{
-		xil_printf("Initialization failed %d\r\n", Status);
+		xil_printf("[错误] DMA配置初始化失败: %d\r\n", Status);
 		return XST_FAILURE;
 	}
+	
+	/* 检查DMA是否有S2MM功能 - 简化检查 */
+	if (!XAxiDma_HasSg(XAxiDma)) {
+		/* 对于简单DMA模式，检查配置文件 */
+		if (CfgPtr->HasS2Mm != 1) {
+			xil_printf("[错误] DMA设备不支持S2MM\r\n");
+			return XST_FAILURE;
+		}
+	}
 
+	/* 连接中断处理程序 */
 	Status = XScuGic_Connect(InstancePtr, IntrID,
 							 (Xil_ExceptionHandler)Dma_Interrupt_Handler,
 							 (void *)XAxiDma);
 
 	if (Status != XST_SUCCESS)
 	{
+		xil_printf("[错误] 中断连接失败: %d\r\n", Status);
 		return Status;
 	}
+	
+	/* 启用GIC中的中断 */
 	XScuGic_Enable(InstancePtr, IntrID);
+	xil_printf("[DMA初始化] 中断已启用\r\n");
 
 	/* 禁用MM2S中断，启用S2MM中断 */
-	XAxiDma_IntrEnable(XAxiDma, XAXIDMA_IRQ_IOC_MASK,
-					   XAXIDMA_DEVICE_TO_DMA);
-	XAxiDma_IntrDisable(XAxiDma, XAXIDMA_IRQ_ALL_MASK,
-						XAXIDMA_DMA_TO_DEVICE);
+	XAxiDma_IntrEnable(XAxiDma, XAXIDMA_IRQ_IOC_MASK, XAXIDMA_DEVICE_TO_DMA);
+	XAxiDma_IntrDisable(XAxiDma, XAXIDMA_IRQ_ALL_MASK, XAXIDMA_DMA_TO_DEVICE);
+	
+	xil_printf("[DMA初始化] S2MM中断已启用，MM2S中断已禁用\r\n");
 
 	return XST_SUCCESS;
 }
@@ -255,19 +265,62 @@ int XAxiDma_Initial(u16 DeviceId, u16 IntrID, XAxiDma *XAxiDma, XScuGic *Instanc
  *回调函数
  *检查中断状态并设置s2mm标志
  */
+/*
+ *回调函数
+ *检查中断状态并设置s2mm标志
+ *基于Xilinx标准示例改进
+ */
 void Dma_Interrupt_Handler(void *CallBackRef)
 {
 	XAxiDma *XAxiDmaPtr;
+	u32 IrqStatus;
+	int TimeOut;
+	
 	XAxiDmaPtr = (XAxiDma *)CallBackRef;
 
-	int s2mm_sr;
-	s2mm_sr = XAxiDma_IntrGetIrq(XAxiDmaPtr, XAXIDMA_DEVICE_TO_DMA);
-	if (s2mm_sr & XAXIDMA_IRQ_IOC_MASK)
+	/* 读取待处理的中断 */
+	IrqStatus = XAxiDma_IntrGetIrq(XAxiDmaPtr, XAXIDMA_DEVICE_TO_DMA);
+	
+	/* 确认待处理的中断 */
+	XAxiDma_IntrAckIrq(XAxiDmaPtr, IrqStatus, XAXIDMA_DEVICE_TO_DMA);
+	
+	/*
+	 * 如果没有中断被断言，则不做任何操作
+	 */
+	if (!(IrqStatus & XAXIDMA_IRQ_ALL_MASK)) {
+		return;
+	}
+	
+	/*
+	 * 如果错误中断被断言，设置错误标志，重置硬件以从错误中恢复
+	 */
+	if ((IrqStatus & XAXIDMA_IRQ_ERROR_MASK)) {
+		xil_printf("[错误] DMA S2MM传输错误中断: 0x%08X\r\n", IrqStatus);
+		
+		/* 重置DMA */
+		XAxiDma_Reset(XAxiDmaPtr);
+		
+		TimeOut = 10000;  // RESET_TIMEOUT_COUNTER
+		while (TimeOut) {
+			if (XAxiDma_ResetIsDone(XAxiDmaPtr)) {
+				break;
+			}
+			TimeOut -= 1;
+		}
+		
+		/* 设置错误标志 */
+		dma_done = 1;
+		s2mm_flag = 1;
+		return;
+	}
+	
+	/*
+	 * 如果完成中断被断言，则设置完成标志
+	 */
+	if ((IrqStatus & XAXIDMA_IRQ_IOC_MASK))
 	{
-		xil_printf("[中断] DMA传输完成中断触发\r\n");
-		/* 清除中断 */
-		XAxiDma_IntrAckIrq(XAxiDmaPtr, XAXIDMA_IRQ_IOC_MASK,
-						   XAXIDMA_DEVICE_TO_DMA);
+		xil_printf("[中断] DMA S2MM传输完成中断触发\r\n");
+		
 		/* 使给定地址范围的数据缓存无效 */
 		Xil_DCacheInvalidateRange((INTPTR)DmaRxBuffer, ADC_CAPTURELEN);
 
@@ -296,7 +349,74 @@ void Dma_Interrupt_Handler(void *CallBackRef)
 			xil_printf("[数据] 警告: ADC数据全零，检查AD9280时钟和配置!\r\n");
 		}
 
+		/* 设置DMA完成标志 */
+		dma_done = 1;
 		s2mm_flag = 1;
+	}
+}
+
+/*
+ * 简单的DMA测试函数
+ * 
+ * @param AxiDmaInst - DMA实例指针
+ * @return XST_SUCCESS 如果测试通过，否则 XST_FAILURE
+ */
+int XAxiDma_SimpleTest(XAxiDma *AxiDmaInst)
+{
+	int Status;
+	u8 TestBuffer[ADC_CAPTURELEN] __attribute__((aligned(64)));
+	int timeout_count = 0;
+	
+	xil_printf("[DMA测试] 开始简单DMA测试\r\n");
+	
+	/* 清除测试缓冲区 */
+	memset(TestBuffer, 0xAA, ADC_CAPTURELEN);  // 填充测试模式
+	
+	/* 清空缓存确保数据写入内存 */
+	Xil_DCacheFlushRange((INTPTR)TestBuffer, ADC_CAPTURELEN);
+	
+	/* 重置标志 */
+	dma_done = 0;
+	s2mm_flag = 0;
+	
+	/* 启动DMA传输 */
+	Status = XAxiDma_SimpleTransfer(AxiDmaInst, (UINTPTR)TestBuffer,
+									ADC_CAPTURELEN, XAXIDMA_DEVICE_TO_DMA);
+	if (Status != XST_SUCCESS)
+	{
+		xil_printf("[DMA测试] DMA传输启动失败: %d\r\n", Status);
+		return XST_FAILURE;
+	}
+	
+	xil_printf("[DMA测试] DMA传输已启动，等待中断...\r\n");
+	
+	/* 等待中断，最多5秒 */
+	while (!dma_done && timeout_count < 5000)
+	{
+		usleep(1000); // 等待1ms
+		timeout_count++;
+		
+		if (timeout_count % 1000 == 0)
+		{
+			xil_printf("[DMA测试] 等待中断... (%d秒)\r\n", timeout_count/1000);
+			/* 检查DMA状态 */
+			u32 s2mm_sr = XAxiDma_ReadReg(AxiDmaInst->RegBase, XAXIDMA_RX_OFFSET + XAXIDMA_SR_OFFSET);
+			xil_printf("[DMA状态] S2MM状态寄存器: 0x%08X\r\n", s2mm_sr);
+		}
+	}
+	
+	if (dma_done)
+	{
+		xil_printf("[DMA测试] 成功收到DMA完成中断！\r\n");
+		return XST_SUCCESS;
+	}
+	else
+	{
+		xil_printf("[DMA测试] 超时：未收到DMA完成中断\r\n");
+		/* 最终检查DMA状态 */
+		u32 s2mm_sr = XAxiDma_ReadReg(AxiDmaInst->RegBase, XAXIDMA_RX_OFFSET + XAXIDMA_SR_OFFSET);
+		xil_printf("[DMA状态] 最终状态: 0x%08X\r\n", s2mm_sr);
+		return XST_FAILURE;
 	}
 }
 
