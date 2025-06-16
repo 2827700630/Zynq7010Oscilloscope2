@@ -47,7 +47,6 @@
  *函数定义
  */
 int XAxiDma_Adc_Wave(u32 width, u8 *frame, u32 stride, XScuGic *InstancePtr);
-int XAxiDma_SimpleTest(XAxiDma *AxiDmaInst);
 int XAxiDma_Initial(u16 DeviceId, u16 IntrID, XAxiDma *XAxiDma, XScuGic *InstancePtr);
 
 /*

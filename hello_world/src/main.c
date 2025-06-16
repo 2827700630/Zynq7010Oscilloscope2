@@ -127,34 +127,7 @@ int main(void)
 
 	usleep(1000); // 等待1秒钟
 
-	/* 添加DMA测试 - 在启动ADC波形显示前测试DMA和中断 */
-	xil_printf("[测试] 开始DMA中断测试...\r\n");
-	
-	// 首先初始化DMA（不启动ADC）
-	extern XAxiDma AxiDma;
-	Status = XAxiDma_Initial(DMA_DEV_ID, S2MM_INTR_ID, &AxiDma, &INST);
-	if (Status != XST_SUCCESS)
-	{
-		xil_printf("[错误] DMA初始化失败: %d\r\n", Status);
-		return XST_FAILURE;
-	}
-	
-	// 简单检查DMA状态 - 使用标准API
-	u32 s2mm_sr = XAxiDma_ReadReg(AxiDma.RegBase, XAXIDMA_RX_OFFSET + XAXIDMA_SR_OFFSET);
-	xil_printf("[DMA状态] S2MM状态寄存器: 0x%08X\r\n", s2mm_sr);
-	
-	// 运行简单的DMA测试
-	Status = XAxiDma_SimpleTest(&AxiDma);
-	if (Status == XST_SUCCESS)
-	{
-		xil_printf("[测试] DMA中断测试通过！开始正常的ADC波形显示\r\n");
-	}
-	else
-	{
-		xil_printf("[测试] DMA中断测试失败！请检查硬件连接和中断配置\r\n");
-		// 即使测试失败也继续，但用轮询模式
-	}
-
+	// 启动ADC波形显示
 	Status = XAxiDma_Adc_Wave(dispCtrl.vMode.width, dispCtrl.framePtr[dispCtrl.curFrame],  dispCtrl.stride, &INST) ;
 	if (Status != XST_SUCCESS)
 	{
