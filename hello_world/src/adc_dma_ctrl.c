@@ -4,6 +4,8 @@
 
 #include "adc_dma_ctrl.h"
 #include "wave/wave.h"
+#include "wave/oscilloscope_text.h"  // 新增：文字显示功能
+#include "wave/oscilloscope_interface.h"  // 新增：完整界面功能
 #include "string.h"
 
 /* 状态码定义 */
@@ -91,11 +93,30 @@ int XAxiDma_Adc_Update(u32 width, u8 *frame, u32 stride)
 	dma_done = 0;
 	frame_count++;
 
-	// 复制网格到波形缓冲区
+	// 复制网格到波形缓冲区（高效方法：预绘制的网格）
 	memcpy(WaveBuffer, GridBuffer, WAVE_LEN);
 
-	// 绘制波形
+	// 在网格基础上绘制波形数据
 	draw_wave(width, WAVE_HEIGHT, (void *)DmaRxBuffer, WaveBuffer, UNSIGNEDCHAR, ADC_BITS, YELLOW, ADC_COE);
+
+	// 在网格和波形基础上添加示波器信息（文字和标签）
+	static OscilloscopeParams osc_params = {
+		.timebase_us = 100.0,      // 100μs/格
+		.voltage_scale = 1.0,      // 1.0V/格（修正：对应AD8056的-5V到+5V输入范围）
+		.sample_rate = 32260000,   // 32.26MHz采样率
+		.trigger_level = 128,      // 中间触发电平
+		.trigger_mode = 0          // 自动触发
+	};
+	
+	// 计算实际测量值
+	calculate_measurements(DmaRxBuffer, ADC_CAPTURELEN, &osc_params);
+	
+	// 计算时基（基于采样率和屏幕宽度）
+	osc_params.timebase_us = (1000000.0 / osc_params.sample_rate) * (ADC_CAPTURELEN / 10.0); // 10个网格
+	
+	// 只绘制示波器信息面板（文字），不重绘网格
+	draw_oscilloscope_info(WaveBuffer, width, WAVE_HEIGHT, &osc_params);
+	draw_grid_labels(WaveBuffer, width, WAVE_HEIGHT, &osc_params);
 
 	// 将画布复制到帧缓冲区
 	frame_copy(width, WAVE_HEIGHT, stride, WAVE_START_COLUMN, WAVE_START_ROW, frame, WaveBuffer);

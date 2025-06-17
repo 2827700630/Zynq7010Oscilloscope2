@@ -150,11 +150,7 @@ int main(void)
 			xil_printf("[主循环] 未知状态: %d\r\n", Status);
 			break;
 		}
-
-		// 适当的循环延迟，避免过度占用CPU
-		usleep(10000); // 等待10ms，约100FPS的更新率
 	}
-
 	// 注意：这段代码永远不会执行到，因为主循环是无限的
 	cleanup_platform();
 	return 0;
