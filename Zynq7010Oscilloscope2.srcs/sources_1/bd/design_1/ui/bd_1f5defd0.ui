@@ -1,7 +1,7 @@
 {
    "ActiveEmotionalView":"Default View",
-   "Default View_ScaleFactor":"0.38841",
-   "Default View_TopLeft":"-332,3",
+   "Default View_ScaleFactor":"0.630974",
+   "Default View_TopLeft":"288,341",
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.8.0 2024-04-26 e1825d835c VDI=44 GEI=38 GUI=JA:21.0
 #  -string -flagsOSRD
@@ -27,40 +27,40 @@ preplace inst axi_smc -pg 1 -lvl 2 -x 560 -y 420 -defaultsOSRD
 preplace inst axi_mem_intercon -pg 1 -lvl 5 -x 1820 -y 640 -defaultsOSRD
 preplace inst system_ila_0 -pg 1 -lvl 5 -x 1820 -y 880 -defaultsOSRD
 preplace inst system_ila_1 -pg 1 -lvl 4 -x 1380 -y 610 -defaultsOSRD
-preplace netloc adc_data_0_1 1 0 3 NJ 560 NJ 560 760J
+preplace netloc adc_data_0_1 1 0 3 NJ 560 NJ 560 780J
 preplace netloc axi_dma_0_s2mm_introut 1 4 1 1600 450n
-preplace netloc axi_dynclk_0_LOCKED_O 1 3 3 1170 310 1620J 330 1970J
+preplace netloc axi_dynclk_0_LOCKED_O 1 3 3 1170 310 1630J 330 1980J
 preplace netloc axi_dynclk_0_PXL_CLK_5X_O 1 3 3 1180 320 1580J 350 NJ
-preplace netloc axi_dynclk_0_PXL_CLK_O 1 3 3 1130 300 1650 340 2000J
+preplace netloc axi_dynclk_0_PXL_CLK_O 1 3 3 1130 300 1660 340 2010J
 preplace netloc axi_vdma_0_mm2s_introut 1 4 1 1590 410n
 preplace netloc proc_sys_reset_0_peripheral_aresetn 1 2 1 730 700n
-preplace netloc processing_system7_0_FCLK_CLK0 1 0 7 20 360 360 520 780 590 1160 990 NJ 990 1980 1260 2480
-preplace netloc processing_system7_0_FCLK_CLK1 1 1 6 390 570 750 860 1190 890 1610 1000 1970 1270 2460
-preplace netloc processing_system7_0_FCLK_CLK2 1 1 6 390 770 770 900 NJ 900 1630J 790 NJ 790 2490
-preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 7 20 570 360 980 NJ 980 NJ 980 NJ 980 NJ 980 2470
+preplace netloc processing_system7_0_FCLK_CLK0 1 0 7 20 360 360 520 800 590 1160 990 NJ 990 2010 1260 2450
+preplace netloc processing_system7_0_FCLK_CLK1 1 1 6 390 570 770 860 1190 890 1620 1000 2000 1270 2430
+preplace netloc processing_system7_0_FCLK_CLK2 1 1 6 390 770 790 900 NJ 900 1640J 790 NJ 790 2460
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 7 20 570 360 980 NJ 980 NJ 980 NJ 980 NJ 980 2440
 preplace netloc rgb2dvi_0_oen 1 6 1 NJ 330
-preplace netloc rst_ps7_0_100M_peripheral_aresetn 1 1 3 370 530 790 600 1140
-preplace netloc rst_ps7_0_142M_peripheral_aresetn 1 2 3 740 910 NJ 910 1620
+preplace netloc rst_ps7_0_100M_peripheral_aresetn 1 1 3 370 530 810 600 1140
+preplace netloc rst_ps7_0_142M_peripheral_aresetn 1 2 3 760 910 NJ 910 1630
 preplace netloc v_tc_0_irq 1 4 1 1600 150n
-preplace netloc xlconcat_0_dout 1 5 1 2000 430n
-preplace netloc ad9280_sample_0_M00_AXIS 1 3 2 1130 880 1640
-preplace netloc axi_dma_0_M_AXI_S2MM 1 4 1 1650 550n
-preplace netloc axi_mem_intercon_M00_AXI 1 5 1 1990 640n
-preplace netloc axi_smc_M00_AXI 1 2 2 770 580 NJ
+preplace netloc xlconcat_0_dout 1 5 1 2030 430n
+preplace netloc ad9280_sample_0_M00_AXIS 1 3 2 1130 880 1650
+preplace netloc axi_dma_0_M_AXI_S2MM 1 4 1 1660 550n
+preplace netloc axi_mem_intercon_M00_AXI 1 5 1 2020 640n
+preplace netloc axi_smc_M00_AXI 1 2 2 790 580 NJ
 preplace netloc axi_smc_M01_AXI 1 2 2 NJ 400 1150
-preplace netloc axi_smc_M02_AXI 1 2 1 790 420n
-preplace netloc axi_smc_M03_AXI 1 2 2 780 380 NJ
+preplace netloc axi_smc_M02_AXI 1 2 1 810 420n
+preplace netloc axi_smc_M03_AXI 1 2 2 800 380 NJ
 preplace netloc axi_smc_M04_AXI 1 2 2 750 60 NJ
 preplace netloc axi_vdma_0_M_AXIS_MM2S 1 4 1 1570 110n
 preplace netloc axi_vdma_0_M_AXI_MM2S 1 4 1 1580 400n
 preplace netloc processing_system7_0_DDR 1 6 1 NJ 1040
 preplace netloc processing_system7_0_FIXED_IO 1 6 1 NJ 1060
-preplace netloc processing_system7_0_M_AXI_GP0 1 1 6 380 970 NJ 970 NJ 970 NJ 970 NJ 970 2460
+preplace netloc processing_system7_0_M_AXI_GP0 1 1 6 380 970 NJ 970 NJ 970 NJ 970 NJ 970 2430
 preplace netloc rgb2dvi_0_TMDS 1 6 1 NJ 310
-preplace netloc v_axi4s_vid_out_0_vid_io_out 1 5 1 1970 120n
+preplace netloc v_axi4s_vid_out_0_vid_io_out 1 5 1 1980 120n
 preplace netloc v_tc_0_vtiming_out 1 4 1 N 130
 levelinfo -pg 1 0 190 560 960 1380 1820 2230 2510
-pagesize -pg 1 -db -bbox -sgen -140 0 2630 1280
+pagesize -pg 1 -db -bbox -sgen -150 0 2630 1280
 "
 }
 {
