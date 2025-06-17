@@ -4,6 +4,8 @@
 
 #include "adc_dma_ctrl.h"
 #include "wave/wave.h"
+#include "wave/oscilloscope_text.h"  // 新增：文字显示功能
+#include "wave/oscilloscope_interface.h"  // 新增：完整界面功能
 #include "string.h"
 
 /* 状态码定义 */
@@ -91,11 +93,33 @@ int XAxiDma_Adc_Update(u32 width, u8 *frame, u32 stride)
 	dma_done = 0;
 	frame_count++;
 
-	// 复制网格到波形缓冲区
-	memcpy(WaveBuffer, GridBuffer, WAVE_LEN);
+	// 暂时注释掉网格复制，专注于文字显示测试
+	// memcpy(WaveBuffer, GridBuffer, WAVE_LEN);
 
-	// 绘制波形
-	draw_wave(width, WAVE_HEIGHT, (void *)DmaRxBuffer, WaveBuffer, UNSIGNEDCHAR, ADC_BITS, YELLOW, ADC_COE);
+	// 清空波形缓冲区，用黑色背景
+	memset(WaveBuffer, 0, WAVE_LEN);
+
+	// 先绘制完整示波器界面（文字和信息面板）
+	static OscilloscopeParams osc_params = {
+		.timebase_us = 100.0,      // 100μs/格
+		.voltage_scale = 0.5,      // 0.5V/格
+		.sample_rate = 32260000,   // 32.26MHz采样率
+		.trigger_level = 128,      // 中间触发电平
+		.trigger_mode = 0          // 自动触发
+	};
+	
+	// 计算实际测量值
+	calculate_measurements(DmaRxBuffer, ADC_CAPTURELEN, &osc_params);
+	
+	// 计算时基（基于采样率和屏幕宽度）
+	osc_params.timebase_us = (1000000.0 / osc_params.sample_rate) * (ADC_CAPTURELEN / 10.0); // 10个网格
+	
+	// 绘制完整示波器界面（在黑色背景上绘制文字）
+	draw_complete_oscilloscope_interface(WaveBuffer, width, WAVE_HEIGHT, 
+	                                   DmaRxBuffer, ADC_CAPTURELEN, &osc_params);
+
+	// 暂时注释掉波形绘制，专注于解决文字镜像问题
+	// draw_wave(width, WAVE_HEIGHT, (void *)DmaRxBuffer, WaveBuffer, UNSIGNEDCHAR, ADC_BITS, YELLOW, ADC_COE);
 
 	// 将画布复制到帧缓冲区
 	frame_copy(width, WAVE_HEIGHT, stride, WAVE_START_COLUMN, WAVE_START_ROW, frame, WaveBuffer);

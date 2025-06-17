@@ -37,6 +37,9 @@ set(USER_COMPILE_SOURCES
 "display_ctrl/display_ctrl.c"
 "dynclk/dynclk.c"
 "wave/wave.c"
+"wave/oscilloscope_text.c"
+"wave/oscilloscope_interface.c"
+"wave/hdmi_font_8x6.c"
 )
 
 # -----------------------------------------
