@@ -40,6 +40,7 @@ set(USER_COMPILE_SOURCES
 "wave/oscilloscope_text.c"
 "wave/oscilloscope_interface.c"
 "wave/hdmi_font_8x6.c"
+"wave/hdmi_font_16x8.c"
 )
 
 # -----------------------------------------

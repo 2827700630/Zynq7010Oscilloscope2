@@ -3,7 +3,7 @@
 /* ------------------------------------------------------------ */
 
 #include "oscilloscope_text.h"
-#include "hdmi_font_8x6.h"
+#include "hdmi_font_16x8.h"
 #include "wave.h"
 #include <string.h>
 #include <stdio.h>
@@ -13,7 +13,7 @@
  * 获取字符在字体数组中的索引
  */
 static int get_char_index(char c) {
-    return hdmi_get_char_index(c);
+    return hdmi_get_char_index_16x8(c);
 }
 
 /**
@@ -50,12 +50,11 @@ static void get_color_rgb(u8 color, u8 *r, u8 *g, u8 *b) {
 void draw_char(u8 *canvas, u32 canvas_width, u32 x, u32 y, char c, u8 color) {
     int char_index = get_char_index(c);
     u8 r, g, b;
-    get_color_rgb(color, &r, &g, &b);
-    
+    get_color_rgb(color, &r, &g, &b);    
     // 使用HDMI优化字库：行列式，逐行扫描，低位在左
-    for (int row = 0; row < HDMI_FONT_HEIGHT; row++) {
-        u8 line = hdmi_font_8x6[char_index][row];
-        for (int col = 0; col < HDMI_FONT_WIDTH; col++) {
+    for (int row = 0; row < HDMI_FONT_HEIGHT_16X8; row++) {
+        u8 line = hdmi_font_16x8[char_index][row];
+        for (int col = 0; col < HDMI_FONT_WIDTH_16X8; col++) {
             // HDMI字库格式：bit0对应最左边像素，bit5对应最右边像素
             if (line & (0x01 << col)) {
                 draw_point(canvas, x + col, y + row, canvas_width, b, g, r);
@@ -72,7 +71,7 @@ void draw_string(u8 *canvas, u32 canvas_width, u32 x, u32 y, const char *str, u8
     
     while (*str) {
         draw_char(canvas, canvas_width, current_x, y, *str, color);
-        current_x += HDMI_FONT_WIDTH;
+        current_x += HDMI_FONT_WIDTH_16X8;
         str++;
     }
 }

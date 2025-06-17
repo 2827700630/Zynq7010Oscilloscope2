@@ -8,8 +8,8 @@
 #include "xil_types.h"
 
 /* 字体大小定义 */
-#define FONT_WIDTH  6    /* 字符宽度（像素） - 使用HDMI优化字库 */
-#define FONT_HEIGHT 8    /* 字符高度（像素） - 使用HDMI优化字库 */
+#define FONT_WIDTH  8    /* 字符宽度（像素） - 使用HDMI优化16x8字库 */
+#define FONT_HEIGHT 16   /* 字符高度（像素） - 使用HDMI优化16x8字库 */
 
 /* 文字颜色定义 */
 #define TEXT_COLOR_WHITE   0
