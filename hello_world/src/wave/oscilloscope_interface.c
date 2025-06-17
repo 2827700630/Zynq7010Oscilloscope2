@@ -1,45 +1,43 @@
 /* ------------------------------------------------------------ */
-/*			示波器界面完整演示程序							*/
+/*			示波器界面绘制模块								*/
 /* ------------------------------------------------------------ */
 
+#include "oscilloscope_interface.h"
 #include "oscilloscope_text.h"
 #include "wave.h"
-#include <math.h> // 添加math.h头文件
+#include <math.h>
+
 
 /**
- * 示波器界面完整演示
- * 专注于镜像测试
+ * 绘制完整的示波器界面
  */
 void draw_complete_oscilloscope_interface(u8 *canvas, u32 canvas_width, u32 canvas_height,
                                           u8 *waveform_data, u32 waveform_length,
                                           OscilloscopeParams *params)
 {
-    // 避免未使用参数警告
-    (void)waveform_data;
-    (void)waveform_length;
-    (void)params;
+    // 1. 清空画布（黑色背景）
+    for (u32 i = 0; i < canvas_width * canvas_height * 3; i++) {
+        canvas[i] = 0;    }
     
-    /* 镜像测试 - 清除所有其他显示，专注于文字测试 */
-    u32 center_x = canvas_width / 2;
-    u32 center_y = canvas_height / 2;
+    // 2. 绘制网格
+    draw_grid(canvas_width, canvas_height, canvas);
     
-    // 屏幕中央大号显示 - 最重要的测试
-    draw_string(canvas, canvas_width, center_x - 50, center_y - 50, "FG FG FG", TEXT_COLOR_YELLOW);
-    draw_string(canvas, canvas_width, center_x - 60, center_y - 20, "MIRROR TEST", TEXT_COLOR_CYAN);
+    // 3. 绘制波形数据
+    if (waveform_data != NULL && waveform_length > 0) {
+        // 使用wave.c中的draw_wave函数绘制波形
+        draw_wave(canvas_width, canvas_height, waveform_data, canvas, 
+                  UNSIGNEDCHAR, 8, 0, 1); // 黄色波形
+    }
     
-    // 左上角测试
-    draw_string(canvas, canvas_width, 50, 50, "FG", TEXT_COLOR_WHITE);
+    // 4. 绘制示波器信息面板
+    if (params != NULL) {
+        draw_oscilloscope_info(canvas, canvas_width, canvas_height, params);
+    }
     
-    // 右上角测试
-    draw_string(canvas, canvas_width, canvas_width - 100, 50, "FG", TEXT_COLOR_GREEN);
-    
-    // 左下角测试
-    draw_string(canvas, canvas_width, 50, canvas_height - 50, "FG", TEXT_COLOR_RED);
-    
-    // 右下角测试
-    draw_string(canvas, canvas_width, canvas_width - 100, canvas_height - 50, "FG", TEXT_COLOR_BLUE);
-      // 关键测试字符 - 用于判断镜像
-    draw_string(canvas, canvas_width, center_x - 80, center_y + 50, "P b d q", TEXT_COLOR_YELLOW);
+    // 5. 绘制网格标签
+    if (params != NULL) {
+        draw_grid_labels(canvas, canvas_width, canvas_height, params);
+    }
 }
 
 /**
@@ -51,17 +49,16 @@ void draw_cursor_measurements(u8 *canvas, u32 canvas_width, u32 canvas_height,
 
     /* 绘制垂直光标线 */
     for (u32 y = 0; y < canvas_height; y++)
-    {
-        // 光标1 - 黄色虚线
+    {        // 光标1 - 黄色虚线
         if (y % 4 < 2)
         {
-            draw_point(canvas, cursor1_x, y, canvas_width, 0, 255, 255); // 黄色
+            draw_point(canvas, cursor1_x, y, canvas_width, 0, 255, 255); // 黄色 (B,G,R)
         }
 
         // 光标2 - 青色虚线
         if (y % 4 < 2)
         {
-            draw_point(canvas, cursor2_x, y, canvas_width, 255, 255, 0); // 青色
+            draw_point(canvas, cursor2_x, y, canvas_width, 255, 255, 0); // 青色 (B,G,R)
         }
     }
 
