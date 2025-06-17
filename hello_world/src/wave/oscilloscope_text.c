@@ -77,19 +77,35 @@ void draw_string(u8 *canvas, u32 canvas_width, u32 x, u32 y, const char *str, u8
 }
 
 /**
- * 绘制浮点数
+ * 绘制浮点数（改进版，正确处理负数）
  */
 void draw_number_float(u8 *canvas, u32 canvas_width, u32 x, u32 y, float value, u8 decimals, u8 color) {
     char buffer[32];
     
-    if (decimals == 0) {
-        snprintf(buffer, sizeof(buffer), "%.0f", value);
-    } else if (decimals == 1) {
-        snprintf(buffer, sizeof(buffer), "%.1f", value);
-    } else if (decimals == 2) {
-        snprintf(buffer, sizeof(buffer), "%.2f", value);
+    // 检查并处理异常值
+    if (value != value) { // NaN检测
+        strcpy(buffer, "NaN");
+    } else if (value > 1e9 || value < -1e9) { // 溢出检测
+        strcpy(buffer, "OVF");
     } else {
-        snprintf(buffer, sizeof(buffer), "%.3f", value);
+        // 根据小数位数格式化
+        switch (decimals) {
+            case 0:
+                snprintf(buffer, sizeof(buffer), "%.0f", value);
+                break;
+            case 1:
+                snprintf(buffer, sizeof(buffer), "%.1f", value);
+                break;
+            case 2:
+                snprintf(buffer, sizeof(buffer), "%.2f", value);
+                break;
+            case 3:
+                snprintf(buffer, sizeof(buffer), "%.3f", value);
+                break;
+            default:
+                snprintf(buffer, sizeof(buffer), "%.2f", value); // 默认2位小数
+                break;
+        }
     }
     
     draw_string(canvas, canvas_width, x, y, buffer, color);
@@ -162,37 +178,47 @@ void draw_oscilloscope_info(u8 *canvas, u32 canvas_width, u32 canvas_height, Osc
 
 /**
  * 绘制网格标签
+ * 网格布局：1920x1080，主网格线间距120x108像素
+ * 水平主线：10条（y = 0, 108, 216, 324, 432, 540, 648, 756, 864, 972）
+ * 垂直主线：16条（x = 0, 120, 240, 360, 480, 600, 720, 840, 960, 1080, 1200, 1320, 1440, 1560, 1680, 1800）
  */
 void draw_grid_labels(u8 *canvas, u32 canvas_width, u32 canvas_height, OscilloscopeParams *params) {
+    
     /* 在屏幕底部显示时间刻度 */
     u32 time_labels_y = canvas_height - 30;
-    u32 grid_divisions = 10; // 假设有10个网格
+    u32 horizontal_grid_lines = 16; // 实际有16条垂直主网格线
+    u32 grid_spacing_x = 120; // 水平网格间距120像素
     
-    for (u32 i = 0; i <= grid_divisions; i++) {
-        u32 x = (canvas_width * i) / grid_divisions;
-        float time_value = (i - grid_divisions/2) * params->timebase_us;
+    for (u32 i = 0; i <= horizontal_grid_lines; i++) {
+        u32 x = i * grid_spacing_x; // 精确对应网格线位置
         
-        // 绘制时间标签
-        if (i % 2 == 0) { // 只在偶数格子显示标签，避免拥挤
-            char time_str[16];
-            snprintf(time_str, sizeof(time_str), "%.1f", time_value);
-            draw_string(canvas, canvas_width, x - 2*FONT_WIDTH, time_labels_y, time_str, TEXT_COLOR_GREEN);
+        // 计算时间值：中心线(第8条线)为0时间，左侧为负，右侧为正
+        float time_value = ((float)i - 8.0) * params->timebase_us;
+        
+        // 绘制时间标签（每隔一条线显示标签，避免拥挤）
+        if (i % 2 == 0 && x < canvas_width) {
+            // 调整x坐标，让文字居中显示在网格线上
+            u32 text_x = (x >= 2*FONT_WIDTH) ? (x - 2*FONT_WIDTH) : 0;
+            draw_number_float(canvas, canvas_width, text_x, time_labels_y, time_value, 1, TEXT_COLOR_GREEN);
         }
     }
     
     /* 在屏幕右侧显示电压刻度 */
     u32 voltage_labels_x = canvas_width - 80;
-    u32 voltage_divisions = 8; // 假设有8个电压网格
+    u32 vertical_grid_lines = 10; // 实际有10条水平主网格线
+    u32 grid_spacing_y = 108; // 垂直网格间距108像素
     
-    for (u32 i = 0; i <= voltage_divisions; i++) {
-        u32 y = (canvas_height * i) / voltage_divisions;
-        float voltage_value = (voltage_divisions/2 - i) * params->voltage_scale;
+    for (u32 i = 0; i <= vertical_grid_lines; i++) {
+        u32 y = i * grid_spacing_y; // 精确对应网格线位置
         
-        // 绘制电压标签
-        if (i % 2 == 0) { // 只在偶数格子显示标签
-            char voltage_str[16];
-            snprintf(voltage_str, sizeof(voltage_str), "%.2f", voltage_value);
-            draw_string(canvas, canvas_width, voltage_labels_x, y - FONT_HEIGHT/2, voltage_str, TEXT_COLOR_GREEN);
+        // 计算电压值：中心线(第5条线)为0V，上方为正，下方为负
+        float voltage_value = (5.0 - (float)i) * params->voltage_scale;
+        
+        // 绘制电压标签（每隔一条线显示标签，避免拥挤）
+        if (i % 2 == 0 && y < canvas_height) {
+            // 调整y坐标，让文字垂直居中显示在网格线上
+            u32 text_y = (y >= FONT_HEIGHT/2) ? (y - FONT_HEIGHT/2) : 0;
+            draw_number_float(canvas, canvas_width, voltage_labels_x, text_y, voltage_value, 2, TEXT_COLOR_GREEN);
         }
     }
 }

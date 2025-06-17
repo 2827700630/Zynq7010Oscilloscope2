@@ -102,7 +102,7 @@ int XAxiDma_Adc_Update(u32 width, u8 *frame, u32 stride)
 	// 在网格和波形基础上添加示波器信息（文字和标签）
 	static OscilloscopeParams osc_params = {
 		.timebase_us = 100.0,      // 100μs/格
-		.voltage_scale = 0.5,      // 0.5V/格
+		.voltage_scale = 1.0,      // 1.0V/格（修正：对应AD8056的-5V到+5V输入范围）
 		.sample_rate = 32260000,   // 32.26MHz采样率
 		.trigger_level = 128,      // 中间触发电平
 		.trigger_mode = 0          // 自动触发
