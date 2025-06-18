@@ -4,9 +4,10 @@
 
 #include "adc_dma_ctrl.h"
 #include "wave/wave.h"
-#include "wave/oscilloscope_text.h"  // 新增：文字显示功能
-#include "wave/oscilloscope_interface.h"  // 新增：完整界面功能
+#include "wave/oscilloscope_text.h"		 // 新增：文字显示功能
+#include "wave/oscilloscope_interface.h" // 新增：完整界面功能
 #include "string.h"
+#include <stdio.h> // 添加stdio.h
 
 /* 状态码定义 */
 #ifndef XST_NO_DATA
@@ -17,22 +18,25 @@
 #define XST_TIMEOUT 4 /* 操作超时 */
 #endif
 
-u8 DmaRxBuffer[MAX_DMA_LEN] __attribute__((aligned(64))); // DMA S2Mm接收缓冲区
+u8 DmaRxBuffer[MAX_DMA_LEN] __attribute__((aligned(64)));				// DMA S2Mm接收缓冲区
 u8 MasterSampleBuffer[ADC_MASTER_SAMPLES] __attribute__((aligned(64))); // 主采样缓冲区(15360点)
-u8 DisplaySampleBuffer[ADC_DISPLAY_SAMPLES]; // 显示采样缓冲区(1920点)
-u8 GridBuffer[WAVE_LEN];								  // 网格缓冲区
-u8 WaveBuffer[WAVE_LEN];								  // 波形缓冲区
-XAxiDma AxiDma;											  // DMA控制器
-volatile int s2mm_flag;									  // S2Mm中断标志
-volatile int dma_done;									  // DMA传输完成标志
+u8 DisplaySampleBuffer[ADC_DISPLAY_SAMPLES];							// 显示采样缓冲区(1920点)
+u8 GridBuffer[WAVE_LEN];												// 网格缓冲区
+u8 WaveBuffer[WAVE_LEN];												// 波形缓冲区
+XAxiDma AxiDma;															// DMA控制器
+volatile int s2mm_flag;													// S2Mm中断标志
+volatile int dma_done;													// DMA传输完成标志
+
+/* 全局触发电平变量 */
+u32 global_trigger_level = 128; // 默认触发电平为中间值
 
 /* 时基配置表 - 5个档位（确保全屏覆盖）*/
 const TimebaseConfig timebase_configs[TIMEBASE_COUNT] = {
-    {1,  1,  31.0,   5.95,  "5us"},      // 最细时基：1:1抽取
-    {2,  2,  62.0,   11.9,  "10us"},     // 2:1抽取
-    {3,  4,  124,    23.8,  "20us"},     // 4:1抽取
-    {4,  5,  155,    29.8,  "30us"},     // 5:1抽取  
-    {5,  8,  248,    47.6,  "50us"}      // 8:1抽取，最粗时基
+	{1, 1, 31.0, 5.95, "5us"},	// 最细时基：1:1抽取
+	{2, 2, 62.0, 11.9, "10us"}, // 2:1抽取
+	{3, 4, 124, 23.8, "20us"},	// 4:1抽取
+	{4, 5, 155, 29.8, "30us"},	// 5:1抽取
+	{5, 8, 248, 47.6, "50us"}	// 8:1抽取，最粗时基
 };
 
 /* 当前时基配置 */
@@ -45,10 +49,12 @@ int XAxiDma_Initial(u16 DeviceId, u16 IntrID, XAxiDma *XAxiDma, XScuGic *Instanc
 void Dma_Interrupt_Handler(void *CallBackRef);
 void frame_copy(u32 width, u32 height, u32 stride, int hor_x, int ver_y, u8 *frame, u8 *CanvasBufferPtr);
 void ad9280_sample(u32 adc_addr, u32 adc_len);
-void extract_samples_uniform(u8* master_buf, u8* display_buf, u8 ratio);
+void extract_samples_uniform(u8 *master_buf, u8 *display_buf, u8 ratio);
 void set_timebase(u8 timebase_index);
 u8 get_current_timebase_index(void);
-const char* get_current_timebase_label(void);
+const char *get_current_timebase_label(void);
+int find_trigger_point(u8 *waveform_data, u32 length, OscilloscopeParams *params);
+void apply_software_trigger(u8 *master_buffer, u8 *display_buffer, u32 master_length, u32 display_length, OscilloscopeParams *params);
 
 /**
  * ADC波形显示初始化函数
@@ -73,7 +79,7 @@ int XAxiDma_Adc_Init(u32 width, u8 *frame, u32 stride, XScuGic *InstancePtr)
 
 	// 初始化时基为中等档位(档位5: 50μs/格)
 	current_timebase = timebase_configs[4]; // 档位5
-	xil_printf("[时基] 初始化为档位%d: %s/格\r\n", 
+	xil_printf("[时基] 初始化为档位%d: %s/格\r\n",
 			   current_timebase.timebase_index, current_timebase.timebase_label);
 
 	// 初始化DMA
@@ -115,65 +121,79 @@ int XAxiDma_Adc_Update(u32 width, u8 *frame, u32 stride)
 	{
 		return XST_NO_DATA; // 没有新数据需要处理
 	}
-
 	// 清除标志并开始处理
 	s2mm_flag = 0;
 	dma_done = 0;
 	frame_count++;
-
-	// 复制网格到波形缓冲区（高效方法：预绘制的网格）
-	memcpy(WaveBuffer, GridBuffer, WAVE_LEN);
-
-	// 在网格基础上绘制波形数据 - 使用显示缓冲区数据
-	draw_wave(width, WAVE_HEIGHT, (void *)DisplaySampleBuffer, WaveBuffer, UNSIGNEDCHAR, ADC_BITS, YELLOW, ADC_COE);
 	// 在网格和波形基础上添加示波器信息（文字和标签）
 	static OscilloscopeParams osc_params = {
-		.timebase_us = 100.0,      // 将由当前时基更新
-		.voltage_scale = 1.0,      // 1.0V/格（修正：对应AD8056的-5V到+5V输入范围）
-		.sample_rate = 0,          // 将根据ADC_SAMPLE_TIME_NS动态计算
-		.trigger_level = 128,      // 中间触发电平
-		.trigger_mode = 0          // 自动触发
+		.timebase_us = 100.0,				 // 将由当前时基更新
+		.voltage_scale = 1.0,				 // 1.0V/格（修正：对应AD8056的-5V到+5V输入范围）
+		.sample_rate = 0,					 // 将根据ADC_SAMPLE_TIME_NS动态计算
+		.trigger_level = 128,				 // 将由全局触发电平更新
+		.trigger_mode = TRIGGER_MODE_AUTO,	 // 自动触发模式
+		.trigger_edge = TRIGGER_EDGE_RISING, // 上升沿触发
+		.trigger_status = TRIGGER_STATUS_WAITING,
+		.trigger_voltage = 0.0 // 将动态计算
 	};
-	
+
+	// 更新触发电平为全局设置值
+	osc_params.trigger_level = global_trigger_level;
+
 	// 动态计算实际采样率
-	osc_params.sample_rate = (u32)(1e9 / ADC_SAMPLE_TIME_NS); // 从ns转换为Hz
-		// 使用当前时基配置更新参数
+	osc_params.sample_rate = (u32)(1e9 / ADC_SAMPLE_TIME_NS); // 从ns转换为Hz// 使用当前时基配置更新参数
 	osc_params.timebase_us = current_timebase.time_per_division_us;
-	
+
 	// 根据时基抽取比例调整有效采样率
 	// 注意：抽取后的有效采样率 = 原始采样率 / 抽取比例
 	u32 effective_sample_rate = osc_params.sample_rate / current_timebase.decimation_ratio;
 	osc_params.sample_rate = effective_sample_rate;
-	
+	// ===== 应用软件触发功能 =====
+	// 将DMA接收的数据复制到主采样缓冲区
+	memcpy(MasterSampleBuffer, DmaRxBuffer, ADC_MASTER_SAMPLES);
+
+	// 应用软件触发，从触发点开始提取显示数据
+	apply_software_trigger(MasterSampleBuffer, DisplaySampleBuffer,
+						   ADC_MASTER_SAMPLES, ADC_DISPLAY_SAMPLES, &osc_params);
+
+	// 复制网格到波形缓冲区（高效方法：预绘制的网格）
+	memcpy(WaveBuffer, GridBuffer, WAVE_LEN);
+
+	// 在网格基础上绘制波形数据 - 使用触发处理后的显示缓冲区数据
+	draw_wave(width, WAVE_HEIGHT, (void *)DisplaySampleBuffer, WaveBuffer, UNSIGNEDCHAR, ADC_BITS, YELLOW, ADC_COE);
+
 	// 计算实际测量值 - 使用显示缓冲区数据
 	calculate_measurements(DisplaySampleBuffer, ADC_DISPLAY_SAMPLES, &osc_params);
-	
 	// 只绘制示波器信息面板（文字），不重绘网格
 	draw_oscilloscope_info(WaveBuffer, width, WAVE_HEIGHT, &osc_params);
 	draw_grid_labels(WaveBuffer, width, WAVE_HEIGHT, &osc_params);
+
+	// 绘制触发电平指示线
+	draw_trigger_level_indicator(WaveBuffer, width, WAVE_HEIGHT, &osc_params);
 
 	// 将画布复制到帧缓冲区
 	frame_copy(width, WAVE_HEIGHT, stride, WAVE_START_COLUMN, WAVE_START_ROW, frame, WaveBuffer);
 	// 性能统计（每100帧显示一次）
 	if (frame_count % 100 == 0)
 	{
-		xil_printf("[性能] 已更新%d帧波形，时基: %s/格\r\n", 
+		xil_printf("[性能] 已更新%d帧波形，时基: %s/格\r\n",
 				   frame_count, current_timebase.timebase_label);
-		
 		// 频率计算调试信息（每100帧显示一次）
-		if (osc_params.frequency_hz > 0) {
-			printf("[频率] 测量频率: %.1f Hz, 有效采样率: %d Hz, Vpp: %.2f V\r\n", 
-					   osc_params.frequency_hz, effective_sample_rate, osc_params.voltage_pp);
-		} else {
+		if (osc_params.frequency_hz > 0)
+		{
+			xil_printf("[频率] 测量频率: %.1f Hz, 有效采样率: %d Hz, Vpp: %.2f V\r\n",
+					   (u32)osc_params.frequency_hz, effective_sample_rate, (u32)(osc_params.voltage_pp * 100));
+		}
+		else
+		{
 			xil_printf("[频率] 无法测量频率（信号太弱或频率超出范围）\r\n");
 		}
 	}
 
 	// 开始下一次ADC采样 - 使用主缓冲区长度
 	ad9280_sample(AD9280_BASE, ADC_MASTER_SAMPLES);
-
-	// 启动DMA传输 - 传输到主缓冲区
-	Status = XAxiDma_SimpleTransfer(&AxiDma, (UINTPTR)MasterSampleBuffer,
+	// 启动DMA传输 - 传输到DMA接收缓冲区
+	Status = XAxiDma_SimpleTransfer(&AxiDma, (UINTPTR)DmaRxBuffer,
 									ADC_MASTER_SAMPLES, XAXIDMA_DEVICE_TO_DMA);
 	if (Status != XST_SUCCESS)
 	{
@@ -211,8 +231,8 @@ int XAxiDma_Adc_Update(u32 width, u8 *frame, u32 stride)
 	}
 
 	// DMA传输成功，进行数据抽取
-	extract_samples_uniform(MasterSampleBuffer, DisplaySampleBuffer, 
-						   current_timebase.decimation_ratio);
+	extract_samples_uniform(MasterSampleBuffer, DisplaySampleBuffer,
+							current_timebase.decimation_ratio);
 
 	return XST_SUCCESS;
 }
@@ -414,13 +434,17 @@ void Dma_Interrupt_Handler(void *CallBackRef)
  * @param display_buf 显示缓冲区指针(1920点)
  * @param ratio 抽取比例
  */
-void extract_samples_uniform(u8* master_buf, u8* display_buf, u8 ratio)
+void extract_samples_uniform(u8 *master_buf, u8 *display_buf, u8 ratio)
 {
-	for (u32 i = 0; i < ADC_DISPLAY_SAMPLES; i++) {
+	for (u32 i = 0; i < ADC_DISPLAY_SAMPLES; i++)
+	{
 		u32 master_index = i * ratio;
-		if (master_index < ADC_MASTER_SAMPLES) {
+		if (master_index < ADC_MASTER_SAMPLES)
+		{
 			display_buf[i] = master_buf[master_index];
-		} else {
+		}
+		else
+		{
 			display_buf[i] = 128; // 默认中位值
 		}
 	}
@@ -433,16 +457,19 @@ void extract_samples_uniform(u8* master_buf, u8* display_buf, u8 ratio)
  */
 void set_timebase(u8 timebase_index)
 {
-	if (timebase_index >= 1 && timebase_index <= TIMEBASE_COUNT) {
+	if (timebase_index >= 1 && timebase_index <= TIMEBASE_COUNT)
+	{
 		current_timebase = timebase_configs[timebase_index - 1];
-		xil_printf("[时基] 切换到档位%d: %s/格\r\n", 
+		xil_printf("[时基] 切换到档位%d: %s/格\r\n",
 				   timebase_index, current_timebase.timebase_label);
-		
+
 		// 重新抽取显示数据
-		extract_samples_uniform(MasterSampleBuffer, DisplaySampleBuffer, 
-							   current_timebase.decimation_ratio);
-	} else {
-		xil_printf("[错误] 时基档位超出范围: %d (有效范围: 1-%d)\r\n", 
+		extract_samples_uniform(MasterSampleBuffer, DisplaySampleBuffer,
+								current_timebase.decimation_ratio);
+	}
+	else
+	{
+		xil_printf("[错误] 时基档位超出范围: %d (有效范围: 1-%d)\r\n",
 				   timebase_index, TIMEBASE_COUNT);
 	}
 }
@@ -458,7 +485,121 @@ u8 get_current_timebase_index(void)
 /**
  * 获取当前时基标签
  */
-const char* get_current_timebase_label(void)
+const char *get_current_timebase_label(void)
 {
 	return current_timebase.timebase_label;
+}
+
+// ===== 触发功能实现 =====
+
+int find_trigger_point(u8 *waveform_data, u32 length, OscilloscopeParams *params)
+{
+	if (!waveform_data || length < 2)
+		return -1;
+
+	u8 trigger_level = params->trigger_level;
+	u8 hysteresis = 2;
+
+	if (trigger_level < hysteresis)
+		return -1;
+	if (trigger_level > (255 - hysteresis))
+		return -1;
+
+	u8 prev_val = waveform_data[0];
+
+	for (u32 i = 1; i < length; i++)
+	{
+		u8 curr_val = waveform_data[i];
+
+		if (prev_val < (trigger_level - hysteresis) && curr_val >= trigger_level)
+		{
+			return (int)i;
+		}
+
+		prev_val = curr_val;
+	}
+
+	return -1;
+}
+
+void apply_software_trigger(u8 *master_buffer, u8 *display_buffer, u32 master_length, u32 display_length, OscilloscopeParams *params)
+{
+	static u32 frame_counter = 0;
+	frame_counter++;
+
+	params->trigger_voltage = ADC_CODE_TO_INPUT_VOLTAGE(params->trigger_level);
+	params->trigger_edge = TRIGGER_EDGE_RISING;
+
+	u8 min_value = 255, max_value = 0;
+	for (u32 i = 0; i < master_length; i++)
+	{
+		if (master_buffer[i] < min_value)
+			min_value = master_buffer[i];
+		if (master_buffer[i] > max_value)
+			max_value = master_buffer[i];
+	}
+
+	int trigger_point = -1;
+	if (params->trigger_level >= min_value && params->trigger_level <= max_value)
+	{
+		trigger_point = find_trigger_point(master_buffer, master_length, params);
+		if (trigger_point >= 0)
+		{
+			params->trigger_status = TRIGGER_STATUS_TRIGGERED;
+		}
+		else
+		{
+			params->trigger_status = TRIGGER_STATUS_WAITING;
+		}
+	}
+	else
+	{
+		params->trigger_status = TRIGGER_STATUS_WAITING;
+	}
+
+	extern TimebaseConfig current_timebase;
+	u8 decimation_ratio = current_timebase.decimation_ratio;
+
+	u32 half_screen = display_length / 2;
+	u32 required_samples = half_screen * decimation_ratio;
+
+	int start_point = 0;
+
+	if (trigger_point >= 0)
+	{
+		start_point = trigger_point - (int)required_samples;
+
+		if (start_point < 0)
+		{
+			start_point = 0;
+		}
+
+		u32 end_point = start_point + (display_length * decimation_ratio);
+		if (end_point > master_length)
+		{
+			start_point = master_length - (display_length * decimation_ratio);
+			if (start_point < 0)
+				start_point = 0;
+		}
+	}
+	else
+	{
+		start_point = (master_length - (display_length * decimation_ratio)) / 2;
+		if (start_point < 0)
+			start_point = 0;
+	}
+
+	for (u32 i = 0; i < display_length; i++)
+	{
+		u32 master_index = start_point + (i * decimation_ratio);
+
+		if (master_index < master_length)
+		{
+			display_buffer[i] = master_buffer[master_index];
+		}
+		else
+		{
+			display_buffer[i] = 0;
+		}
+	}
 }

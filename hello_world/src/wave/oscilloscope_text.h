@@ -29,17 +29,27 @@
 #define ADC_BITS               8      /* ADC位数 */
 #define ADC_MAX_CODE          255     /* ADC最大码值 */
 
-/* 根据您的转换关系：VAD = (1/5)VIN + 1 
- * 即：VIN = 5*(VAD - 1)
- * 当VAD=2V时，VIN=5V；当VAD=0V时，VIN=-5V
- * 输入电压范围：-5V ~ +5V (10Vpp)
- */
 #define INPUT_VOLTAGE_OFFSET  1.0f    /* ADC偏移电压 1V */
 #define INPUT_VOLTAGE_GAIN    5.0f    /* 输入电压增益系数 */
 
 /* 电压转换宏 */
 #define ADC_CODE_TO_INPUT_VOLTAGE(code) \
     (INPUT_VOLTAGE_GAIN * (((float)(code) * ADC_REFERENCE_VOLTAGE / ADC_MAX_CODE) - INPUT_VOLTAGE_OFFSET))
+
+/* 触发模式定义 */
+#define TRIGGER_MODE_AUTO    0    /* 自动触发模式 */
+#define TRIGGER_MODE_NORMAL  1    /* 正常触发模式 */
+#define TRIGGER_MODE_SINGLE  2    /* 单次触发模式 */
+
+/* 触发边沿定义 */
+#define TRIGGER_EDGE_RISING   0   /* 上升沿触发 */
+#define TRIGGER_EDGE_FALLING  1   /* 下降沿触发 */
+#define TRIGGER_EDGE_BOTH     2   /* 双边沿触发 */
+
+/* 触发状态定义 */
+#define TRIGGER_STATUS_WAITING   0  /* 等待触发 */
+#define TRIGGER_STATUS_TRIGGERED 1  /* 已触发 */
+#define TRIGGER_STATUS_TIMEOUT   2  /* 触发超时 */
 
 /* 示波器参数结构体 */
 typedef struct {
@@ -48,8 +58,11 @@ typedef struct {
     float frequency_hz;     /* 频率 (Hz) */
     float voltage_scale;    /* 电压档位 (V/格) */
     u32 sample_rate;        /* 采样率 (Hz) */
-    u32 trigger_level;      /* 触发电平 */
+    u32 trigger_level;      /* 触发电平 (ADC码值 0-255) */
     u8 trigger_mode;        /* 触发模式 */
+    u8 trigger_edge;        /* 触发边沿 */
+    u8 trigger_status;      /* 触发状态 */
+    float trigger_voltage;  /* 触发电平对应的实际电压值 */
 } OscilloscopeParams;
 
 /* 函数声明 */
@@ -60,5 +73,6 @@ void draw_number_int(u8 *canvas, u32 canvas_width, u32 x, u32 y, u32 value, u8 c
 void draw_oscilloscope_info(u8 *canvas, u32 canvas_width, u32 canvas_height, OscilloscopeParams *params);
 void draw_grid_labels(u8 *canvas, u32 canvas_width, u32 canvas_height, OscilloscopeParams *params);
 void calculate_measurements(u8 *waveform_data, u32 length, OscilloscopeParams *params);
+void draw_trigger_level_indicator(u8 *canvas, u32 canvas_width, u32 canvas_height, OscilloscopeParams *params);
 
 #endif /* OSCILLOSCOPE_TEXT_H */
