@@ -272,13 +272,13 @@ TOOLCHAIN_DEP_FLAGS:STRING= -MMD -MP
 TOOLCHAIN_EXTRA_C_FLAGS:STRING= -O2 -g -Wall -Wextra -fno-tree-loop-distribute-patterns
 
 //Enable Interval Timer
-XILTIMER_en_interval_timer:BOOL=OFF
+XILTIMER_en_interval_timer:BOOL=ON
 
 //This parameter is used to select specific timer for sleep functionality
-XILTIMER_sleep_timer:STRING=Default;
+XILTIMER_sleep_timer:STRING=Default
 
 //This parameter is used to select specific timer for tick functionality
-XILTIMER_tick_timer:STRING=None
+XILTIMER_tick_timer:STRING=ps7_scutimer_0
 
 //Yocto based embeddedsw FLOW
 YOCTO:BOOL=OFF
@@ -650,7 +650,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=32
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=33
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

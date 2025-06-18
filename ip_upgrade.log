@@ -1,0 +1,422 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
+| Date         : Wed Jun 18 21:14:39 2025
+| Host         : myhym running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z010clg400-1
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_ad9280_scop_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of design_1_ad9280_scop_0_0 from xilinx.com:user:ad9280_scop:2.5 (Rev. 2) to xilinx.com:user:ad9280_scop:2.7 (Rev. 1)
+
+
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
+| Date         : Wed Jun 18 20:51:49 2025
+| Host         : myhym running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z010clg400-1
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_ad9280_scop_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of design_1_ad9280_scop_0_0 from xilinx.com:user:ad9280_scop:2.4 (Rev. 1) to xilinx.com:user:ad9280_scop:2.5 (Rev. 2)
+
+
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
+| Date         : Wed Jun 18 19:22:11 2025
+| Host         : myhym running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z010clg400-1
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_ad9280_scop_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the update of design_1_ad9280_scop_0_0 (xilinx.com:user:ad9280_scop:2.4 (Rev. 1)) to current project options.
+
+
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
+| Date         : Wed Jun 18 19:15:36 2025
+| Host         : myhym running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z010clg400-1
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_ad9280_scop_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the update of design_1_ad9280_scop_0_0 (xilinx.com:user:ad9280_scop:2.4 (Rev. 1)) to current project options.
+
+
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
+| Date         : Wed Jun 18 19:14:18 2025
+| Host         : myhym running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z010clg400-1
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_ad9280_scop_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of design_1_ad9280_scop_0_0 from xilinx.com:user:ad9280_scop:2.3 (Rev. 1) to xilinx.com:user:ad9280_scop:2.4 (Rev. 1)
+
+
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
+| Date         : Wed Jun 18 18:51:16 2025
+| Host         : myhym running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z010clg400-1
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_ad9280_scop_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of design_1_ad9280_scop_0_0 from xilinx.com:user:ad9280_scop:2.2 (Rev. 1) to xilinx.com:user:ad9280_scop:2.3 (Rev. 1)
+
+
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
+| Date         : Wed Jun 18 18:22:04 2025
+| Host         : myhym running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z010clg400-1
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_ad9280_scop_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of design_1_ad9280_scop_0_0 from xilinx.com:user:ad9280_scop:2.1 (Rev. 1) to xilinx.com:user:ad9280_scop:2.2 (Rev. 1)
+
+
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
+| Date         : Wed Jun 18 18:16:26 2025
+| Host         : myhym running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z010clg400-1
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_ad9280_scop_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the update of design_1_ad9280_scop_0_0 (xilinx.com:user:ad9280_scop:2.1 (Rev. 1)) to current project options.
+
+
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
+| Date         : Wed Jun 18 16:45:26 2025
+| Host         : myhym running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z010clg400-1
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_ad9280_scop_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of design_1_ad9280_scop_0_0 from xilinx.com:user:ad9280_scop:2.0 (Rev. 4) to xilinx.com:user:ad9280_scop:2.1 (Rev. 1)
+
+
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
+| Date         : Wed Jun 18 16:36:32 2025
+| Host         : myhym running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z010clg400-1
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_ad9280_scop_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the update of design_1_ad9280_scop_0_0 (xilinx.com:user:ad9280_scop:2.0 (Rev. 4)) to current project options.
+
+
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
+| Date         : Wed Jun 18 14:44:13 2025
+| Host         : myhym running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z010clg400-1
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_ad9280_scop_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of design_1_ad9280_scop_0_0 (xilinx.com:user:ad9280_scop:2.0) from (Rev. 3) to (Rev. 4)
+
+
+
+
+
+
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
+| Date         : Tue Jun 17 22:48:17 2025
+| Host         : myhym running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7z010clg400-1
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'design_1_ad9280_scope_adc_0_0'
+
+1. Summary
+----------
+
+CAUTION (success, with warnings) in the upgrade of design_1_ad9280_scope_adc_0_0 (xilinx.com:user:ad9280_scope_adc:1.0) from (Rev. 7) to (Rev. 9)
+
+After upgrade, an IP may have parameter and port differences compared to the original customization. Please review the parameters within the IP customization GUI to ensure proper functionality. Also, please review the updated IP instantiation template to ensure proper connectivity, and update your design if required.
+
+2. Connection Warnings
+----------------------
+
+Detected external port differences while upgrading 'design_1_ad9280_scope_adc_0_0'. These changes may impact your design.
+
+
+-Upgraded port 'm00_axis_tdata' width 8 differs from original width 32
+
+-Upgraded port 'm00_axis_tstrb' width 1 differs from original width 4
+
+
+3. Customization warnings
+-------------------------
+
+An attempt to modify the value of disabled parameter 'C_M00_AXIS_TDATA_WIDTH' from '8' to '32' has been ignored for IP 'design_1_ad9280_scope_adc_0_0'
+
+
+4. Debug Commands
+-----------------
+
+  The following debug information can be passed to Vivado as Tcl commands,
+in order to validate or debug the output of the upgrade flow.
+  You may consult any warnings from within this upgrade, and alter or remove
+the configuration parameter(s) which caused the warning; then execute the Tcl
+commands, and use the IP Customization GUI to verify the IP configuration.
+
+create_ip -vlnv xilinx.com:user:ad9280_scope_adc:1.0 -user_name design_1_ad9280_scope_adc_0_0
+set_property -dict "\
+  CONFIG.ADC_DATA_WIDTH {8} \
+  CONFIG.C_INTR_ACTIVE_STATE {0xFFFFFFFF} \
+  CONFIG.C_INTR_SENSITIVITY {0xFFFFFFFF} \
+  CONFIG.C_IRQ_ACTIVE_STATE {1} \
+  CONFIG.C_IRQ_SENSITIVITY {1} \
+  CONFIG.C_M00_AXIS_START_COUNT {32} \
+  CONFIG.C_M00_AXIS_TDATA_WIDTH {32} \
+  CONFIG.C_NUM_OF_INTR {1} \
+  CONFIG.C_S00_AXI_ADDR_WIDTH {5} \
+  CONFIG.C_S00_AXI_BASEADDR {0xFFFFFFFF} \
+  CONFIG.C_S00_AXI_DATA_WIDTH {32} \
+  CONFIG.C_S00_AXI_HIGHADDR {0x00000000} \
+  CONFIG.C_S_AXI_INTR_ADDR_WIDTH {5} \
+  CONFIG.C_S_AXI_INTR_BASEADDR {0xFFFFFFFF} \
+  CONFIG.C_S_AXI_INTR_DATA_WIDTH {32} \
+  CONFIG.C_S_AXI_INTR_HIGHADDR {0x00000000} \
+  CONFIG.Component_Name {design_1_ad9280_scope_adc_0_0} \
+  CONFIG.FIFO_DEPTH {1024} \
+  CONFIG.IRQ.PortWidth {1} \
+  CONFIG.IRQ.SENSITIVITY {LEVEL_HIGH} \
+  CONFIG.M00_AXIS.CLK_DOMAIN {} \
+  CONFIG.M00_AXIS.FREQ_HZ {100000000} \
+  CONFIG.M00_AXIS.HAS_TKEEP {0} \
+  CONFIG.M00_AXIS.HAS_TLAST {1} \
+  CONFIG.M00_AXIS.HAS_TREADY {1} \
+  CONFIG.M00_AXIS.HAS_TSTRB {1} \
+  CONFIG.M00_AXIS.INSERT_VIP {0} \
+  CONFIG.M00_AXIS.LAYERED_METADATA {undef} \
+  CONFIG.M00_AXIS.PHASE {0.0} \
+  CONFIG.M00_AXIS.TDATA_NUM_BYTES {4} \
+  CONFIG.M00_AXIS.TDEST_WIDTH {0} \
+  CONFIG.M00_AXIS.TID_WIDTH {0} \
+  CONFIG.M00_AXIS.TUSER_WIDTH {0} \
+  CONFIG.M00_AXIS.WIZ_DATA_WIDTH {32} \
+  CONFIG.M00_AXIS_CLK.ASSOCIATED_BUSIF {M00_AXIS} \
+  CONFIG.M00_AXIS_CLK.ASSOCIATED_PORT {} \
+  CONFIG.M00_AXIS_CLK.ASSOCIATED_RESET {m00_axis_aresetn} \
+  CONFIG.M00_AXIS_CLK.CLK_DOMAIN {} \
+  CONFIG.M00_AXIS_CLK.FREQ_HZ {100000000} \
+  CONFIG.M00_AXIS_CLK.FREQ_TOLERANCE_HZ {0} \
+  CONFIG.M00_AXIS_CLK.INSERT_VIP {0} \
+  CONFIG.M00_AXIS_CLK.PHASE {0.0} \
+  CONFIG.M00_AXIS_RST.INSERT_VIP {0} \
+  CONFIG.M00_AXIS_RST.POLARITY {ACTIVE_LOW} \
+  CONFIG.S00_AXI.ADDR_WIDTH {5} \
+  CONFIG.S00_AXI.ARUSER_WIDTH {0} \
+  CONFIG.S00_AXI.AWUSER_WIDTH {0} \
+  CONFIG.S00_AXI.BUSER_WIDTH {0} \
+  CONFIG.S00_AXI.CLK_DOMAIN {} \
+  CONFIG.S00_AXI.DATA_WIDTH {32} \
+  CONFIG.S00_AXI.FREQ_HZ {100000000} \
+  CONFIG.S00_AXI.HAS_BRESP {1} \
+  CONFIG.S00_AXI.HAS_BURST {0} \
+  CONFIG.S00_AXI.HAS_CACHE {0} \
+  CONFIG.S00_AXI.HAS_LOCK {0} \
+  CONFIG.S00_AXI.HAS_PROT {1} \
+  CONFIG.S00_AXI.HAS_QOS {0} \
+  CONFIG.S00_AXI.HAS_REGION {0} \
+  CONFIG.S00_AXI.HAS_RRESP {1} \
+  CONFIG.S00_AXI.HAS_WSTRB {1} \
+  CONFIG.S00_AXI.ID_WIDTH {0} \
+  CONFIG.S00_AXI.INSERT_VIP {0} \
+  CONFIG.S00_AXI.MAX_BURST_LENGTH {1} \
+  CONFIG.S00_AXI.NUM_READ_OUTSTANDING {1} \
+  CONFIG.S00_AXI.NUM_READ_THREADS {1} \
+  CONFIG.S00_AXI.NUM_WRITE_OUTSTANDING {1} \
+  CONFIG.S00_AXI.NUM_WRITE_THREADS {1} \
+  CONFIG.S00_AXI.PHASE {0.0} \
+  CONFIG.S00_AXI.PROTOCOL {AXI4LITE} \
+  CONFIG.S00_AXI.READ_WRITE_MODE {READ_WRITE} \
+  CONFIG.S00_AXI.RUSER_BITS_PER_BYTE {0} \
+  CONFIG.S00_AXI.RUSER_WIDTH {0} \
+  CONFIG.S00_AXI.SUPPORTS_NARROW_BURST {0} \
+  CONFIG.S00_AXI.WIZ_DATA_WIDTH {32} \
+  CONFIG.S00_AXI.WIZ_NUM_REG {8} \
+  CONFIG.S00_AXI.WUSER_BITS_PER_BYTE {0} \
+  CONFIG.S00_AXI.WUSER_WIDTH {0} \
+  CONFIG.S00_AXI_CLK.ASSOCIATED_BUSIF {S00_AXI} \
+  CONFIG.S00_AXI_CLK.ASSOCIATED_PORT {} \
+  CONFIG.S00_AXI_CLK.ASSOCIATED_RESET {s00_axi_aresetn} \
+  CONFIG.S00_AXI_CLK.CLK_DOMAIN {} \
+  CONFIG.S00_AXI_CLK.FREQ_HZ {100000000} \
+  CONFIG.S00_AXI_CLK.FREQ_TOLERANCE_HZ {0} \
+  CONFIG.S00_AXI_CLK.INSERT_VIP {0} \
+  CONFIG.S00_AXI_CLK.PHASE {0.0} \
+  CONFIG.S00_AXI_RST.INSERT_VIP {0} \
+  CONFIG.S00_AXI_RST.POLARITY {ACTIVE_LOW} \
+  CONFIG.S_AXI_INTR.ADDR_WIDTH {5} \
+  CONFIG.S_AXI_INTR.ARUSER_WIDTH {0} \
+  CONFIG.S_AXI_INTR.AWUSER_WIDTH {0} \
+  CONFIG.S_AXI_INTR.BUSER_WIDTH {0} \
+  CONFIG.S_AXI_INTR.CLK_DOMAIN {} \
+  CONFIG.S_AXI_INTR.DATA_WIDTH {32} \
+  CONFIG.S_AXI_INTR.FREQ_HZ {100000000} \
+  CONFIG.S_AXI_INTR.HAS_BRESP {1} \
+  CONFIG.S_AXI_INTR.HAS_BURST {0} \
+  CONFIG.S_AXI_INTR.HAS_CACHE {0} \
+  CONFIG.S_AXI_INTR.HAS_LOCK {0} \
+  CONFIG.S_AXI_INTR.HAS_PROT {1} \
+  CONFIG.S_AXI_INTR.HAS_QOS {0} \
+  CONFIG.S_AXI_INTR.HAS_REGION {0} \
+  CONFIG.S_AXI_INTR.HAS_RRESP {1} \
+  CONFIG.S_AXI_INTR.HAS_WSTRB {1} \
+  CONFIG.S_AXI_INTR.ID_WIDTH {0} \
+  CONFIG.S_AXI_INTR.INSERT_VIP {0} \
+  CONFIG.S_AXI_INTR.MAX_BURST_LENGTH {1} \
+  CONFIG.S_AXI_INTR.NUM_READ_OUTSTANDING {1} \
+  CONFIG.S_AXI_INTR.NUM_READ_THREADS {1} \
+  CONFIG.S_AXI_INTR.NUM_WRITE_OUTSTANDING {1} \
+  CONFIG.S_AXI_INTR.NUM_WRITE_THREADS {1} \
+  CONFIG.S_AXI_INTR.PHASE {0.0} \
+  CONFIG.S_AXI_INTR.PROTOCOL {AXI4LITE} \
+  CONFIG.S_AXI_INTR.READ_WRITE_MODE {READ_WRITE} \
+  CONFIG.S_AXI_INTR.RUSER_BITS_PER_BYTE {0} \
+  CONFIG.S_AXI_INTR.RUSER_WIDTH {0} \
+  CONFIG.S_AXI_INTR.SUPPORTS_NARROW_BURST {0} \
+  CONFIG.S_AXI_INTR.WIZ_DATA_WIDTH {32} \
+  CONFIG.S_AXI_INTR.WIZ_NUM_REG {5} \
+  CONFIG.S_AXI_INTR.WUSER_BITS_PER_BYTE {0} \
+  CONFIG.S_AXI_INTR.WUSER_WIDTH {0} \
+  CONFIG.S_AXI_INTR_CLK.ASSOCIATED_BUSIF {S_AXI_INTR} \
+  CONFIG.S_AXI_INTR_CLK.ASSOCIATED_PORT {} \
+  CONFIG.S_AXI_INTR_CLK.ASSOCIATED_RESET {s_axi_intr_aresetn} \
+  CONFIG.S_AXI_INTR_CLK.CLK_DOMAIN {} \
+  CONFIG.S_AXI_INTR_CLK.FREQ_HZ {100000000} \
+  CONFIG.S_AXI_INTR_CLK.FREQ_TOLERANCE_HZ {0} \
+  CONFIG.S_AXI_INTR_CLK.INSERT_VIP {0} \
+  CONFIG.S_AXI_INTR_CLK.PHASE {0.0} \
+  CONFIG.S_AXI_INTR_RST.INSERT_VIP {0} \
+  CONFIG.S_AXI_INTR_RST.POLARITY {ACTIVE_LOW} \
+  CONFIG.TRIGGER_THRESHOLD_WIDTH {8} \
+  CONFIG.adc_clk.ASSOCIATED_BUSIF {} \
+  CONFIG.adc_clk.ASSOCIATED_PORT {} \
+  CONFIG.adc_clk.ASSOCIATED_RESET {adc_rst_n} \
+  CONFIG.adc_clk.CLK_DOMAIN {} \
+  CONFIG.adc_clk.FREQ_HZ {100000000} \
+  CONFIG.adc_clk.FREQ_TOLERANCE_HZ {0} \
+  CONFIG.adc_clk.INSERT_VIP {0} \
+  CONFIG.adc_clk.NUM_READ_OUTSTANDING {} \
+  CONFIG.adc_clk.NUM_WRITE_OUTSTANDING {} \
+  CONFIG.adc_clk.PHASE {0.0} \
+  CONFIG.adc_rst_n.INSERT_VIP {0} \
+  CONFIG.adc_rst_n.POLARITY {ACTIVE_LOW} " [get_ips design_1_ad9280_scope_adc_0_0]
+
+

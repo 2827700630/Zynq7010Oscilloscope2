@@ -10,9 +10,9 @@
 (* CORE_GENERATION_INFO = "bd_f60c,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=bd_f60c,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=7,numReposBlks=7,numNonXlnxBlks=0,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=SBD,synth_mode=None}" *) (* HW_HANDOFF = "design_1_system_ila_0_0.hwdef" *) 
 module bd_f60c
    (SLOT_0_AXIS_tdata,
-    SLOT_0_AXIS_tkeep,
     SLOT_0_AXIS_tlast,
     SLOT_0_AXIS_tready,
+    SLOT_0_AXIS_tstrb,
     SLOT_0_AXIS_tvalid,
     SLOT_1_AXI_araddr,
     SLOT_1_AXI_arcache,
@@ -42,12 +42,12 @@ module bd_f60c
     SLOT_1_AXI_wvalid,
     clk,
     resetn);
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 SLOT_0_AXIS TDATA" *) (* X_INTERFACE_MODE = "Monitor SlaveType" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME SLOT_0_AXIS, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK1, FREQ_HZ 142857132, HAS_TKEEP 1, HAS_TLAST 1, HAS_TREADY 1, HAS_TSTRB 0, INSERT_VIP 0, LAYERED_METADATA undef, PHASE 0.0, TDATA_NUM_BYTES 1, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0" *) input [7:0]SLOT_0_AXIS_tdata;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 SLOT_0_AXIS TKEEP" *) input [0:0]SLOT_0_AXIS_tkeep;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 SLOT_0_AXIS TDATA" *) (* X_INTERFACE_MODE = "Monitor SlaveType" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME SLOT_0_AXIS, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK1, FREQ_HZ 166666672, HAS_TKEEP 0, HAS_TLAST 1, HAS_TREADY 1, HAS_TSTRB 1, INSERT_VIP 0, LAYERED_METADATA undef, PHASE 0.0, TDATA_NUM_BYTES 1, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0" *) input [7:0]SLOT_0_AXIS_tdata;
   (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 SLOT_0_AXIS TLAST" *) input SLOT_0_AXIS_tlast;
   (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 SLOT_0_AXIS TREADY" *) input SLOT_0_AXIS_tready;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 SLOT_0_AXIS TSTRB" *) input [0:0]SLOT_0_AXIS_tstrb;
   (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 SLOT_0_AXIS TVALID" *) input SLOT_0_AXIS_tvalid;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 SLOT_1_AXI ARADDR" *) (* X_INTERFACE_MODE = "Monitor SlaveType" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME SLOT_1_AXI, ADDR_WIDTH 32, ARUSER_WIDTH 0, AWUSER_WIDTH 0, BUSER_WIDTH 0, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK1, DATA_WIDTH 32, FREQ_HZ 142857132, HAS_BRESP 1, HAS_BURST 0, HAS_CACHE 1, HAS_LOCK 0, HAS_PROT 1, HAS_QOS 0, HAS_REGION 0, HAS_RRESP 0, HAS_WSTRB 1, ID_WIDTH 0, INSERT_VIP 0, MAX_BURST_LENGTH 128, NUM_READ_OUTSTANDING 2, NUM_READ_THREADS 1, NUM_WRITE_OUTSTANDING 16, NUM_WRITE_THREADS 1, PHASE 0.0, PROTOCOL AXI4, READ_WRITE_MODE WRITE_ONLY, RUSER_BITS_PER_BYTE 0, RUSER_WIDTH 0, SUPPORTS_NARROW_BURST 0, WUSER_BITS_PER_BYTE 0, WUSER_WIDTH 0" *) input [31:0]SLOT_1_AXI_araddr;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 SLOT_1_AXI ARADDR" *) (* X_INTERFACE_MODE = "Monitor SlaveType" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME SLOT_1_AXI, ADDR_WIDTH 32, ARUSER_WIDTH 0, AWUSER_WIDTH 0, BUSER_WIDTH 0, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK1, DATA_WIDTH 32, FREQ_HZ 166666672, HAS_BRESP 1, HAS_BURST 0, HAS_CACHE 1, HAS_LOCK 0, HAS_PROT 1, HAS_QOS 0, HAS_REGION 0, HAS_RRESP 0, HAS_WSTRB 1, ID_WIDTH 0, INSERT_VIP 0, MAX_BURST_LENGTH 128, NUM_READ_OUTSTANDING 2, NUM_READ_THREADS 1, NUM_WRITE_OUTSTANDING 16, NUM_WRITE_THREADS 1, PHASE 0.0, PROTOCOL AXI4, READ_WRITE_MODE WRITE_ONLY, RUSER_BITS_PER_BYTE 0, RUSER_WIDTH 0, SUPPORTS_NARROW_BURST 0, WUSER_BITS_PER_BYTE 0, WUSER_WIDTH 0" *) input [31:0]SLOT_1_AXI_araddr;
   (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 SLOT_1_AXI ARCACHE" *) input [3:0]SLOT_1_AXI_arcache;
   (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 SLOT_1_AXI ARLEN" *) input [7:0]SLOT_1_AXI_arlen;
   (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 SLOT_1_AXI ARPROT" *) input [2:0]SLOT_1_AXI_arprot;
@@ -73,13 +73,13 @@ module bd_f60c
   (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 SLOT_1_AXI WREADY" *) input SLOT_1_AXI_wready;
   (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 SLOT_1_AXI WSTRB" *) input [3:0]SLOT_1_AXI_wstrb;
   (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 SLOT_1_AXI WVALID" *) input SLOT_1_AXI_wvalid;
-  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 CLK.CLK CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLK.CLK, ASSOCIATED_BUSIF SLOT_0_AXIS:SLOT_1_AXI, ASSOCIATED_RESET resetn, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK1, FREQ_HZ 142857132, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0" *) input clk;
+  (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 CLK.CLK CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLK.CLK, ASSOCIATED_BUSIF SLOT_0_AXIS:SLOT_1_AXI, ASSOCIATED_RESET resetn, CLK_DOMAIN design_1_processing_system7_0_0_FCLK_CLK1, FREQ_HZ 166666672, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0" *) input clk;
   (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 RST.RESETN RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME RST.RESETN, INSERT_VIP 0, POLARITY ACTIVE_LOW" *) input resetn;
 
   wire [7:0]SLOT_0_AXIS_tdata;
-  wire [0:0]SLOT_0_AXIS_tkeep;
   wire SLOT_0_AXIS_tlast;
   wire SLOT_0_AXIS_tready;
+  wire [0:0]SLOT_0_AXIS_tstrb;
   wire SLOT_0_AXIS_tvalid;
   wire [31:0]SLOT_1_AXI_araddr;
   wire [3:0]SLOT_1_AXI_arcache;
@@ -109,9 +109,9 @@ module bd_f60c
   wire SLOT_1_AXI_wvalid;
   wire clk;
   wire [7:0]net_slot_0_axis_tdata;
-  wire [0:0]net_slot_0_axis_tkeep;
   wire net_slot_0_axis_tlast;
   wire net_slot_0_axis_tready;
+  wire [0:0]net_slot_0_axis_tstrb;
   wire net_slot_0_axis_tvalid;
   wire [1:0]net_slot_1_axi_ar_cnt;
   wire [1:0]net_slot_1_axi_ar_ctrl;
@@ -148,9 +148,9 @@ module bd_f60c
        (.aclk(clk),
         .aresetn(resetn),
         .m_slot_0_axis_tdata(net_slot_0_axis_tdata),
-        .m_slot_0_axis_tkeep(net_slot_0_axis_tkeep),
         .m_slot_0_axis_tlast(net_slot_0_axis_tlast),
         .m_slot_0_axis_tready(net_slot_0_axis_tready),
+        .m_slot_0_axis_tstrb(net_slot_0_axis_tstrb),
         .m_slot_0_axis_tvalid(net_slot_0_axis_tvalid),
         .m_slot_1_axi_ar_cnt(net_slot_1_axi_ar_cnt),
         .m_slot_1_axi_arready(net_slot_1_axi_arready),
@@ -177,9 +177,9 @@ module bd_f60c
         .m_slot_1_axi_wstrb(net_slot_1_axi_wstrb),
         .m_slot_1_axi_wvalid(net_slot_1_axi_wvalid),
         .slot_0_axis_tdata(SLOT_0_AXIS_tdata),
-        .slot_0_axis_tkeep(SLOT_0_AXIS_tkeep),
         .slot_0_axis_tlast(SLOT_0_AXIS_tlast),
         .slot_0_axis_tready(SLOT_0_AXIS_tready),
+        .slot_0_axis_tstrb(SLOT_0_AXIS_tstrb),
         .slot_0_axis_tvalid(SLOT_0_AXIS_tvalid),
         .slot_1_axi_araddr(SLOT_1_AXI_araddr),
         .slot_1_axi_arcache(SLOT_1_AXI_arcache),
@@ -210,7 +210,7 @@ module bd_f60c
   bd_f60c_ila_lib_0 ila_lib
        (.clk(clk),
         .probe0(net_slot_0_axis_tdata),
-        .probe1(net_slot_0_axis_tkeep),
+        .probe1(net_slot_0_axis_tstrb),
         .probe10(net_slot_1_axi_awprot),
         .probe11(net_slot_1_axi_awsize),
         .probe12(net_slot_1_axi_b_cnt),

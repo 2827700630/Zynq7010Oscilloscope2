@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version              : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-| Date                      : Tue Jun 17 00:25:16 2025
+| Date                      : Wed Jun 18 22:24:31 2025
 | Host                      : myhym running 64-bit major release  (build 9200)
 | Command                   : report_io -file design_1_wrapper_io_placed.rpt
 | Design                    : design_1_wrapper
@@ -25,7 +25,7 @@ Table of Contents
 +---------------+
 | Total User IO |
 +---------------+
-|           148 |
+|           149 |
 +---------------+
 
 
@@ -331,7 +331,7 @@ Table of Contents
 | R14        |                   | High Range | IO_L6N_T0_VREF_34       | User IO       |                   |      34 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | R15        |                   | High Range | VCCO_34                 | VCCO          |                   |      34 |            |      |                     |                      |    3.30 |            |           |          |      |                  |              |                   |              |
 | R16        |                   | High Range | IO_L19P_T3_34           | User IO       |                   |      34 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
-| R17        |                   | High Range | IO_L19N_T3_VREF_34      | User IO       |                   |      34 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
+| R17        | ext_trigger_0     | High Range | IO_L19N_T3_VREF_34      | INPUT         | LVCMOS33          |      34 |            |      |                     |                 NONE |         | FIXED      |           |          |      | NONE             |              |                   |              |
 | R18        |                   | High Range | IO_L20N_T3_34           | User IO       |                   |      34 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | R19        |                   | High Range | IO_0_34                 | User IO       |                   |      34 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | R20        |                   |            | GND                     | GND           |                   |         |            |      |                     |                      |     0.0 |            |           |          |      |                  |              |                   |              |

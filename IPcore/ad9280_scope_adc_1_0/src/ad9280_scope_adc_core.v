@@ -5,24 +5,43 @@
 // Engineer: 
 // 
 // Create Date: 2025/06/14
-// Design Name: AD9280 Scope ADC Core
+// Design Name: AD9280 Scope ADC Core (8-bit Output Compatible)
 // Module Name: ad9280_scope_adc_core
 // Project Name: AD9280 Oscilloscope
 // Target Devices: ZYNQ
 // Tool Versions: Vivado 2021.1
 // Description: AD9280 ADC sampling core with hardware trigger functionality
+//              Modified for 8-bit output compatibility with ad9280_sample
+// 
+// Modifications Applied:
+// - Changed output from 32-bit to 8-bit for ad9280_sample compatibility
+// - Improved data efficiency from 25% to 100%
+// - Maintained all advanced features (trigger, pre-trigger, etc.)
+// - Uses optimized Xilinx XPM async FIFO (256x8bit)
+// - Direct 8-bit ADC data output without padding
+// 
+// Key Features:
+// - Multiple trigger modes (auto/normal/single/external)
+// - Configurable pre-trigger depth
+// - Cross-clock domain support (ADC clock vs System clock)
+// - 8-bit AXI Stream output (compatible with ad9280_sample)
+// - Efficient resource utilization
 // 
 // Dependencies: 
+// - Xilinx XPM Library (xpm_fifo_async)
 // 
 // Revision:
 // Revision 0.01 - File Created
+// Revision 0.02 - FIFO Optimized (2025/06/17)
+// Revision 0.03 - 8-bit Output Compatibility (2025/06/17)
 // Additional Comments:
+// Now compatible with ad9280_sample interface for easy IP core replacement
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
 module ad9280_scope_adc_core #(
     parameter integer ADC_DATA_WIDTH = 8,
-    parameter integer FIFO_DEPTH = 1024,
+    parameter integer FIFO_DEPTH = 256,        // 优化：减少到256，足够1920点采样使用
     parameter integer SAMPLE_DEPTH_WIDTH = 16
 )(
     // Clock and Reset
@@ -51,10 +70,9 @@ module ad9280_scope_adc_core #(
     output wire fifo_full,
     output wire fifo_empty,
     output reg [SAMPLE_DEPTH_WIDTH-1:0] sample_count,
-    
-    // Data Output Interface
+      // Data Output Interface (修改为8位输出，与ad9280_sample兼容)
     output wire data_valid,
-    output wire [31:0] data_out,
+    output wire [7:0] data_out,
     input wire data_ready
 );
 
@@ -264,59 +282,77 @@ module ad9280_scope_adc_core #(
             endcase
         end
     end
+      // FIFO信号定义
+    wire [7:0] fifo_data_out;
+    wire fifo_empty;
+    wire fifo_full_flag;
+    wire fifo_prog_empty;
+    wire fifo_prog_full;
+    wire fifo_rd_rst_busy;
+    wire fifo_wr_rst_busy;
     
     // FIFO write control
-    assign fifo_wr_en = adc_valid && (state == PRE_TRIGGER || state == SAMPLING || state == WAIT_TRIGGER);
-    assign fifo_data_in = {24'h0, adc_data_reg};
+    assign fifo_wr_en = adc_valid && (state == PRE_TRIGGER || state == SAMPLING);
+    assign fifo_data_in = adc_data_reg; // 优化：直接使用8位数据，减少资源消耗
     
-    // FIFO read control
-    assign fifo_rd_en = data_ready && !fifo_prog_empty;
-    
-    // Output assignments
-    assign data_valid = !fifo_prog_empty;
-    assign data_out = fifo_data_out;
+    // FIFO read control  
+    assign fifo_rd_en = data_ready && !fifo_empty;
+      // Output assignments (修改为直接8位输出)
+    assign data_valid = !fifo_empty;
+    assign data_out = fifo_data_out; // 直接输出8位数据，无需扩展
     assign fifo_full = fifo_prog_full;
-    assign fifo_empty = fifo_prog_empty;
     
-    // Simple FIFO implementation
-    // Note: In actual design, use Xilinx FIFO IP for better performance
-    reg [31:0] fifo_mem [0:FIFO_DEPTH-1];
-    reg [$clog2(FIFO_DEPTH):0] fifo_wr_ptr;
-    reg [$clog2(FIFO_DEPTH):0] fifo_rd_ptr;
-    reg [$clog2(FIFO_DEPTH):0] fifo_count;
-    
-    always @(posedge adc_clk or negedge adc_rst_n) begin
-        if (!adc_rst_n) begin
-            fifo_wr_ptr <= 0;
-        end else if (fifo_wr_en && !fifo_prog_full) begin
-            fifo_mem[fifo_wr_ptr[$clog2(FIFO_DEPTH)-1:0]] <= fifo_data_in;
-            fifo_wr_ptr <= fifo_wr_ptr + 1;
-        end
-    end
-    
-    always @(posedge adc_clk or negedge adc_rst_n) begin
-        if (!adc_rst_n) begin
-            fifo_rd_ptr <= 0;
-        end else if (fifo_rd_en && !fifo_prog_empty) begin
-            fifo_rd_ptr <= fifo_rd_ptr + 1;
-        end
-    end
-    
-    // FIFO count management
-    always @(posedge adc_clk or negedge adc_rst_n) begin
-        if (!adc_rst_n) begin
-            fifo_count <= 0;
-        end else begin
-            case ({fifo_wr_en && !fifo_prog_full, fifo_rd_en && !fifo_prog_empty})
-                2'b10: fifo_count <= fifo_count + 1;
-                2'b01: fifo_count <= fifo_count - 1;
-                default: fifo_count <= fifo_count;
-            endcase
-        end
-    end
-    
-    assign fifo_data_out = fifo_mem[fifo_rd_ptr[$clog2(FIFO_DEPTH)-1:0]];
-    assign fifo_prog_full = (fifo_count >= (FIFO_DEPTH - 4));
-    assign fifo_prog_empty = (fifo_count == 0);
+    // 优化的Xilinx XPM异步FIFO实现
+    // 支持不同时钟域，更高效的资源利用
+    xpm_fifo_async #(
+        .CASCADE_HEIGHT(0),           // DECIMAL
+        .CDC_SYNC_STAGES(2),          // DECIMAL
+        .DOUT_RESET_VALUE("0"),       // String
+        .ECC_MODE("no_ecc"),          // String
+        .FIFO_MEMORY_TYPE("auto"),    // String - 自动选择最优存储类型
+        .FIFO_READ_LATENCY(1),        // DECIMAL
+        .FIFO_WRITE_DEPTH(FIFO_DEPTH), // DECIMAL - 使用参数化深度
+        .FULL_RESET_VALUE(0),         // DECIMAL
+        .PROG_EMPTY_THRESH(10),       // DECIMAL - 程序化空标志阈值
+        .PROG_FULL_THRESH(FIFO_DEPTH-10), // DECIMAL - 程序化满标志阈值
+        .RD_DATA_COUNT_WIDTH($clog2(FIFO_DEPTH)+1), // DECIMAL
+        .READ_DATA_WIDTH(8),          // DECIMAL - 8位读数据宽度
+        .READ_MODE("std"),            // String
+        .RELATED_CLOCKS(0),           // DECIMAL - 异步时钟
+        .SIM_ASSERT_CHK(0),           // DECIMAL
+        .USE_ADV_FEATURES("0707"),    // String - 启用prog_full, prog_empty, rd_data_count, wr_data_count
+        .WAKEUP_TIME(0),              // DECIMAL
+        .WRITE_DATA_WIDTH(8),         // DECIMAL - 8位写数据宽度
+        .WR_DATA_COUNT_WIDTH($clog2(FIFO_DEPTH)+1)  // DECIMAL
+    )
+    xpm_fifo_async_inst (
+        .almost_empty(),              // 1-bit output: Almost Empty
+        .almost_full(),               // 1-bit output: Almost Full
+        .data_valid(),                // 1-bit output: Read Data Valid
+        .dbiterr(),                   // 1-bit output: Double Bit Error
+        .dout(fifo_data_out),         // READ_DATA_WIDTH-bit output: Read Data
+        .empty(fifo_empty),           // 1-bit output: Empty Flag
+        .full(fifo_full_flag),        // 1-bit output: Full Flag
+        .overflow(),                  // 1-bit output: Overflow
+        .prog_empty(fifo_prog_empty), // 1-bit output: Programmable Empty
+        .prog_full(fifo_prog_full),   // 1-bit output: Programmable Full
+        .rd_data_count(),             // RD_DATA_COUNT_WIDTH-bit output: Read Data Count
+        .rd_rst_busy(fifo_rd_rst_busy), // 1-bit output: Read Reset Busy
+        .sbiterr(),                   // 1-bit output: Single Bit Error
+        .underflow(),                 // 1-bit output: Underflow
+        .wr_ack(),                    // 1-bit output: Write Acknowledge
+        .wr_data_count(),             // WR_DATA_COUNT_WIDTH-bit output: Write Data Count
+        .wr_rst_busy(fifo_wr_rst_busy), // 1-bit output: Write Reset Busy
+        
+        .din(fifo_data_in),           // WRITE_DATA_WIDTH-bit input: Write Data
+        .injectdbiterr(1'b0),         // 1-bit input: Double Bit Error Injection
+        .injectsbiterr(1'b0),         // 1-bit input: Single Bit Error Injection
+        .rd_clk(sys_clk),             // 1-bit input: Read clock - 系统时钟域
+        .rd_en(fifo_rd_en),           // 1-bit input: Read Enable
+        .rst(~adc_rst_n),             // 1-bit input: Reset
+        .sleep(1'b0),                 // 1-bit input: Dynamic Power Saving
+        .wr_clk(adc_clk),             // 1-bit input: Write clock - ADC时钟域  
+        .wr_en(fifo_wr_en)            // 1-bit input: Write Enable
+    );
 
 endmodule

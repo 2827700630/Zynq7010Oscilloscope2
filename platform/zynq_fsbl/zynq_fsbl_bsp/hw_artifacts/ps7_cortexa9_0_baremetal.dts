@@ -26,11 +26,11 @@
                  <0x100000 &ps7_ddr_0_memory 0x100000 0x1ff00000>,
                  <0x0 &ps7_ram_0_memory 0x0 0x30000>,
                  <0xffff0000 &ps7_ram_1_memory 0xffff0000 0xfe00>,
+                 <0x40000000 &ad9280_scop_0 0x40000000 0x10000>,
                  <0x40400000 &axi_dma_0 0x40400000 0x10000>,
                  <0x43000000 &axi_vdma_0 0x43000000 0x10000>,
                  <0x43c00000 &v_tc_0 0x43c00000 0x10000>,
                  <0x43c10000 &axi_dynclk_0 0x43c10000 0x10000>,
-                 <0x43c20000 &ad9280_sample_0 0x43c20000 0x10000>,
                  <0xf8008000 &ps7_afi_0 0xf8008000 0x1000>,
                  <0xf8009000 &ps7_afi_1 0xf8009000 0x1000>,
                  <0xf800a000 &ps7_afi_2 0xf800a000 0x1000>,
@@ -850,20 +850,23 @@
                         phandle = <0x35>;
                 };
 
-                ad9280_sample_0: ad9280_sample@43c20000 {
+                ad9280_scop_0: ad9280_scop@40000000 {
+                        compatible = "xlnx,ad9280-scop-2.7";
+                        xlnx,trigger-threshold-width = <0x8>;
+                        xlnx,adc-data-width = <0x8>;
                         xlnx,s00-axi-data-width = <0x20>;
-                        compatible = "xlnx,ad9280-sample-1.0";
-                        status = "okay";
-                        clock-names = "adc_clk", "m00_axis_aclk", "s00_axi_aclk";
-                        xlnx,s00-axi-addr-width = <0x4>;
-                        xlnx,ip-name = "ad9280_sample";
-                        xlnx,edk-iptype = "PERIPHERAL";
-                        reg = <0x43c20000 0x10000>;
+                        xlnx,ip-name = "ad9280_scop";
+                        reg = <0x40000000 0x10000>;
                         clocks = <&clkc 0x11>,
                          <&clkc 0x10>,
                          <&clkc 0xf>;
-                        xlnx,name = "ad9280_sample_0";
-                        phandle = <0x9>;
+                        xlnx,edk-iptype = "PERIPHERAL";
+                        status = "okay";
+                        xlnx,fifo-depth = <0x400>;
+                        xlnx,s00-axi-addr-width = <0x5>;
+                        clock-names = "adc_clk", "m00_axis_aclk", "s00_axi_aclk";
+                        xlnx,name = "ad9280_scop_0";
+                        phandle = <0x5>;
                 };
 
                 axi_dma_0: dma@40400000 {
@@ -907,7 +910,7 @@
                         xlnx,include-mm2s = <0x0>;
                         xlnx,include-mm2s-dre = <0x0>;
                         xlnx,name = "axi_dma_0";
-                        phandle = <0x5>;
+                        phandle = <0x6>;
 
                         dma_channel_40400030: dma-channel@40400030 {
                                 interrupts = <0x0 0x1f 0x4>;
@@ -931,7 +934,7 @@
                         clocks = <&clkc 0xf>,
                          <&clkc 0xf>;
                         xlnx,name = "axi_dynclk_0";
-                        phandle = <0x8>;
+                        phandle = <0x9>;
                 };
 
                 axi_vdma_0: dma@43000000 {
@@ -1028,7 +1031,7 @@
                         xlnx,use-s2mm-fsync = <0x2>;
                         xlnx,enable-debug-info-8 = <0x0>;
                         xlnx,enable-mm2s-buf-empty = <0x0>;
-                        phandle = <0x6>;
+                        phandle = <0x7>;
 
                         dma_channel_43000000: dma-channel@43000000 {
                                 interrupts = <0x0 0x1d 0x4>;
@@ -1157,7 +1160,7 @@
                         xlnx,gen-fieldid-polarity = <0x1>;
                         xlnx,gen-f1-vsync-hstart = <0x500>;
                         xlnx,gen-f0-vsync-hend = <0x500>;
-                        phandle = <0x7>;
+                        phandle = <0x8>;
                 };
         };
 
@@ -1266,7 +1269,7 @@
                 clocking1 = "/amba_pl/clocking1";
                 clocking0 = "/amba_pl/clocking0";
                 misc_clk_0 = "/amba_pl/misc_clk_0";
-                ad9280_sample_0 = "/amba_pl/ad9280_sample@43c20000";
+                ad9280_scop_0 = "/amba_pl/ad9280_scop@40000000";
                 axi_dma_0 = "/amba_pl/dma@40400000";
                 dma_channel_40400030 = "/amba_pl/dma@40400000/dma-channel@40400030";
                 axi_dynclk_0 = "/amba_pl/axi_dynclk@43c10000";

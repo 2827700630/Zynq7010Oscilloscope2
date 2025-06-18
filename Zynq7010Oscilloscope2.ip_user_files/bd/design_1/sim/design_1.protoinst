@@ -3,28 +3,28 @@
 	"modules": {
 		"design_1": {
 			"proto_instances": {
-				"/ad9280_sample_0/M00_AXIS": {
+				"/ad9280_scop_0/M00_AXIS": {
 					"interface": "xilinx.com:interface:axis:1.0",
 					"ports": {
 						"ACLK": { "actual": "m00_axis_aclk"},
 						"ARESETN": { "actual": "m00_axis_aresetn"},
 						"TDATA": { "actual": "m00_axis_tdata[7:0]"},
-						"TKEEP": { "actual": "m00_axis_tkeep[0:0]"},
 						"TLAST": { "actual": "m00_axis_tlast"},
 						"TREADY": { "actual": "m00_axis_tready"},
+						"TSTRB": { "actual": "m00_axis_tstrb[0:0]"},
 						"TVALID": { "actual": "m00_axis_tvalid"}
 					}
 				},
-				"/ad9280_sample_0/S00_AXI": {
+				"/ad9280_scop_0/S00_AXI": {
 					"interface": "xilinx.com:interface:aximm:1.0",
 					"ports": {
 						"ACLK": { "actual": "s00_axi_aclk"},
-						"ARADDR": { "actual": "s00_axi_araddr[3:0]"},
+						"ARADDR": { "actual": "s00_axi_araddr[4:0]"},
 						"ARESETN": { "actual": "s00_axi_aresetn"},
 						"ARPROT": { "actual": "s00_axi_arprot[2:0]"},
 						"ARREADY": { "actual": "s00_axi_arready"},
 						"ARVALID": { "actual": "s00_axi_arvalid"},
-						"AWADDR": { "actual": "s00_axi_awaddr[3:0]"},
+						"AWADDR": { "actual": "s00_axi_awaddr[4:0]"},
 						"AWPROT": { "actual": "s00_axi_awprot[2:0]"},
 						"AWREADY": { "actual": "s00_axi_awready"},
 						"AWVALID": { "actual": "s00_axi_awvalid"},
@@ -673,11 +673,11 @@
 					"interface": "xilinx.com:interface:aximm:1.0",
 					"ports": {
 						"ACLK": { "actual": "aclk"},
-						"ARADDR": { "actual": "M00_AXI_araddr[3:0]"},
+						"ARADDR": { "actual": "M00_AXI_araddr[4:0]"},
 						"ARPROT": { "actual": "M00_AXI_arprot[2:0]"},
 						"ARREADY": { "actual": "M00_AXI_arready"},
 						"ARVALID": { "actual": "M00_AXI_arvalid"},
-						"AWADDR": { "actual": "M00_AXI_awaddr[3:0]"},
+						"AWADDR": { "actual": "M00_AXI_awaddr[4:0]"},
 						"AWPROT": { "actual": "M00_AXI_awprot[2:0]"},
 						"AWREADY": { "actual": "M00_AXI_awready"},
 						"AWVALID": { "actual": "M00_AXI_awvalid"},

@@ -2715,7 +2715,7 @@
         "C_PROBE2_WIDTH": [ { "value": "1", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
         "C_PROBE1_WIDTH": [ { "value": "1", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
         "C_PROBE0_WIDTH": [ { "value": "1", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
-        "C_DATA_DEPTH": [ { "value": "4096", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
+        "C_DATA_DEPTH": [ { "value": "1024", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "C_NUM_OF_PROBES": [ { "value": "1", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "C_XLNX_HW_PROBE_INFO": [ { "value": "DEFAULT", "resolve_type": "user", "usage": "all" } ],
         "Component_Name": [ { "value": "design_1_system_ila_0_0", "resolve_type": "user", "usage": "all" } ],
@@ -4010,7 +4010,7 @@
       "ports": {
         "clk": [ { "direction": "in" } ],
         "SLOT_0_AXIS_tdata": [ { "direction": "in", "size_left": "7", "size_right": "0", "driver_value": "0" } ],
-        "SLOT_0_AXIS_tkeep": [ { "direction": "in", "size_left": "0", "size_right": "0", "driver_value": "1" } ],
+        "SLOT_0_AXIS_tstrb": [ { "direction": "in", "size_left": "0", "size_right": "0", "driver_value": "1" } ],
         "SLOT_0_AXIS_tlast": [ { "direction": "in", "driver_value": "0" } ],
         "SLOT_0_AXIS_tvalid": [ { "direction": "in", "driver_value": "0" } ],
         "SLOT_0_AXIS_tready": [ { "direction": "in", "driver_value": "1" } ],
@@ -4084,8 +4084,8 @@
             "TID_WIDTH": [ { "value": "0", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
             "TUSER_WIDTH": [ { "value": "0", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
             "HAS_TREADY": [ { "value": "1", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
-            "HAS_TSTRB": [ { "value": "0", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
-            "HAS_TKEEP": [ { "value": "1", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
+            "HAS_TSTRB": [ { "value": "1", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
+            "HAS_TKEEP": [ { "value": "0", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
             "HAS_TLAST": [ { "value": "1", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
             "FREQ_HZ": [ { "value": "166666672", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
             "PHASE": [ { "value": "0.0", "value_permission": "bd", "resolve_type": "generated", "format": "float", "is_static_object": false } ],
@@ -4095,7 +4095,7 @@
           },
           "port_maps": {
             "TDATA": [ { "physical_name": "SLOT_0_AXIS_tdata" } ],
-            "TKEEP": [ { "physical_name": "SLOT_0_AXIS_tkeep" } ],
+            "TSTRB": [ { "physical_name": "SLOT_0_AXIS_tstrb" } ],
             "TLAST": [ { "physical_name": "SLOT_0_AXIS_tlast" } ],
             "TVALID": [ { "physical_name": "SLOT_0_AXIS_tvalid" } ],
             "TREADY": [ { "physical_name": "SLOT_0_AXIS_tready" } ]

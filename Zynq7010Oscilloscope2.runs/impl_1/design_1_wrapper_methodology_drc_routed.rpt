@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-| Date         : Tue Jun 17 00:27:15 2025
+| Date         : Wed Jun 18 22:27:29 2025
 | Host         : myhym running 64-bit major release  (build 9200)
 | Command      : report_methodology -file design_1_wrapper_methodology_drc_routed.rpt -pb design_1_wrapper_methodology_drc_routed.pb -rpx design_1_wrapper_methodology_drc_routed.rpx
 | Design       : design_1_wrapper
@@ -23,23 +23,65 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max checks: <unlimited>
-             Checks found: 57
+             Checks found: 197
 +-----------+------------------+-------------------------------------------------------------+--------+
 | Rule      | Severity         | Description                                                 | Checks |
 +-----------+------------------+-------------------------------------------------------------+--------+
+| TIMING-6  | Critical Warning | No common primary clock between related clocks              | 4      |
+| TIMING-7  | Critical Warning | No common node between related clocks                       | 4      |
 | TIMING-36 | Critical Warning | Invalid Generated Clock due to missing edge propagation     | 1      |
 | LUTAR-1   | Warning          | LUT drives async reset alert                                | 7      |
 | PDRC-190  | Warning          | Suboptimally placed synchronized register chain             | 32     |
 | TIMING-9  | Warning          | Unknown CDC Logic                                           | 1      |
-| TIMING-10 | Warning          | Missing property on synchronizer                            | 1      |
-| TIMING-18 | Warning          | Missing input or output delay                               | 8      |
+| TIMING-16 | Warning          | Large setup violation                                       | 134    |
+| TIMING-18 | Warning          | Missing input or output delay                               | 9      |
 | TIMING-30 | Warning          | Sub-optimal master source pin selection for generated clock | 1      |
-| ULMTCS-2  | Warning          | Control Sets use limits require reduction                   | 1      |
-| XDCB-5    | Warning          | Runtime inefficient way to find pin objects                 | 5      |
+| ULMTCS-1  | Warning          | Control Sets use limits recommend reduction                 | 1      |
+| XDCB-5    | Warning          | Runtime inefficient way to find pin objects                 | 3      |
 +-----------+------------------+-------------------------------------------------------------+--------+
 
 2. REPORT DETAILS
 -----------------
+TIMING-6#1 Critical Warning
+No common primary clock between related clocks  
+The clocks clk_fpga_0 and clk_fpga_1 are related (timed together) but they have no common primary clock. The design could fail in hardware. To find a timing path between these clocks, run the following command: report_timing -from [get_clocks clk_fpga_0] -to [get_clocks clk_fpga_1]
+Related violations: <none>
+
+TIMING-6#2 Critical Warning
+No common primary clock between related clocks  
+The clocks clk_fpga_0 and clk_fpga_2 are related (timed together) but they have no common primary clock. The design could fail in hardware. To find a timing path between these clocks, run the following command: report_timing -from [get_clocks clk_fpga_0] -to [get_clocks clk_fpga_2]
+Related violations: <none>
+
+TIMING-6#3 Critical Warning
+No common primary clock between related clocks  
+The clocks clk_fpga_1 and clk_fpga_0 are related (timed together) but they have no common primary clock. The design could fail in hardware. To find a timing path between these clocks, run the following command: report_timing -from [get_clocks clk_fpga_1] -to [get_clocks clk_fpga_0]
+Related violations: <none>
+
+TIMING-6#4 Critical Warning
+No common primary clock between related clocks  
+The clocks clk_fpga_2 and clk_fpga_0 are related (timed together) but they have no common primary clock. The design could fail in hardware. To find a timing path between these clocks, run the following command: report_timing -from [get_clocks clk_fpga_2] -to [get_clocks clk_fpga_0]
+Related violations: <none>
+
+TIMING-7#1 Critical Warning
+No common node between related clocks  
+The clocks clk_fpga_0 and clk_fpga_1 are related (timed together) but they have no common node. The design could fail in hardware. To find a timing path between these clocks, run the following command: report_timing -from [get_clocks clk_fpga_0] -to [get_clocks clk_fpga_1]
+Related violations: <none>
+
+TIMING-7#2 Critical Warning
+No common node between related clocks  
+The clocks clk_fpga_0 and clk_fpga_2 are related (timed together) but they have no common node. The design could fail in hardware. To find a timing path between these clocks, run the following command: report_timing -from [get_clocks clk_fpga_0] -to [get_clocks clk_fpga_2]
+Related violations: <none>
+
+TIMING-7#3 Critical Warning
+No common node between related clocks  
+The clocks clk_fpga_1 and clk_fpga_0 are related (timed together) but they have no common node. The design could fail in hardware. To find a timing path between these clocks, run the following command: report_timing -from [get_clocks clk_fpga_1] -to [get_clocks clk_fpga_0]
+Related violations: <none>
+
+TIMING-7#4 Critical Warning
+No common node between related clocks  
+The clocks clk_fpga_2 and clk_fpga_0 are related (timed together) but they have no common node. The design could fail in hardware. To find a timing path between these clocks, run the following command: report_timing -from [get_clocks clk_fpga_2] -to [get_clocks clk_fpga_0]
+Related violations: <none>
+
 TIMING-36#1 Critical Warning
 Invalid Generated Clock due to missing edge propagation  
 There is no rising/falling edge propagation between master clock axi_dynclk_0_PXL_CLK_O to generated clock design_1_i/rgb2dvi_0/U0/SerialClk
@@ -135,162 +177,162 @@ Related violations: <none>
 
 PDRC-190#1 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[0] in site SLICE_X10Y43 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][0] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[0] in site SLICE_X14Y57 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][0] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#2 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[10] in site SLICE_X6Y46 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][10] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[10] in site SLICE_X17Y55 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][10] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#3 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[11] in site SLICE_X8Y48 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][11] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[11] in site SLICE_X19Y56 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][11] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#4 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[12] in site SLICE_X8Y46 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][12] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[12] in site SLICE_X22Y57 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][12] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#5 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[13] in site SLICE_X14Y43 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][13] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[13] in site SLICE_X17Y53 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][13] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#6 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[14] in site SLICE_X11Y48 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][14] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[14] in site SLICE_X18Y57 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][14] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#7 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[15] in site SLICE_X12Y47 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][15] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[15] in site SLICE_X18Y51 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][15] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#8 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[16] in site SLICE_X13Y44 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][16] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[16] in site SLICE_X23Y53 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][16] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#9 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[17] in site SLICE_X15Y46 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][17] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[17] in site SLICE_X22Y53 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][17] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#10 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[18] in site SLICE_X13Y48 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][18] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[18] in site SLICE_X20Y57 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][18] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#11 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[19] in site SLICE_X17Y45 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][19] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[19] in site SLICE_X21Y51 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][19] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#12 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[1] in site SLICE_X13Y46 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][1] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[1] in site SLICE_X13Y52 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][1] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#13 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[20] in site SLICE_X17Y47 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][20] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[20] in site SLICE_X24Y53 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][20] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#14 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[21] in site SLICE_X16Y47 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][21] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[21] in site SLICE_X25Y51 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][21] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#15 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[22] in site SLICE_X14Y45 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][22] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[22] in site SLICE_X25Y53 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][22] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#16 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[23] in site SLICE_X16Y45 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][23] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[23] in site SLICE_X23Y51 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][23] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#17 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[24] in site SLICE_X11Y46 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][24] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[24] in site SLICE_X24Y56 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][24] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#18 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[25] in site SLICE_X9Y46 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][25] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[25] in site SLICE_X21Y53 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][25] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#19 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[26] in site SLICE_X11Y44 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][26] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[26] in site SLICE_X25Y55 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][26] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#20 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[27] in site SLICE_X15Y48 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][27] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[27] in site SLICE_X23Y55 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][27] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#21 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[28] in site SLICE_X10Y47 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][28] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[28] in site SLICE_X20Y52 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][28] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#22 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[29] in site SLICE_X10Y49 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][29] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[29] in site SLICE_X19Y53 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][29] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#23 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[2] in site SLICE_X10Y45 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][2] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[2] in site SLICE_X21Y56 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][2] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#24 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[30] in site SLICE_X14Y49 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][30] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[30] in site SLICE_X20Y55 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][30] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#25 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[31] in site SLICE_X14Y47 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][31] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[31] in site SLICE_X22Y51 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][31] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#26 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[3] in site SLICE_X9Y48 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][3] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[3] in site SLICE_X12Y53 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][3] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#27 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[4] in site SLICE_X12Y44 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][4] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[4] in site SLICE_X15Y56 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][4] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#28 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[5] in site SLICE_X9Y44 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][5] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[5] in site SLICE_X18Y54 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][5] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#29 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[6] in site SLICE_X6Y48 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][6] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[6] in site SLICE_X15Y54 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][6] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#30 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[7] in site SLICE_X7Y47 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][7] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[7] in site SLICE_X13Y54 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][7] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#31 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[8] in site SLICE_X8Y44 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][8] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[8] in site SLICE_X22Y55 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][8] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 PDRC-190#32 Warning
 Suboptimally placed synchronized register chain  
-The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[9] in site SLICE_X7Y45 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][9] is not placed in the same (SLICE) site.
+The FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.lite_rdata_cdc_from_reg[9] in site SLICE_X14Y52 is part of a synchronized register chain that is suboptimally placed as the load FDRE cell design_1_i/axi_dma_0/U0/I_AXI_DMA_REG_MODULE/GEN_AXI_LITE_IF.AXI_LITE_IF_I/GEN_ASYNC_READ.REG_DATA2LITE_CLOCK/syncstages_ff_reg[0][9] is not placed in the same (SLICE) site.
 Related violations: <none>
 
 TIMING-9#1 Warning
@@ -298,9 +340,674 @@ Unknown CDC Logic
 One or more asynchronous Clock Domain Crossing has been detected between 2 clock domains through a set_false_path or a set_clock_groups or set_max_delay -datapath_only constraint but no double-registers logic synchronizer has been found on the side of the capture clock. It is recommended to run report_cdc for a complete and detailed CDC coverage. Please consider using XPM_CDC to avoid Critical severities
 Related violations: <none>
 
-TIMING-10#1 Warning
-Missing property on synchronizer  
-One or more logic synchronizer has been detected between 2 clock domains but the synchronizer does not have the property ASYNC_REG defined on one or both registers. It is recommended to run report_cdc for a complete and detailed CDC coverage
+TIMING-16#1 Warning
+Large setup violation  
+There is a large setup violation of -1.045 ns between design_1_i/axi_dma_0/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/ENABLE_AXIS_SKID.I_S2MM_STRM_SKID_BUF/sig_s_ready_out_reg/C (clocked by clk_fpga_1) and design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/gen_pf_ic_rc.gpe_ic.diff_pntr_pe_reg[4]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#2 Warning
+Large setup violation  
+There is a large setup violation of -1.054 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/gen_pf_ic_rc.ram_empty_i_reg/C (clocked by clk_fpga_0) and design_1_i/axi_dma_0/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/ENABLE_AXIS_SKID.I_S2MM_STRM_SKID_BUF/sig_m_valid_dup_reg/D (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#3 Warning
+Large setup violation  
+There is a large setup violation of -1.061 ns between design_1_i/axi_dma_0/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/ENABLE_AXIS_SKID.I_S2MM_STRM_SKID_BUF/sig_s_ready_out_reg/C (clocked by clk_fpga_1) and design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/gen_pf_ic_rc.gpe_ic.diff_pntr_pe_reg[6]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#4 Warning
+Large setup violation  
+There is a large setup violation of -1.089 ns between design_1_i/axi_dma_0/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/ENABLE_AXIS_SKID.I_S2MM_STRM_SKID_BUF/sig_s_ready_out_reg/C (clocked by clk_fpga_1) and design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/rdp_inst/count_value_i_reg[4]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#5 Warning
+Large setup violation  
+There is a large setup violation of -1.105 ns between design_1_i/axi_dma_0/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/ENABLE_AXIS_SKID.I_S2MM_STRM_SKID_BUF/sig_s_ready_out_reg/C (clocked by clk_fpga_1) and design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/rdp_inst/count_value_i_reg[6]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#6 Warning
+Large setup violation  
+There is a large setup violation of -1.135 ns between design_1_i/axi_dma_0/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/ENABLE_AXIS_SKID.I_S2MM_STRM_SKID_BUF/sig_s_ready_out_reg/C (clocked by clk_fpga_1) and design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/gen_pf_ic_rc.gpe_ic.diff_pntr_pe_reg[7]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#7 Warning
+Large setup violation  
+There is a large setup violation of -1.156 ns between design_1_i/axi_dma_0/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/ENABLE_AXIS_SKID.I_S2MM_STRM_SKID_BUF/sig_s_ready_out_reg/C (clocked by clk_fpga_1) and design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/gen_pf_ic_rc.gpe_ic.diff_pntr_pe_reg[5]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#8 Warning
+Large setup violation  
+There is a large setup violation of -1.160 ns between design_1_i/axi_dma_0/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/ENABLE_AXIS_SKID.I_S2MM_STRM_SKID_BUF/sig_s_ready_out_reg/C (clocked by clk_fpga_1) and design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/gen_pf_ic_rc.gpe_ic.diff_pntr_pe_reg[8]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#9 Warning
+Large setup violation  
+There is a large setup violation of -1.179 ns between design_1_i/axi_dma_0/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/ENABLE_AXIS_SKID.I_S2MM_STRM_SKID_BUF/sig_s_ready_out_reg/C (clocked by clk_fpga_1) and design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/rdp_inst/count_value_i_reg[7]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#10 Warning
+Large setup violation  
+There is a large setup violation of -1.200 ns between design_1_i/axi_dma_0/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/ENABLE_AXIS_SKID.I_S2MM_STRM_SKID_BUF/sig_s_ready_out_reg/C (clocked by clk_fpga_1) and design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/rdp_inst/count_value_i_reg[5]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#11 Warning
+Large setup violation  
+There is a large setup violation of -1.204 ns between design_1_i/axi_dma_0/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/ENABLE_AXIS_SKID.I_S2MM_STRM_SKID_BUF/sig_s_ready_out_reg/C (clocked by clk_fpga_1) and design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/rdp_inst/count_value_i_reg[8]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#12 Warning
+Large setup violation  
+There is a large setup violation of -1.220 ns between design_1_i/axi_dma_0/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/ENABLE_AXIS_SKID.I_S2MM_STRM_SKID_BUF/sig_s_ready_out_reg/C (clocked by clk_fpga_1) and design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/rdp_inst/count_value_i_reg[10]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#13 Warning
+Large setup violation  
+There is a large setup violation of -1.251 ns between design_1_i/axi_dma_0/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/ENABLE_AXIS_SKID.I_S2MM_STRM_SKID_BUF/sig_s_ready_out_reg/C (clocked by clk_fpga_1) and design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/gen_sdpram.xpm_memory_base_inst/gen_wr_a.gen_word_narrow.mem_reg/ENBWREN (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#14 Warning
+Large setup violation  
+There is a large setup violation of -1.271 ns between design_1_i/axi_dma_0/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/ENABLE_AXIS_SKID.I_S2MM_STRM_SKID_BUF/sig_s_ready_out_reg/C (clocked by clk_fpga_1) and design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/gen_pf_ic_rc.gpe_ic.diff_pntr_pe_reg[9]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#15 Warning
+Large setup violation  
+There is a large setup violation of -1.315 ns between design_1_i/axi_dma_0/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/ENABLE_AXIS_SKID.I_S2MM_STRM_SKID_BUF/sig_s_ready_out_reg/C (clocked by clk_fpga_1) and design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/rdp_inst/count_value_i_reg[9]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#16 Warning
+Large setup violation  
+There is a large setup violation of -1.448 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/gen_pf_ic_rc.ram_empty_i_reg/C (clocked by clk_fpga_0) and design_1_i/axi_dma_0/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/ENABLE_AXIS_SKID.I_S2MM_STRM_SKID_BUF/sig_m_valid_out_reg/D (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#17 Warning
+Large setup violation  
+There is a large setup violation of -1.522 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/gen_sdpram.xpm_memory_base_inst/gen_wr_a.gen_word_narrow.mem_reg/CLKBWRCLK (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/stream_data_out_fifo_reg[2]/D (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#18 Warning
+Large setup violation  
+There is a large setup violation of -1.530 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/gen_sdpram.xpm_memory_base_inst/gen_wr_a.gen_word_narrow.mem_reg/CLKBWRCLK (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/stream_data_out_fifo_reg[0]/D (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#19 Warning
+Large setup violation  
+There is a large setup violation of -1.537 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/gen_sdpram.xpm_memory_base_inst/gen_wr_a.gen_word_narrow.mem_reg/CLKBWRCLK (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/stream_data_out_fifo_reg[3]/D (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#20 Warning
+Large setup violation  
+There is a large setup violation of -1.544 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/gen_sdpram.xpm_memory_base_inst/gen_wr_a.gen_word_narrow.mem_reg/CLKBWRCLK (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/stream_data_out_fifo_reg[1]/D (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#21 Warning
+Large setup violation  
+There is a large setup violation of -1.559 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/gen_sdpram.xpm_memory_base_inst/gen_wr_a.gen_word_narrow.mem_reg/CLKBWRCLK (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/stream_data_out_fifo_reg[6]/D (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#22 Warning
+Large setup violation  
+There is a large setup violation of -1.562 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/gen_sdpram.xpm_memory_base_inst/gen_wr_a.gen_word_narrow.mem_reg/CLKBWRCLK (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/stream_data_out_fifo_reg[7]/D (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#23 Warning
+Large setup violation  
+There is a large setup violation of -1.564 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/gen_sdpram.xpm_memory_base_inst/gen_wr_a.gen_word_narrow.mem_reg/CLKBWRCLK (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/stream_data_out_fifo_reg[4]/D (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#24 Warning
+Large setup violation  
+There is a large setup violation of -1.723 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/gen_sdpram.xpm_memory_base_inst/gen_wr_a.gen_word_narrow.mem_reg/CLKBWRCLK (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/stream_data_out_fifo_reg[5]/D (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#25 Warning
+Large setup violation  
+There is a large setup violation of -1.796 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/gen_pf_ic_rc.ram_empty_i_reg/C (clocked by clk_fpga_0) and design_1_i/axi_dma_0/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/ENABLE_AXIS_SKID.I_S2MM_STRM_SKID_BUF/sig_s_ready_dup_reg/D (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#26 Warning
+Large setup violation  
+There is a large setup violation of -1.909 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[15]/C (clocked by clk_fpga_2) and design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg1_reg[31]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#27 Warning
+Large setup violation  
+There is a large setup violation of -1.953 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/trigger_detected_reg/C (clocked by clk_fpga_2) and design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg1_reg[8]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#28 Warning
+Large setup violation  
+There is a large setup violation of -2.004 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[10]/C (clocked by clk_fpga_2) and design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg1_reg[26]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#29 Warning
+Large setup violation  
+There is a large setup violation of -2.004 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/gen_pf_ic_rc.ram_empty_i_reg/C (clocked by clk_fpga_0) and design_1_i/axi_dma_0/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/ENABLE_AXIS_SKID.I_S2MM_STRM_SKID_BUF/sig_s_ready_out_reg/D (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#30 Warning
+Large setup violation  
+There is a large setup violation of -2.022 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[8]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/software_trigger_reg_reg/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#31 Warning
+Large setup violation  
+There is a large setup violation of -2.022 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[5]/C (clocked by clk_fpga_2) and design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg1_reg[21]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#32 Warning
+Large setup violation  
+There is a large setup violation of -2.029 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[3]/C (clocked by clk_fpga_2) and design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg1_reg[19]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#33 Warning
+Large setup violation  
+There is a large setup violation of -2.045 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/acquisition_complete_reg/C (clocked by clk_fpga_2) and design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg1_reg[9]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#34 Warning
+Large setup violation  
+There is a large setup violation of -2.052 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[7]/C (clocked by clk_fpga_2) and design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg1_reg[23]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#35 Warning
+Large setup violation  
+There is a large setup violation of -2.092 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/sampling_active_reg/C (clocked by clk_fpga_2) and design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg1_reg[5]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#36 Warning
+Large setup violation  
+There is a large setup violation of -2.118 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[11]/C (clocked by clk_fpga_2) and design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg1_reg[27]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#37 Warning
+Large setup violation  
+There is a large setup violation of -2.125 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[6]/C (clocked by clk_fpga_2) and design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg1_reg[22]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#38 Warning
+Large setup violation  
+There is a large setup violation of -2.140 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[9]/C (clocked by clk_fpga_2) and design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg1_reg[25]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#39 Warning
+Large setup violation  
+There is a large setup violation of -2.162 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[14]/C (clocked by clk_fpga_2) and design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg1_reg[30]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#40 Warning
+Large setup violation  
+There is a large setup violation of -2.231 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[13]/C (clocked by clk_fpga_2) and design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg1_reg[29]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#41 Warning
+Large setup violation  
+There is a large setup violation of -2.249 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[12]/C (clocked by clk_fpga_2) and design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg1_reg[28]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#42 Warning
+Large setup violation  
+There is a large setup violation of -2.307 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[0]/C (clocked by clk_fpga_2) and design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg1_reg[16]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#43 Warning
+Large setup violation  
+There is a large setup violation of -2.315 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[1]/C (clocked by clk_fpga_2) and design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg1_reg[17]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#44 Warning
+Large setup violation  
+There is a large setup violation of -2.359 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[2]/C (clocked by clk_fpga_2) and design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg1_reg[18]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#45 Warning
+Large setup violation  
+There is a large setup violation of -2.367 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[4]/C (clocked by clk_fpga_2) and design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg1_reg[20]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#46 Warning
+Large setup violation  
+There is a large setup violation of -2.481 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[8]/C (clocked by clk_fpga_2) and design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg1_reg[24]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#47 Warning
+Large setup violation  
+There is a large setup violation of -2.510 ns between design_1_i/ad9280_scop_0/inst/adc_core_inst/xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/gen_pf_ic_rc.gpf_ic.prog_full_i_reg/C (clocked by clk_fpga_2) and design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg1_reg[7]/D (clocked by clk_fpga_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#48 Warning
+Large setup violation  
+There is a large setup violation of -3.024 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sampling_active_reg/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#49 Warning
+Large setup violation  
+There is a large setup violation of -3.303 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/axis_tlast_fifo_reg/D (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#50 Warning
+Large setup violation  
+There is a large setup violation of -3.493 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[2]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#51 Warning
+Large setup violation  
+There is a large setup violation of -3.493 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[14]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#52 Warning
+Large setup violation  
+There is a large setup violation of -3.504 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[10]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#53 Warning
+Large setup violation  
+There is a large setup violation of -3.504 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[11]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#54 Warning
+Large setup violation  
+There is a large setup violation of -3.504 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[12]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#55 Warning
+Large setup violation  
+There is a large setup violation of -3.504 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[4]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#56 Warning
+Large setup violation  
+There is a large setup violation of -3.527 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[0]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#57 Warning
+Large setup violation  
+There is a large setup violation of -3.527 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[13]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#58 Warning
+Large setup violation  
+There is a large setup violation of -3.527 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[5]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#59 Warning
+Large setup violation  
+There is a large setup violation of -3.527 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[8]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#60 Warning
+Large setup violation  
+There is a large setup violation of -3.644 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[10]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#61 Warning
+Large setup violation  
+There is a large setup violation of -3.644 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[12]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#62 Warning
+Large setup violation  
+There is a large setup violation of -3.644 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[13]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#63 Warning
+Large setup violation  
+There is a large setup violation of -3.644 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[9]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#64 Warning
+Large setup violation  
+There is a large setup violation of -3.666 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[7]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#65 Warning
+Large setup violation  
+There is a large setup violation of -3.666 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[6]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#66 Warning
+Large setup violation  
+There is a large setup violation of -3.666 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[7]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#67 Warning
+Large setup violation  
+There is a large setup violation of -3.668 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[3]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#68 Warning
+Large setup violation  
+There is a large setup violation of -3.703 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[14]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#69 Warning
+Large setup violation  
+There is a large setup violation of -3.703 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[15]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#70 Warning
+Large setup violation  
+There is a large setup violation of -3.703 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[1]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#71 Warning
+Large setup violation  
+There is a large setup violation of -3.703 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[15]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#72 Warning
+Large setup violation  
+There is a large setup violation of -3.780 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[0]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#73 Warning
+Large setup violation  
+There is a large setup violation of -3.780 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[9]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#74 Warning
+Large setup violation  
+There is a large setup violation of -3.780 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[1]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#75 Warning
+Large setup violation  
+There is a large setup violation of -3.780 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[2]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#76 Warning
+Large setup violation  
+There is a large setup violation of -3.799 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[11]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#77 Warning
+Large setup violation  
+There is a large setup violation of -3.799 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[8]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#78 Warning
+Large setup violation  
+There is a large setup violation of -3.841 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[3]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#79 Warning
+Large setup violation  
+There is a large setup violation of -3.841 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[4]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#80 Warning
+Large setup violation  
+There is a large setup violation of -3.841 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[5]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#81 Warning
+Large setup violation  
+There is a large setup violation of -3.841 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg0_reg[1]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[6]/CE (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#82 Warning
+Large setup violation  
+There is a large setup violation of -3.962 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg3_reg[3]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/trigger_detected_reg_reg/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#83 Warning
+Large setup violation  
+There is a large setup violation of -4.166 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/transfer_count_reg[4]/R (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#84 Warning
+Large setup violation  
+There is a large setup violation of -4.166 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/transfer_count_reg[5]/R (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#85 Warning
+Large setup violation  
+There is a large setup violation of -4.166 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/transfer_count_reg[6]/R (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#86 Warning
+Large setup violation  
+There is a large setup violation of -4.166 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/transfer_count_reg[7]/R (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#87 Warning
+Large setup violation  
+There is a large setup violation of -4.196 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/transfer_count_reg[12]/R (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#88 Warning
+Large setup violation  
+There is a large setup violation of -4.196 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/transfer_count_reg[13]/R (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#89 Warning
+Large setup violation  
+There is a large setup violation of -4.196 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/transfer_count_reg[14]/R (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#90 Warning
+Large setup violation  
+There is a large setup violation of -4.196 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/transfer_count_reg[15]/R (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#91 Warning
+Large setup violation  
+There is a large setup violation of -4.232 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[11]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/FSM_sequential_state_reg[2]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#92 Warning
+Large setup violation  
+There is a large setup violation of -4.273 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/transfer_count_reg[10]/R (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#93 Warning
+Large setup violation  
+There is a large setup violation of -4.273 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/transfer_count_reg[11]/R (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#94 Warning
+Large setup violation  
+There is a large setup violation of -4.273 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/transfer_count_reg[8]/R (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#95 Warning
+Large setup violation  
+There is a large setup violation of -4.273 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/transfer_count_reg[9]/R (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#96 Warning
+Large setup violation  
+There is a large setup violation of -4.306 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/transfer_count_reg[0]/R (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#97 Warning
+Large setup violation  
+There is a large setup violation of -4.306 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/transfer_count_reg[1]/R (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#98 Warning
+Large setup violation  
+There is a large setup violation of -4.306 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/transfer_count_reg[2]/R (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#99 Warning
+Large setup violation  
+There is a large setup violation of -4.306 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/ad9280_scop_master_stream_v2_0_M00_AXIS_inst/transfer_count_reg[3]/R (clocked by clk_fpga_1). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#100 Warning
+Large setup violation  
+There is a large setup violation of -4.376 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[11]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/FSM_sequential_state_reg[1]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#101 Warning
+Large setup violation  
+There is a large setup violation of -4.387 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[11]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/FSM_sequential_state_reg[0]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#102 Warning
+Large setup violation  
+There is a large setup violation of -4.855 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[11]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#103 Warning
+Large setup violation  
+There is a large setup violation of -4.879 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[12]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#104 Warning
+Large setup violation  
+There is a large setup violation of -4.880 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[13]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#105 Warning
+Large setup violation  
+There is a large setup violation of -4.886 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[10]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#106 Warning
+Large setup violation  
+There is a large setup violation of -4.900 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[5]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#107 Warning
+Large setup violation  
+There is a large setup violation of -4.904 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[6]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#108 Warning
+Large setup violation  
+There is a large setup violation of -4.998 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[2]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#109 Warning
+Large setup violation  
+There is a large setup violation of -5.005 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[14]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#110 Warning
+Large setup violation  
+There is a large setup violation of -5.009 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[9]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#111 Warning
+Large setup violation  
+There is a large setup violation of -5.011 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[6]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#112 Warning
+Large setup violation  
+There is a large setup violation of -5.012 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[11]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#113 Warning
+Large setup violation  
+There is a large setup violation of -5.013 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[12]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#114 Warning
+Large setup violation  
+There is a large setup violation of -5.014 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[8]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#115 Warning
+Large setup violation  
+There is a large setup violation of -5.015 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[5]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#116 Warning
+Large setup violation  
+There is a large setup violation of -5.016 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[4]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#117 Warning
+Large setup violation  
+There is a large setup violation of -5.019 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[10]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#118 Warning
+Large setup violation  
+There is a large setup violation of -5.021 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[7]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#119 Warning
+Large setup violation  
+There is a large setup violation of -5.023 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[4]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#120 Warning
+Large setup violation  
+There is a large setup violation of -5.025 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[8]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#121 Warning
+Large setup violation  
+There is a large setup violation of -5.033 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[15]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#122 Warning
+Large setup violation  
+There is a large setup violation of -5.037 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[1]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#123 Warning
+Large setup violation  
+There is a large setup violation of -5.042 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[0]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#124 Warning
+Large setup violation  
+There is a large setup violation of -5.043 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[1]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#125 Warning
+Large setup violation  
+There is a large setup violation of -5.049 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[9]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#126 Warning
+Large setup violation  
+There is a large setup violation of -5.051 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[7]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#127 Warning
+Large setup violation  
+There is a large setup violation of -5.053 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[2]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#128 Warning
+Large setup violation  
+There is a large setup violation of -5.055 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[3]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#129 Warning
+Large setup violation  
+There is a large setup violation of -5.149 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[14]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#130 Warning
+Large setup violation  
+There is a large setup violation of -5.170 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[13]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#131 Warning
+Large setup violation  
+There is a large setup violation of -5.174 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[0]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#132 Warning
+Large setup violation  
+There is a large setup violation of -5.187 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/sample_count_reg[3]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#133 Warning
+Large setup violation  
+There is a large setup violation of -5.197 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/total_sample_count_reg[15]/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#134 Warning
+Large setup violation  
+There is a large setup violation of -5.808 ns between design_1_i/ad9280_scop_0/inst/ad9280_scop_slave_lite_v2_0_S00_AXI_inst/slv_reg4_reg[2]/C (clocked by clk_fpga_0) and design_1_i/ad9280_scop_0/inst/adc_core_inst/acquisition_complete_reg/D (clocked by clk_fpga_2). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-18#1 Warning
@@ -343,43 +1050,36 @@ Missing input or output delay
 An input delay is missing on adc_data[7] relative to the rising and/or falling clock edge(s) of clk_fpga_2.
 Related violations: <none>
 
+TIMING-18#9 Warning
+Missing input or output delay  
+An input delay is missing on ext_trigger_0 relative to the rising and/or falling clock edge(s) of clk_fpga_2.
+Related violations: <none>
+
 TIMING-30#1 Warning
 Sub-optimal master source pin selection for generated clock  
 The generated clock design_1_i/rgb2dvi_0/U0/SerialClk has a sub-optimal master source pin selection, timing can be pessimistic
 Related violations: <none>
 
-ULMTCS-2#1 Warning
-Control Sets use limits require reduction  
-This design uses 747 control sets (vs. available limit of 4400, determined by 1 control set per CLB). This exceeds the control set use guideline of 15 percent. This is at a level where reduction is REQUIRED (see UG949). Use report_control_sets to get more details.
+ULMTCS-1#1 Warning
+Control Sets use limits recommend reduction  
+This design uses 638 control sets (vs. available limit of 4400, determined by 1 control set per CLB). This exceeds the control set use guideline of 7.5 percent. This is at a level where reduction is RECOMMENDED (see UG949). Use report_control_sets to get more details.
 Related violations: <none>
 
 XDCB-5#1 Warning
 Runtime inefficient way to find pin objects  
-The option '-from : [get_pins -hierarchical -filter {NAME =~ *ila_core_inst/u_trig/N_DDR_TC.N_DDR_TC_INST[*].U_TC/allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst/DUT/u_srl_drive/CLK}]' of constraint 'set_false_path' uses inefficient query to find pin objects (see constraint position '111' in the Timing Constraint window in Vivado IDE). To reduce runtime, it is recommended to get the pins through the cell objects. Please refer to Using Constraints Guide (Constraints Efficiency). An example of optimal query is: get_pins -filter {REF_PIN_NAME=~yy*} -of_objects [get_cells -hierarchical xx*].
-Current XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_system_ila_1_0/bd_0/ip/ip_0/ila_v6_2/constraints/ila.xdc (Line: 72)
+The option '-from : [get_pins -hierarchical -filter {NAME =~ *ila_core_inst/u_trig/N_DDR_TC.N_DDR_TC_INST[*].U_TC/allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst/DUT/u_srl_drive/CLK}]' of constraint 'set_false_path' uses inefficient query to find pin objects (see constraint position '51' in the Timing Constraint window in Vivado IDE). To reduce runtime, it is recommended to get the pins through the cell objects. Please refer to Using Constraints Guide (Constraints Efficiency). An example of optimal query is: get_pins -filter {REF_PIN_NAME=~yy*} -of_objects [get_cells -hierarchical xx*].
+Current XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_system_ila_0_0/bd_0/ip/ip_0/ila_v6_2/constraints/ila.xdc (Line: 72)
 Related violations: <none>
 
 XDCB-5#2 Warning
 Runtime inefficient way to find pin objects  
-The option '-from : [get_pins -hierarchical -filter {NAME =~ *ila_core_inst/u_trig/N_DDR_TC.N_DDR_TC_INST[*].U_TC/allx_typeA_match_detection.ltlib_v1_0_3_allx_typeA_inst/DUT/u_srl_drive/CLK}]' of constraint 'set_false_path' uses inefficient query to find pin objects (see constraint position '56' in the Timing Constraint window in Vivado IDE). To reduce runtime, it is recommended to get the pins through the cell objects. Please refer to Using Constraints Guide (Constraints Efficiency). An example of optimal query is: get_pins -filter {REF_PIN_NAME=~yy*} -of_objects [get_cells -hierarchical xx*].
-Current XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_system_ila_0_0/bd_0/ip/ip_0/ila_v6_2/constraints/ila.xdc (Line: 72)
+The option '-through : [get_pins -filter {NAME =~ *SyncAsync*/oSyncStages_reg[0]/D} -hier]' of constraint 'set_false_path' uses inefficient query to find pin objects (see constraint position '9' in the Timing Constraint window in Vivado IDE). To reduce runtime, it is recommended to get the pins through the cell objects. Please refer to Using Constraints Guide (Constraints Efficiency). An example of optimal query is: get_pins -filter {REF_PIN_NAME=~yy*} -of_objects [get_cells -hierarchical xx*].
+Current XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_0_0/src/rgb2dvi.xdc (Line: 5)
 Related violations: <none>
 
 XDCB-5#3 Warning
 Runtime inefficient way to find pin objects  
-The option '-through : [get_pins -filter {NAME =~ *SyncAsync*/oSyncStages_reg[0]/D} -hier]' of constraint 'set_false_path' uses inefficient query to find pin objects (see constraint position '14' in the Timing Constraint window in Vivado IDE). To reduce runtime, it is recommended to get the pins through the cell objects. Please refer to Using Constraints Guide (Constraints Efficiency). An example of optimal query is: get_pins -filter {REF_PIN_NAME=~yy*} -of_objects [get_cells -hierarchical xx*].
-Current XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_rgb2dvi_0_0/src/rgb2dvi.xdc (Line: 5)
-Related violations: <none>
-
-XDCB-5#4 Warning
-Runtime inefficient way to find pin objects  
-The option '-to : [get_pins -hierarchical -filter {NAME =~ *ila_core_inst/u_trig/N_DDR_TC.N_DDR_TC_INST[*].U_TC/yes_output_reg.dout_reg_reg/D}]' of constraint 'set_false_path' uses inefficient query to find pin objects (see constraint position '111' in the Timing Constraint window in Vivado IDE). To reduce runtime, it is recommended to get the pins through the cell objects. Please refer to Using Constraints Guide (Constraints Efficiency). An example of optimal query is: get_pins -filter {REF_PIN_NAME=~yy*} -of_objects [get_cells -hierarchical xx*].
-Current XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_system_ila_1_0/bd_0/ip/ip_0/ila_v6_2/constraints/ila.xdc (Line: 72)
-Related violations: <none>
-
-XDCB-5#5 Warning
-Runtime inefficient way to find pin objects  
-The option '-to : [get_pins -hierarchical -filter {NAME =~ *ila_core_inst/u_trig/N_DDR_TC.N_DDR_TC_INST[*].U_TC/yes_output_reg.dout_reg_reg/D}]' of constraint 'set_false_path' uses inefficient query to find pin objects (see constraint position '56' in the Timing Constraint window in Vivado IDE). To reduce runtime, it is recommended to get the pins through the cell objects. Please refer to Using Constraints Guide (Constraints Efficiency). An example of optimal query is: get_pins -filter {REF_PIN_NAME=~yy*} -of_objects [get_cells -hierarchical xx*].
+The option '-to : [get_pins -hierarchical -filter {NAME =~ *ila_core_inst/u_trig/N_DDR_TC.N_DDR_TC_INST[*].U_TC/yes_output_reg.dout_reg_reg/D}]' of constraint 'set_false_path' uses inefficient query to find pin objects (see constraint position '51' in the Timing Constraint window in Vivado IDE). To reduce runtime, it is recommended to get the pins through the cell objects. Please refer to Using Constraints Guide (Constraints Efficiency). An example of optimal query is: get_pins -filter {REF_PIN_NAME=~yy*} -of_objects [get_cells -hierarchical xx*].
 Current XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_system_ila_0_0/bd_0/ip/ip_0/ila_v6_2/constraints/ila.xdc (Line: 72)
 Related violations: <none>
 

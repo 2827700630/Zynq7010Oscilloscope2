@@ -2,7 +2,7 @@
 //Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-//Date        : Tue Jun 17 00:12:19 2025
+//Date        : Wed Jun 18 22:16:45 2025
 //Host        : myhym running 64-bit major release  (build 9200)
 //Command     : generate_target design_1_wrapper.bd
 //Design      : design_1_wrapper
@@ -38,6 +38,7 @@ module design_1_wrapper
     TMDS_data_p,
     adc_clk,
     adc_data,
+    ext_trigger_0,
     hdmi_oen);
   inout [14:0]DDR_addr;
   inout [2:0]DDR_ba;
@@ -66,6 +67,7 @@ module design_1_wrapper
   output [2:0]TMDS_data_p;
   output adc_clk;
   input [7:0]adc_data;
+  input ext_trigger_0;
   output hdmi_oen;
 
   wire [14:0]DDR_addr;
@@ -95,6 +97,7 @@ module design_1_wrapper
   wire [2:0]TMDS_data_p;
   wire adc_clk;
   wire [7:0]adc_data;
+  wire ext_trigger_0;
   wire hdmi_oen;
 
   design_1 design_1_i
@@ -125,5 +128,6 @@ module design_1_wrapper
         .TMDS_data_p(TMDS_data_p),
         .adc_clk(adc_clk),
         .adc_data(adc_data),
+        .ext_trigger_0(ext_trigger_0),
         .hdmi_oen(hdmi_oen));
 endmodule

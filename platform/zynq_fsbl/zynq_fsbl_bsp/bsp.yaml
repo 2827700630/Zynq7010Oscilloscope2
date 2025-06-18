@@ -152,7 +152,7 @@ include_folder: include
 lib_folder: lib
 libsrc_folder: libsrc
 drv_info:
-  ad9280_sample_0: None
+  ad9280_scop_0: None
   axi_dma_0:
     driver: axidma
     ip_name: axi_dma

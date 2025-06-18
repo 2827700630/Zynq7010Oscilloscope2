@@ -211,3 +211,9 @@ E:/FPGAproject/Zynq7010Oscilloscope2/platform/ps7_cortexa9_0/standalone_ps7_cort
 E:/FPGAproject/Zynq7010Oscilloscope2/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src/core/default_timer/CMakeFiles/install.dir
 E:/FPGAproject/Zynq7010Oscilloscope2/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src/core/default_timer/CMakeFiles/install/local.dir
 E:/FPGAproject/Zynq7010Oscilloscope2/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src/core/default_timer/CMakeFiles/install/strip.dir
+E:/FPGAproject/Zynq7010Oscilloscope2/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src/core/scutimer/CMakeFiles/edit_cache.dir
+E:/FPGAproject/Zynq7010Oscilloscope2/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src/core/scutimer/CMakeFiles/rebuild_cache.dir
+E:/FPGAproject/Zynq7010Oscilloscope2/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src/core/scutimer/CMakeFiles/list_install_components.dir
+E:/FPGAproject/Zynq7010Oscilloscope2/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src/core/scutimer/CMakeFiles/install.dir
+E:/FPGAproject/Zynq7010Oscilloscope2/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src/core/scutimer/CMakeFiles/install/local.dir
+E:/FPGAproject/Zynq7010Oscilloscope2/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src/core/scutimer/CMakeFiles/install/strip.dir

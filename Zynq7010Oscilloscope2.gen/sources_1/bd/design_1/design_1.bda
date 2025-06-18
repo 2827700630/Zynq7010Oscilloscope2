@@ -226,6 +226,24 @@
             },
             "V5": {
                 "VT": "AC",
+                "BA": "0x40000000",
+                "HA": "0x4000FFFF",
+                "BP": "C_S00_AXI_BASEADDR",
+                "HP": "C_S00_AXI_HIGHADDR",
+                "MA": "Data",
+                "MX": "/processing_system7_0",
+                "MI": "M_AXI_GP0",
+                "MS": "SEG_ad9280_scop_0_S00_AXI_reg",
+                "MV": "xilinx.com:ip:processing_system7:5.5",
+                "SX": "/ad9280_scop_0",
+                "SI": "S00_AXI",
+                "SS": "S00_AXI_reg",
+                "SV": "xilinx.com:user:ad9280_scop:2.7",
+                "TM": "both",
+                "TU": "register"
+            },
+            "V6": {
+                "VT": "AC",
                 "BA": "0x40400000",
                 "HA": "0x4040FFFF",
                 "BP": "C_BASEADDR",
@@ -242,7 +260,7 @@
                 "TM": "both",
                 "TU": "register"
             },
-            "V6": {
+            "V7": {
                 "VT": "AC",
                 "BA": "0x43000000",
                 "HA": "0x4300FFFF",
@@ -260,7 +278,7 @@
                 "TM": "both",
                 "TU": "register"
             },
-            "V7": {
+            "V8": {
                 "VT": "AC",
                 "BA": "0x43C00000",
                 "HA": "0x43C0FFFF",
@@ -278,7 +296,7 @@
                 "TM": "both",
                 "TU": "register"
             },
-            "V8": {
+            "V9": {
                 "VT": "AC",
                 "BA": "0x43C10000",
                 "HA": "0x43C1FFFF",
@@ -293,24 +311,6 @@
                 "SI": "s00_axi",
                 "SS": "reg0",
                 "SV": "digilentinc.com:ip:axi_dynclk:1.0",
-                "TM": "both",
-                "TU": "register"
-            },
-            "V9": {
-                "VT": "AC",
-                "BA": "0x43C20000",
-                "HA": "0x43C2FFFF",
-                "BP": "C_S00_AXI_BASEADDR",
-                "HP": "C_S00_AXI_HIGHADDR",
-                "MA": "Data",
-                "MX": "/processing_system7_0",
-                "MI": "M_AXI_GP0",
-                "MS": "SEG_ad9280_sample_0_S00_AXI_reg",
-                "MV": "xilinx.com:ip:processing_system7:5.5",
-                "SX": "/ad9280_sample_0",
-                "SI": "S00_AXI",
-                "SS": "S00_AXI_reg",
-                "SV": "xilinx.com:user:ad9280_sample:1.0",
                 "TM": "both",
                 "TU": "register"
             }

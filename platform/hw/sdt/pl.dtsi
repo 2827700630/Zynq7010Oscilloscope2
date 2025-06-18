@@ -42,17 +42,20 @@
 			clock-frequency = <100000000>;
 			#clock-cells = <0>;
 		};
-		ad9280_sample_0: ad9280_sample@43c20000 {
+		ad9280_scop_0: ad9280_scop@40000000 {
+			compatible = "xlnx,ad9280-scop-2.7";
+			xlnx,trigger-threshold-width = <8>;
+			xlnx,adc-data-width = <8>;
 			xlnx,s00-axi-data-width = <32>;
-			compatible = "xlnx,ad9280-sample-1.0";
-			status = "okay";
-			clock-names = "adc_clk" , "m00_axis_aclk" , "s00_axi_aclk";
-			xlnx,s00-axi-addr-width = <4>;
-			xlnx,ip-name = "ad9280_sample";
-			xlnx,edk-iptype = "PERIPHERAL";
-			reg = <0x43c20000 0x10000>;
+			xlnx,ip-name = "ad9280_scop";
+			reg = <0x40000000 0x10000>;
 			clocks = <&clkc 17>, <&clkc 16>, <&clkc 15>;
-			xlnx,name = "ad9280_sample_0";
+			xlnx,edk-iptype = "PERIPHERAL";
+			status = "okay";
+			xlnx,fifo-depth = <1024>;
+			xlnx,s00-axi-addr-width = <5>;
+			clock-names = "adc_clk" , "m00_axis_aclk" , "s00_axi_aclk";
+			xlnx,name = "ad9280_scop_0";
 		};
 		axi_dma_0: dma@40400000 {
 			interrupts = < 0 31 4 >;

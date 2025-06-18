@@ -32,7 +32,8 @@
 /* 中断ID计算：ZYNQ IRQ_F2P基址 + xlconcat端口（vivado中设计）偏移 */
 #define ZYNQ_IRQ_F2P_BASE_ID 61									/* ZYNQ Fabric-to-PS中断基础ID，vitis2025.1中xparameters中生成的参数31是错误的 */
 #define DMA_XLCONCAT_PORT 2										/* DMA连接在xlconcat的In2端口 */
-#define S2MM_INTR_ID (ZYNQ_IRQ_F2P_BASE_ID + DMA_XLCONCAT_PORT) /* 61+2=63 */
+// #define S2MM_INTR_ID (ZYNQ_IRQ_F2P_BASE_ID + DMA_XLCONCAT_PORT) /* 61+2=63 */
+#define S2MM_INTR_ID 31
 
 /* -------------------------------------------------------- */
 /*				全局变量									*/

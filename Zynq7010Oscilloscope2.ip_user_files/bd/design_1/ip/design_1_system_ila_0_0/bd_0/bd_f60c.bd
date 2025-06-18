@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0xC0E562EA65F88889",
+      "boundary_crc": "0xA7E351B37D9A4E7E",
       "design_src": "SBD",
       "device": "xc7z010clg400-1",
       "name": "bd_f60c",
@@ -36,7 +36,7 @@
             "value_src": "default"
           },
           "HAS_TKEEP": {
-            "value": "1",
+            "value": "0",
             "value_src": "default"
           },
           "HAS_TLAST": {
@@ -48,7 +48,7 @@
             "value_src": "default"
           },
           "HAS_TSTRB": {
-            "value": "0",
+            "value": "1",
             "value_src": "default"
           },
           "INSERT_VIP": {
@@ -281,7 +281,7 @@
             "value": "FALSE"
           },
           "C_DATA_DEPTH": {
-            "value": "4096"
+            "value": "1024"
           },
           "C_EN_STRG_QUAL": {
             "value": "0"
@@ -474,13 +474,13 @@
             "value": "AXI4S"
           },
           "C_SLOT_0_HAS_TKEEP": {
-            "value": "1"
+            "value": "0"
           },
           "C_SLOT_0_HAS_TREADY": {
             "value": "1"
           },
           "C_SLOT_0_HAS_TSTRB": {
-            "value": "0"
+            "value": "1"
           },
           "C_SLOT_0_MON_MODE": {
             "value": "FT"
@@ -671,12 +671,6 @@
           "ila_lib/probe0"
         ]
       },
-      "net_slot_0_axis_tkeep": {
-        "ports": [
-          "g_inst/m_slot_0_axis_tkeep",
-          "ila_lib/probe1"
-        ]
-      },
       "net_slot_0_axis_tlast": {
         "ports": [
           "g_inst/m_slot_0_axis_tlast",
@@ -687,6 +681,12 @@
         "ports": [
           "g_inst/m_slot_0_axis_tready",
           "ila_lib/probe3"
+        ]
+      },
+      "net_slot_0_axis_tstrb": {
+        "ports": [
+          "g_inst/m_slot_0_axis_tstrb",
+          "ila_lib/probe1"
         ]
       },
       "net_slot_0_axis_tvalid": {

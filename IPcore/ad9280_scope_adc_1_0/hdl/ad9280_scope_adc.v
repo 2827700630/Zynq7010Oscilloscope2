@@ -13,9 +13,8 @@
 		// Parameters of Axi Slave Bus Interface S00_AXI
 		parameter integer C_S00_AXI_DATA_WIDTH	= 32,
 		parameter integer C_S00_AXI_ADDR_WIDTH	= 5,
-
-		// Parameters of Axi Master Bus Interface M00_AXIS
-		parameter integer C_M00_AXIS_TDATA_WIDTH	= 32,
+		// Parameters of Axi Master Bus Interface M00_AXIS (修改为8位输出)
+		parameter integer C_M00_AXIS_TDATA_WIDTH	= 8,
 		parameter integer C_M00_AXIS_START_COUNT	= 32,
 
 		// Parameters of Axi Slave Bus Interface S_AXI_INTR
@@ -114,10 +113,9 @@
 	wire [1:0] trigger_mode;
 	wire trigger_edge;
 	wire software_trigger;
-	
-	// FIFO signals
+		// FIFO signals (修改为8位数据)
 	wire fifo_rd_en;
-	wire [31:0] fifo_data_out;
+	wire [7:0] fifo_data_out;
 // Instantiation of Axi Bus Interface S00_AXI
 	ad9280_scope_adc_slave_lite_v1_0_S00_AXI # ( 
 		.C_S_AXI_DATA_WIDTH(C_S00_AXI_DATA_WIDTH),
@@ -202,8 +200,7 @@
 		.S_AXI_RREADY(s_axi_intr_rready),
 		.irq(irq)
 	);	// Add user logic here
-	
-	// Internal signals for ADC core
+		// Internal signals for ADC core (修改data_out为8位)
 	wire core_sampling_active;
 	wire core_trigger_detected;
 	wire core_acquisition_complete;
@@ -211,7 +208,7 @@
 	wire core_fifo_empty;
 	wire [15:0] core_sample_count;
 	wire core_data_valid;
-	wire [31:0] core_data_out;
+	wire [7:0] core_data_out;  // 修改为8位输出
 	wire core_data_ready;
 	
 	// Extract control signals from registers

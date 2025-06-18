@@ -462,9 +462,9 @@
 #define XPAR_PS7_AFI_3_BASEADDR 0xf800b000
 #define XPAR_PS7_AFI_3_HIGHADDR 0xf800bfff
 
-/* Definitions for peripheral AD9280_SAMPLE_0 */
-#define XPAR_AD9280_SAMPLE_0_BASEADDR 0x43c20000
-#define XPAR_AD9280_SAMPLE_0_HIGHADDR 0x43c2ffff
+/* Definitions for peripheral AD9280_SCOP_0 */
+#define XPAR_AD9280_SCOP_0_BASEADDR 0x40000000
+#define XPAR_AD9280_SCOP_0_HIGHADDR 0x4000ffff
 
 /* Definitions for peripheral AXI_DYNCLK_0 */
 #define XPAR_AXI_DYNCLK_0_BASEADDR 0x43c10000

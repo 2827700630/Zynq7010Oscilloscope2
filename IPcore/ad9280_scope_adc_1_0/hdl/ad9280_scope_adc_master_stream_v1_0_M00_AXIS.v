@@ -6,9 +6,8 @@ module ad9280_scope_adc_master_stream_v1_0_M00_AXIS #
 
 	// User parameters ends
 	// Do not modify the parameters beyond this line
-
 	// Width of S_AXIS address bus. The slave accepts the read and write addresses of width C_M_AXIS_TDATA_WIDTH.
-	parameter integer C_M_AXIS_TDATA_WIDTH	= 32,
+	parameter integer C_M_AXIS_TDATA_WIDTH	= 8,  // 修改为8位，与ad9280_sample兼容
 	// Start count is the number of clock cycles the master will wait before initiating/issuing any transaction.
 	parameter integer C_M_START_COUNT	= 32
 )
@@ -36,8 +35,7 @@ module ad9280_scope_adc_master_stream_v1_0_M00_AXIS #
 	// TREADY indicates that the slave can accept a transfer in the current cycle.
 	input wire  M_AXIS_TREADY
 );
-
-	// AXI Stream internal signals
+	// AXI Stream internal signals (修改为8位数据)
 	reg [C_M_AXIS_TDATA_WIDTH-1:0] stream_data_out;
 	reg axis_tvalid_reg;
 	reg axis_tlast_reg;
@@ -57,11 +55,10 @@ module ad9280_scope_adc_master_stream_v1_0_M00_AXIS #
 	assign tx_en = M_AXIS_TREADY && axis_tvalid_reg;
 	
 	// Stream control logic
-	always @(posedge M_AXIS_ACLK) begin
-		if (!M_AXIS_ARESETN) begin
+	always @(posedge M_AXIS_ACLK) begin		if (!M_AXIS_ARESETN) begin
 			axis_tvalid_reg <= 1'b0;
 			axis_tlast_reg <= 1'b0;
-			stream_data_out <= 32'h0;
+			stream_data_out <= 8'h0;  // 修改为8位初始值
 			transfer_count <= 16'h0;
 			streaming_active <= 1'b0;
 		end else begin

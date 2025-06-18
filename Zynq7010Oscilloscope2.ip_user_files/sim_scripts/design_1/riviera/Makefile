@@ -9,12 +9,12 @@ RELEASEDIR=../../../lib
 INCLUDEDIR=../../../include
 INCLUDES=-I./. -I${INCLUDEDIR}
 
-INCLUDEFILES=*.h
-LIBSOURCES=*.c
-OUTS = *.o
+INCLUDEFILES=$(wildcard *.h)
+LIBSOURCES=($wildcard *.c)
+OUTS = ($wildcard *.o)
 
 libs:
-	echo "Compiling ad9280_sample..."
+	echo "Compiling ad9280_scop..."
 	$(COMPILER) $(COMPILER_FLAGS) $(EXTRA_COMPILER_FLAGS) $(INCLUDES) $(LIBSOURCES)
 	$(ARCHIVER) -r ${RELEASEDIR}/${LIB} ${OUTS}
 	make clean

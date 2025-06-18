@@ -31,8 +31,8 @@ set(USER_INCLUDE_DIRECTORIES
 set(USER_COMPILE_SOURCES
 "main.c"
 "platform.c"
-"ad9280_sample.c"
-"ad9280_sample_selftest.c"
+"ad9280_scop.c"
+"ad9280_scop_selftest.c"
 "adc_dma_ctrl.c"
 "display_ctrl/display_ctrl.c"
 "dynclk/dynclk.c"

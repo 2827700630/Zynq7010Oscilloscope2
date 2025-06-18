@@ -97,6 +97,7 @@ proc step_failed { step } {
 OPTRACE "impl_1" END { }
 }
 
+set_msg_config -id {HDL-1065} -limit 10000
 
 OPTRACE "impl_1" START { ROLLUP_1 }
 OPTRACE "Phase: Init Design" START { ROLLUP_AUTO }
@@ -106,7 +107,7 @@ set rc [catch {
   create_msg_db init_design.pb
   set_param chipscope.maxJobs 5
   set_param general.usePosixSpawnForFork 1
-  set_param bd.open.in_stealth_mode 3
+  set_param bd.open.in_stealth_mode 2
   set_param runs.launchOptions { -jobs 20  }
 OPTRACE "create in-memory project" START { }
   create_project -in_memory -part xc7z010clg400-1
@@ -116,7 +117,10 @@ OPTRACE "create in-memory project" END { }
 OPTRACE "set parameters" START { }
   set_property webtalk.parent_dir E:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.cache/wt [current_project]
   set_property parent.project_path E:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.xpr [current_project]
-  set_property ip_repo_paths E:/FPGAproject/17_ad9280_dma_hdmi/repo [current_project]
+  set_property ip_repo_paths {
+  E:/FPGAproject/Zynq7010Oscilloscope2/IPcore/ad9280_scop_2/ad9280_scop_2_0
+  e:/FPGAproject/17_ad9280_dma_hdmi/repo
+} [current_project]
   update_ip_catalog
   set_property ip_output_repo E:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
