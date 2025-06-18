@@ -18,11 +18,25 @@
 #endif
 
 u8 DmaRxBuffer[MAX_DMA_LEN] __attribute__((aligned(64))); // DMA S2Mm接收缓冲区
+u8 MasterSampleBuffer[ADC_MASTER_SAMPLES] __attribute__((aligned(64))); // 主采样缓冲区(15360点)
+u8 DisplaySampleBuffer[ADC_DISPLAY_SAMPLES]; // 显示采样缓冲区(1920点)
 u8 GridBuffer[WAVE_LEN];								  // 网格缓冲区
 u8 WaveBuffer[WAVE_LEN];								  // 波形缓冲区
 XAxiDma AxiDma;											  // DMA控制器
 volatile int s2mm_flag;									  // S2Mm中断标志
 volatile int dma_done;									  // DMA传输完成标志
+
+/* 时基配置表 - 5个档位（确保全屏覆盖）*/
+const TimebaseConfig timebase_configs[TIMEBASE_COUNT] = {
+    {1,  1,  31.0,   5.95,  "5us"},      // 最细时基：1:1抽取
+    {2,  2,  62.0,   11.9,  "10us"},     // 2:1抽取
+    {3,  4,  124,    23.8,  "20us"},     // 4:1抽取
+    {4,  5,  155,    29.8,  "30us"},     // 5:1抽取  
+    {5,  8,  248,    47.6,  "50us"}      // 8:1抽取，最粗时基
+};
+
+/* 当前时基配置 */
+TimebaseConfig current_timebase;
 
 /*
  * 函数声明
@@ -31,6 +45,10 @@ int XAxiDma_Initial(u16 DeviceId, u16 IntrID, XAxiDma *XAxiDma, XScuGic *Instanc
 void Dma_Interrupt_Handler(void *CallBackRef);
 void frame_copy(u32 width, u32 height, u32 stride, int hor_x, int ver_y, u8 *frame, u8 *CanvasBufferPtr);
 void ad9280_sample(u32 adc_addr, u32 adc_len);
+void extract_samples_uniform(u8* master_buf, u8* display_buf, u8 ratio);
+void set_timebase(u8 timebase_index);
+u8 get_current_timebase_index(void);
+const char* get_current_timebase_label(void);
 
 /**
  * ADC波形显示初始化函数
@@ -44,14 +62,19 @@ void ad9280_sample(u32 adc_addr, u32 adc_len);
 int XAxiDma_Adc_Init(u32 width, u8 *frame, u32 stride, XScuGic *InstancePtr)
 {
 	int Status;
-
-	xil_printf("[初始化] 开始ADC波形显示初始化\r\n");
+	xil_printf("[初始化] 开始ADC多级缓冲波形显示初始化\r\n");
 	xil_printf("[配置] 波形宽度: %d, 高度: %d\r\n", width, WAVE_HEIGHT);
-	xil_printf("[配置] ADC采集长度: %d, ADC基地址: 0x%08X\r\n", ADC_CAPTURELEN, AD9280_BASE);
+	xil_printf("[配置] 主采样长度: %d (15K), 显示长度: %d\r\n", ADC_MASTER_SAMPLES, ADC_DISPLAY_SAMPLES);
+	xil_printf("[配置] ADC基地址: 0x%08X\r\n", AD9280_BASE);
 
 	// 初始化标志
 	s2mm_flag = 1;
 	dma_done = 0;
+
+	// 初始化时基为中等档位(档位5: 50μs/格)
+	current_timebase = timebase_configs[4]; // 档位5
+	xil_printf("[时基] 初始化为档位%d: %s/格\r\n", 
+			   current_timebase.timebase_index, current_timebase.timebase_label);
 
 	// 初始化DMA
 	Status = XAxiDma_Initial(DMA_DEV_ID, S2MM_INTR_ID, &AxiDma, InstancePtr);
@@ -61,6 +84,11 @@ int XAxiDma_Adc_Init(u32 width, u8 *frame, u32 stride, XScuGic *InstancePtr)
 		return XST_FAILURE;
 	}
 	xil_printf("[初始化] DMA初始化成功\r\n");
+
+	// 清空缓冲区
+	memset(MasterSampleBuffer, 128, ADC_MASTER_SAMPLES);
+	memset(DisplaySampleBuffer, 128, ADC_DISPLAY_SAMPLES);
+	xil_printf("[初始化] 缓冲区清空完成\r\n");
 
 	// 绘制网格（一次性）
 	draw_grid(width, WAVE_HEIGHT, GridBuffer);
@@ -96,23 +124,23 @@ int XAxiDma_Adc_Update(u32 width, u8 *frame, u32 stride)
 	// 复制网格到波形缓冲区（高效方法：预绘制的网格）
 	memcpy(WaveBuffer, GridBuffer, WAVE_LEN);
 
-	// 在网格基础上绘制波形数据
-	draw_wave(width, WAVE_HEIGHT, (void *)DmaRxBuffer, WaveBuffer, UNSIGNEDCHAR, ADC_BITS, YELLOW, ADC_COE);
+	// 在网格基础上绘制波形数据 - 使用显示缓冲区数据
+	draw_wave(width, WAVE_HEIGHT, (void *)DisplaySampleBuffer, WaveBuffer, UNSIGNEDCHAR, ADC_BITS, YELLOW, ADC_COE);
 
 	// 在网格和波形基础上添加示波器信息（文字和标签）
 	static OscilloscopeParams osc_params = {
-		.timebase_us = 100.0,      // 100μs/格
+		.timebase_us = 100.0,      // 将由当前时基更新
 		.voltage_scale = 1.0,      // 1.0V/格（修正：对应AD8056的-5V到+5V输入范围）
 		.sample_rate = 32260000,   // 32.26MHz采样率
 		.trigger_level = 128,      // 中间触发电平
 		.trigger_mode = 0          // 自动触发
 	};
 	
-	// 计算实际测量值
-	calculate_measurements(DmaRxBuffer, ADC_CAPTURELEN, &osc_params);
+	// 使用当前时基配置更新参数
+	osc_params.timebase_us = current_timebase.time_per_division_us;
 	
-	// 计算时基（基于采样率和屏幕宽度）
-	osc_params.timebase_us = (1000000.0 / osc_params.sample_rate) * (ADC_CAPTURELEN / 10.0); // 10个网格
+	// 计算实际测量值 - 使用显示缓冲区数据
+	calculate_measurements(DisplaySampleBuffer, ADC_DISPLAY_SAMPLES, &osc_params);
 	
 	// 只绘制示波器信息面板（文字），不重绘网格
 	draw_oscilloscope_info(WaveBuffer, width, WAVE_HEIGHT, &osc_params);
@@ -124,31 +152,31 @@ int XAxiDma_Adc_Update(u32 width, u8 *frame, u32 stride)
 	// 性能统计（每100帧显示一次）
 	if (frame_count % 100 == 0)
 	{
-		xil_printf("[性能] 已更新%d帧波形\r\n", frame_count);
+		xil_printf("[性能] 已更新%d帧波形，时基: %s/格\r\n", 
+				   frame_count, current_timebase.timebase_label);
 	}
 
-	// 开始下一次ADC采样
-	ad9280_sample(AD9280_BASE, ADC_CAPTURELEN);
+	// 开始下一次ADC采样 - 使用主缓冲区长度
+	ad9280_sample(AD9280_BASE, ADC_MASTER_SAMPLES);
 
-	// 启动DMA传输
-	Status = XAxiDma_SimpleTransfer(&AxiDma, (UINTPTR)DmaRxBuffer,
-									ADC_CAPTURELEN, XAXIDMA_DEVICE_TO_DMA);
+	// 启动DMA传输 - 传输到主缓冲区
+	Status = XAxiDma_SimpleTransfer(&AxiDma, (UINTPTR)MasterSampleBuffer,
+									ADC_MASTER_SAMPLES, XAXIDMA_DEVICE_TO_DMA);
 	if (Status != XST_SUCCESS)
 	{
 		xil_printf("[错误] DMA传输启动失败: %d\r\n", Status);
 		s2mm_flag = 1; // 设置标志重新尝试
 		return XST_FAILURE;
 	}
-
 	// 等待中断信号（非阻塞等待）
 	int timeout_count = 0;
-	while (!dma_done && timeout_count < 2000)
+	while (!dma_done && timeout_count < 3000) // 调整超时时间为3秒，适应15K数据
 	{
 		usleep(1000); // 等待1ms
 		timeout_count++;
 
-		// 每100ms打印一次等待状态
-		if (timeout_count % 100 == 0)
+		// 每300ms打印一次等待状态
+		if (timeout_count % 300 == 0)
 		{
 			xil_printf("[DMA] 等待中断... (%dms)\r\n", timeout_count);
 		}
@@ -168,6 +196,10 @@ int XAxiDma_Adc_Update(u32 width, u8 *frame, u32 stride)
 		s2mm_flag = 1; // 重置标志
 		return XST_TIMEOUT;
 	}
+
+	// DMA传输成功，进行数据抽取
+	extract_samples_uniform(MasterSampleBuffer, DisplaySampleBuffer, 
+						   current_timebase.decimation_ratio);
 
 	return XST_SUCCESS;
 }
@@ -360,4 +392,60 @@ void Dma_Interrupt_Handler(void *CallBackRef)
 		dma_done = 1;
 		s2mm_flag = 1;
 	}
+}
+
+/**
+ * 均匀抽取函数 - 从主缓冲区抽取数据到显示缓冲区
+ *
+ * @param master_buf 主缓冲区指针(76800点)
+ * @param display_buf 显示缓冲区指针(1920点)
+ * @param ratio 抽取比例
+ */
+void extract_samples_uniform(u8* master_buf, u8* display_buf, u8 ratio)
+{
+	for (u32 i = 0; i < ADC_DISPLAY_SAMPLES; i++) {
+		u32 master_index = i * ratio;
+		if (master_index < ADC_MASTER_SAMPLES) {
+			display_buf[i] = master_buf[master_index];
+		} else {
+			display_buf[i] = 128; // 默认中位值
+		}
+	}
+}
+
+/**
+ * 设置时基档位
+ *
+ * @param timebase_index 时基档位(1-11)
+ */
+void set_timebase(u8 timebase_index)
+{
+	if (timebase_index >= 1 && timebase_index <= TIMEBASE_COUNT) {
+		current_timebase = timebase_configs[timebase_index - 1];
+		xil_printf("[时基] 切换到档位%d: %s/格\r\n", 
+				   timebase_index, current_timebase.timebase_label);
+		
+		// 重新抽取显示数据
+		extract_samples_uniform(MasterSampleBuffer, DisplaySampleBuffer, 
+							   current_timebase.decimation_ratio);
+	} else {
+		xil_printf("[错误] 时基档位超出范围: %d (有效范围: 1-%d)\r\n", 
+				   timebase_index, TIMEBASE_COUNT);
+	}
+}
+
+/**
+ * 获取当前时基档位
+ */
+u8 get_current_timebase_index(void)
+{
+	return current_timebase.timebase_index;
+}
+
+/**
+ * 获取当前时基标签
+ */
+const char* get_current_timebase_label(void)
+{
+	return current_timebase.timebase_label;
 }

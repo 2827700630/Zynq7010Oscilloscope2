@@ -236,6 +236,12 @@ set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_ax
 # IP: bd/design_1/ip/design_1_axi_mem_intercon_imp_xbar_0/design_1_axi_mem_intercon_imp_xbar_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_axi_mem_intercon_imp_xbar_0 || ORIG_REF_NAME==design_1_axi_mem_intercon_imp_xbar_0} -quiet] -quiet
 
+# IP: bd/design_1/ip/design_1_axi_mem_intercon_imp_auto_us_0/design_1_axi_mem_intercon_imp_auto_us_0.xci
+set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_axi_mem_intercon_imp_auto_us_0 || ORIG_REF_NAME==design_1_axi_mem_intercon_imp_auto_us_0} -quiet] -quiet
+
+# IP: bd/design_1/ip/design_1_axi_mem_intercon_imp_auto_pc_0/design_1_axi_mem_intercon_imp_auto_pc_0.xci
+set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_axi_mem_intercon_imp_auto_pc_0 || ORIG_REF_NAME==design_1_axi_mem_intercon_imp_auto_pc_0} -quiet] -quiet
+
 # IP: bd/design_1/ip/design_1_axi_mem_intercon_0/design_1_axi_mem_intercon_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_axi_mem_intercon_0 || ORIG_REF_NAME==design_1_axi_mem_intercon_0} -quiet] -quiet
 
@@ -307,12 +313,6 @@ set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==bd_365d_slo
 
 # IP: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_system_ila_1_0/bd_0/ip/ip_11/bd_365d_slot_1_r_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==bd_365d_slot_1_r_0 || ORIG_REF_NAME==bd_365d_slot_1_r_0} -quiet] -quiet
-
-# IP: bd/design_1/ip/design_1_axi_mem_intercon_imp_auto_us_0/design_1_axi_mem_intercon_imp_auto_us_0.xci
-set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_axi_mem_intercon_imp_auto_us_0 || ORIG_REF_NAME==design_1_axi_mem_intercon_imp_auto_us_0} -quiet] -quiet
-
-# IP: bd/design_1/ip/design_1_axi_mem_intercon_imp_auto_pc_0/design_1_axi_mem_intercon_imp_auto_pc_0.xci
-set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==design_1_axi_mem_intercon_imp_auto_pc_0 || ORIG_REF_NAME==design_1_axi_mem_intercon_imp_auto_pc_0} -quiet] -quiet
 
 # XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_ad9280_sample_0_0/src/ad.xdc
 set_property KEEP_HIERARCHY SOFT [get_cells [split [join [get_cells -hier -filter {REF_NAME==design_1_ad9280_sample_0_0 || ORIG_REF_NAME==design_1_ad9280_sample_0_0} -quiet] {/inst } ]/inst ] -quiet] -quiet
@@ -467,7 +467,12 @@ set_property KEEP_HIERARCHY SOFT [get_cells [split [join [get_cells -hier -filte
 # XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_axi_smc_0/smartconnect.xdc
 set_property KEEP_HIERARCHY SOFT [get_cells [split [join [get_cells -hier -filter {REF_NAME==design_1_axi_smc_0 || ORIG_REF_NAME==design_1_axi_smc_0} -quiet] {/inst } ]/inst ] -quiet] -quiet
 
-# XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_system_ila_0_0/bd_0/bd_f60c_ooc.xdc
+# XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_axi_mem_intercon_imp_auto_us_0/design_1_axi_mem_intercon_imp_auto_us_0_clocks.xdc
+set_property KEEP_HIERARCHY SOFT [get_cells [split [join [get_cells -hier -filter {REF_NAME==design_1_axi_mem_intercon_imp_auto_us_0 || ORIG_REF_NAME==design_1_axi_mem_intercon_imp_auto_us_0} -quiet] {/inst } ]/inst ] -quiet] -quiet
+
+# XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_axi_mem_intercon_imp_auto_us_0/design_1_axi_mem_intercon_imp_auto_us_0_ooc.xdc
+
+# XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_axi_mem_intercon_imp_auto_pc_0/design_1_axi_mem_intercon_imp_auto_pc_0_ooc.xdc
 
 # XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_system_ila_0_0/bd_0/ip/ip_0/ila_v6_2/constraints/ila_impl.xdc
 set_property KEEP_HIERARCHY SOFT [get_cells [split [join [get_cells -hier -filter {REF_NAME==bd_f60c_ila_lib_0 || ORIG_REF_NAME==bd_f60c_ila_lib_0} -quiet] {/inst } ]/inst ] -quiet] -quiet
@@ -477,9 +482,9 @@ set_property KEEP_HIERARCHY SOFT [get_cells [split [join [get_cells -hier -filte
 
 # XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_system_ila_0_0/bd_0/ip/ip_0/bd_f60c_ila_lib_0_ooc.xdc
 
-# XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_system_ila_0_0/design_1_system_ila_0_0_ooc.xdc
+# XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_system_ila_0_0/bd_0/bd_f60c_ooc.xdc
 
-# XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_system_ila_1_0/bd_0/bd_365d_ooc.xdc
+# XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_system_ila_0_0/design_1_system_ila_0_0_ooc.xdc
 
 # XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_system_ila_1_0/bd_0/ip/ip_0/ila_v6_2/constraints/ila_impl.xdc
 set_property KEEP_HIERARCHY SOFT [get_cells [split [join [get_cells -hier -filter {REF_NAME==bd_365d_ila_lib_0 || ORIG_REF_NAME==bd_365d_ila_lib_0} -quiet] {/inst } ]/inst ] -quiet] -quiet
@@ -489,13 +494,8 @@ set_property KEEP_HIERARCHY SOFT [get_cells [split [join [get_cells -hier -filte
 
 # XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_system_ila_1_0/bd_0/ip/ip_0/bd_365d_ila_lib_0_ooc.xdc
 
+# XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_system_ila_1_0/bd_0/bd_365d_ooc.xdc
+
 # XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_system_ila_1_0/design_1_system_ila_1_0_ooc.xdc
-
-# XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_axi_mem_intercon_imp_auto_us_0/design_1_axi_mem_intercon_imp_auto_us_0_clocks.xdc
-set_property KEEP_HIERARCHY SOFT [get_cells [split [join [get_cells -hier -filter {REF_NAME==design_1_axi_mem_intercon_imp_auto_us_0 || ORIG_REF_NAME==design_1_axi_mem_intercon_imp_auto_us_0} -quiet] {/inst } ]/inst ] -quiet] -quiet
-
-# XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_axi_mem_intercon_imp_auto_us_0/design_1_axi_mem_intercon_imp_auto_us_0_ooc.xdc
-
-# XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/ip/design_1_axi_mem_intercon_imp_auto_pc_0/design_1_axi_mem_intercon_imp_auto_pc_0_ooc.xdc
 
 # XDC: e:/FPGAproject/Zynq7010Oscilloscope2/Zynq7010Oscilloscope2.gen/sources_1/bd/design_1/design_1_ooc.xdc

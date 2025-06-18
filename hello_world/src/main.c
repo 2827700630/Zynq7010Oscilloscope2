@@ -119,8 +119,9 @@ int main(void)
 		cleanup_platform();
 		return -1;
 	}
-
-	xil_printf("[主循环] 开始实时波形显示循环\r\n");
+	xil_printf("[主循环] 开始实时波形显示循环\r\n");	// 时基切换演示计数器
+	static u32 timebase_demo_counter = 0;
+	static u8 current_demo_timebase = 3; // 从档位3开始 (20μs/格)
 
 	// 主循环 - 在main函数中进行实时波形更新
 	while (1)
@@ -131,6 +132,17 @@ int main(void)
 		{
 		case XST_SUCCESS:
 			// 波形更新成功，继续循环
+			timebase_demo_counter++;
+
+			// 每200帧自动切换时基进行演示（约3秒间隔，假设60FPS）
+			if (timebase_demo_counter >= 200) {
+				timebase_demo_counter = 0;
+				current_demo_timebase++;
+				if (current_demo_timebase > TIMEBASE_COUNT) {
+					current_demo_timebase = 1; // 循环回到第一档
+				}				set_timebase(current_demo_timebase);
+				xil_printf("[演示] 自动切换到时基档位: %d (5档位优化版本)\r\n", current_demo_timebase);
+			}
 			break;
 
 		case XST_NO_DATA:
