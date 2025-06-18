@@ -498,27 +498,56 @@ int find_trigger_point(u8 *waveform_data, u32 length, OscilloscopeParams *params
 		return -1;
 
 	u8 trigger_level = params->trigger_level;
-	u8 hysteresis = 2;
+	u8 hysteresis = 1; // 减小滞回值，提高灵敏度
 
+	// 边界检查
 	if (trigger_level < hysteresis)
 		return -1;
 	if (trigger_level > (255 - hysteresis))
 		return -1;
 
+	// 调试：统计波形数据范围
+	u8 min_val = 255, max_val = 0;
+	u32 valid_samples = 0;
+	for (u32 j = 0; j < length; j++) {
+		if (waveform_data[j] != 0) valid_samples++;
+		if (waveform_data[j] < min_val) min_val = waveform_data[j];
+		if (waveform_data[j] > max_val) max_val = waveform_data[j];
+	}
+
+	// 如果波形数据全为0或变化太小，返回-1
+	if (valid_samples == 0 || (max_val - min_val) < (hysteresis * 2)) {
+		// xil_printf("[触发] 波形数据无效: 有效样本=%d, 范围=[%d,%d], 触发电平=%d\r\n", 
+		// 		   valid_samples, min_val, max_val, trigger_level);
+		return -1;
+	}
+
 	u8 prev_val = waveform_data[0];
+	u32 potential_triggers = 0; // 统计潜在触发点
 
 	for (u32 i = 1; i < length; i++)
 	{
 		u8 curr_val = waveform_data[i];
 
+		// 检查上升沿条件
 		if (prev_val < (trigger_level - hysteresis) && curr_val >= trigger_level)
 		{
+			// xil_printf("[触发] 找到触发点: 位置=%d, 前值=%d, 当前值=%d, 触发电平=%d\r\n", 
+			// 		   i, prev_val, curr_val, trigger_level);
 			return (int)i;
+		}
+
+		// 统计接近触发条件的点
+		if (prev_val < trigger_level && curr_val > prev_val) {
+			potential_triggers++;
 		}
 
 		prev_val = curr_val;
 	}
 
+	// // 未找到触发点的调试信息
+	// xil_printf("[触发] 未找到触发点: 波形范围=[%d,%d], 触发电平=%d, 潜在触发=%d\r\n", 
+	// 		   min_val, max_val, trigger_level, potential_triggers);
 	return -1;
 }
 
