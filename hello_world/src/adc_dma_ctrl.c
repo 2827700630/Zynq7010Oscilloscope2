@@ -126,18 +126,24 @@ int XAxiDma_Adc_Update(u32 width, u8 *frame, u32 stride)
 
 	// 在网格基础上绘制波形数据 - 使用显示缓冲区数据
 	draw_wave(width, WAVE_HEIGHT, (void *)DisplaySampleBuffer, WaveBuffer, UNSIGNEDCHAR, ADC_BITS, YELLOW, ADC_COE);
-
 	// 在网格和波形基础上添加示波器信息（文字和标签）
 	static OscilloscopeParams osc_params = {
 		.timebase_us = 100.0,      // 将由当前时基更新
 		.voltage_scale = 1.0,      // 1.0V/格（修正：对应AD8056的-5V到+5V输入范围）
-		.sample_rate = 32260000,   // 32.26MHz采样率
+		.sample_rate = 0,          // 将根据ADC_SAMPLE_TIME_NS动态计算
 		.trigger_level = 128,      // 中间触发电平
 		.trigger_mode = 0          // 自动触发
 	};
 	
-	// 使用当前时基配置更新参数
+	// 动态计算实际采样率
+	osc_params.sample_rate = (u32)(1e9 / ADC_SAMPLE_TIME_NS); // 从ns转换为Hz
+		// 使用当前时基配置更新参数
 	osc_params.timebase_us = current_timebase.time_per_division_us;
+	
+	// 根据时基抽取比例调整有效采样率
+	// 注意：抽取后的有效采样率 = 原始采样率 / 抽取比例
+	u32 effective_sample_rate = osc_params.sample_rate / current_timebase.decimation_ratio;
+	osc_params.sample_rate = effective_sample_rate;
 	
 	// 计算实际测量值 - 使用显示缓冲区数据
 	calculate_measurements(DisplaySampleBuffer, ADC_DISPLAY_SAMPLES, &osc_params);
@@ -148,12 +154,19 @@ int XAxiDma_Adc_Update(u32 width, u8 *frame, u32 stride)
 
 	// 将画布复制到帧缓冲区
 	frame_copy(width, WAVE_HEIGHT, stride, WAVE_START_COLUMN, WAVE_START_ROW, frame, WaveBuffer);
-
 	// 性能统计（每100帧显示一次）
 	if (frame_count % 100 == 0)
 	{
 		xil_printf("[性能] 已更新%d帧波形，时基: %s/格\r\n", 
 				   frame_count, current_timebase.timebase_label);
+		
+		// 频率计算调试信息（每100帧显示一次）
+		if (osc_params.frequency_hz > 0) {
+			printf("[频率] 测量频率: %.1f Hz, 有效采样率: %d Hz, Vpp: %.2f V\r\n", 
+					   osc_params.frequency_hz, effective_sample_rate, osc_params.voltage_pp);
+		} else {
+			xil_printf("[频率] 无法测量频率（信号太弱或频率超出范围）\r\n");
+		}
 	}
 
 	// 开始下一次ADC采样 - 使用主缓冲区长度
