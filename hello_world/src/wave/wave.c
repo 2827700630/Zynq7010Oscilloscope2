@@ -82,7 +82,10 @@ void draw_wave(u32 width, u32 height,  void *BufferPtr, u8 *CanvasBufferPtr, u8 
 	else
 		adder = 0 ;
 
-	for(i = 0; i < width ; i++)
+	/* 注意：这里width应该始终是1920，因为我们绘制的是显示缓冲区数据 */
+	u32 actual_width = (width > 1920) ? 1920 : width;
+	
+	for(i = 0; i < actual_width ; i++)
 	{
 		/* 将字符数据转换为适应新高度的范围 */
 		if (i == 0)

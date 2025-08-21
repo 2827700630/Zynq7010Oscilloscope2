@@ -14,6 +14,9 @@
 #include "platform.h"
 #include "sleep.h"
 #include "adc_dma_ctrl.h"
+#include "xgpiops.h"				// GPIO驱动
+#include "wave/oscilloscope_text.h" // 添加这个头文件以支持ADC_CODE_TO_INPUT_VOLTAGE宏
+
 /*
  * XPAR 重定义
  */
@@ -34,6 +37,14 @@
 #define DMA_XLCONCAT_PORT 2										/* DMA连接在xlconcat的In2端口 */
 #define S2MM_INTR_ID (ZYNQ_IRQ_F2P_BASE_ID + DMA_XLCONCAT_PORT) /* 61+2=63 */
 
+/* GPIO和按键定义 */
+#define GPIO_DEVICE_ID 0		   /* PS GPIO设备ID定义 */
+#define BUTTON_MIO_PIN_TIMEBASE 50 /* 时基切换按键连接到MIO50 */
+#define BUTTON_MIO_PIN_TRIGGER 51  /* 触发电平调节按键连接到MIO51 */
+#define BUTTON_PRESS_LOW 0		   /* 按键按下时为低电平 */
+#define BUTTON_RELEASE_HIGH 1	   /* 按键释放时为高电平 */
+#define DEBOUNCE_DELAY_MS 50	   /* 按键防抖延时(毫秒) */
+
 /* -------------------------------------------------------- */
 /*				全局变量									*/
 /* -------------------------------------------------------- */
@@ -48,9 +59,23 @@ u8 *pFrames[DISPLAY_NUM_FRAMES]; // 指向帧缓冲区的指针数组
 
 // 中断结构体和函数
 XScuGic INST;
-int SetInterruptInit(XScuGic *InstancePtr, u16 IntrID);
 
-/// @brief 主函数
+// GPIO驱动实例
+XGpioPs Gpio;
+
+// 函数声明
+int SetInterruptInit(XScuGic *InstancePtr, u16 IntrID);
+int InitializeGpio(void);
+int CheckButtonPress(void);
+int CheckTriggerButtonPress(void);
+
+// 触发控制功能
+void adjust_trigger_level(int direction);
+void adjust_trigger_level_direct(u32 trigger_level);
+void set_trigger_voltage(float voltage_v);
+void reset_trigger_system(u32 trigger_level);
+void cycle_trigger_mode(void);
+void set_trigger_voltage(float voltage_v); /// @brief 主函数
 /// @param 无
 /// @return 0
 int main(void)
@@ -59,13 +84,23 @@ int main(void)
 	int Status;
 	XAxiVdma_Config *vdmaConfig;
 	int i;
-
 	/*
 	 * 初始化ScuGic中断
 	 */
 	Status = SetInterruptInit(&INST, INT_DEVICE_ID);
 	if (Status != XST_SUCCESS)
 		return XST_FAILURE;
+
+	/*
+	 * 初始化GPIO（时基切换按键）
+	 */
+	Status = InitializeGpio();
+	if (Status != XST_SUCCESS)
+	{
+		xil_printf("GPIO Initialization Failed\r\n");
+		return XST_FAILURE;
+	}
+	xil_printf("GPIO Initialization Success\r\n");
 
 	/*
 	 * 初始化指向3个帧缓冲区的指针数组
@@ -110,7 +145,6 @@ int main(void)
 	DemoPrintTest(dispCtrl.framePtr[dispCtrl.curFrame], dispCtrl.vMode.width, dispCtrl.vMode.height, dispCtrl.stride, DEMO_PATTERN_3);
 
 	usleep(1000); // 等待1秒钟
-
 	// 初始化ADC波形显示模块
 	Status = XAxiDma_Adc_Init(dispCtrl.vMode.width, dispCtrl.framePtr[dispCtrl.curFrame], dispCtrl.stride, &INST);
 	if (Status != XST_SUCCESS)
@@ -119,8 +153,18 @@ int main(void)
 		cleanup_platform();
 		return -1;
 	}
+	// 初始化触发系统
+	reset_trigger_system(150); // 初始触发电平设为150（对应1V）
 
 	xil_printf("[主循环] 开始实时波形显示循环\r\n");
+
+	// 时基切换控制变量
+	static u8 current_timebase = 3;	  // 当前时基档位（从档位3开始）
+	static u32 last_button_check = 0; // 上次按键检测计数
+
+	// 自动演示控制变量（可选功能）
+	static u32 auto_demo_counter = 0;
+	static u8 auto_demo_enabled = 0; // 0=关闭自动演示，1=开启自动演示
 
 	// 主循环 - 在main函数中进行实时波形更新
 	while (1)
@@ -131,6 +175,63 @@ int main(void)
 		{
 		case XST_SUCCESS:
 			// 波形更新成功，继续循环
+			last_button_check++;
+			// 每10帧检测一次按键（约166ms间隔，假设60FPS）
+			if (last_button_check >= 10)
+			{
+				last_button_check = 0;
+
+				// 检测时基切换按键（MIO50）
+				if (CheckButtonPress())
+				{
+					// 切换到下一个时基档位
+					current_timebase++;
+					if (current_timebase > TIMEBASE_COUNT)
+					{
+						current_timebase = 1; // 循环回到第一档
+					}
+					set_timebase(current_timebase);
+					xil_printf("[按键] 手动切换到时基档位: %d\r\n", current_timebase);
+
+					// 按键按下后暂停一下，避免连续触发
+					usleep(200000); // 等待200ms
+				}
+
+				// 检测触发电平调节按键（MIO51）
+				if (CheckTriggerButtonPress())
+				{
+					// 循环调节触发电平（每次按下增加，从0到255循环）
+					static u32 trigger_press_count = 0;
+					trigger_press_count++;
+
+					// 计算新的触发电平（分16档，每档16个ADC码值）
+					u32 new_trigger_level = ((trigger_press_count % 16) + 1) * 16;
+					if (new_trigger_level > 255)
+						new_trigger_level = 255;
+
+					adjust_trigger_level_direct(new_trigger_level);
+
+					// 按键按下后暂停一下，避免连续触发
+					usleep(200000); // 等待200ms
+				}
+			}
+
+			// 可选：自动演示功能（按住按键5秒可切换）
+			if (auto_demo_enabled)
+			{
+				auto_demo_counter++;
+				if (auto_demo_counter >= 300)
+				{ // 每5秒自动切换
+					auto_demo_counter = 0;
+					current_timebase++;
+					if (current_timebase > TIMEBASE_COUNT)
+					{
+						current_timebase = 1;
+					}
+					set_timebase(current_timebase);
+					xil_printf("[自动] 演示切换到时基档位: %d\r\n", current_timebase);
+				}
+			}
 			break;
 
 		case XST_NO_DATA:
@@ -282,4 +383,242 @@ int SetInterruptInit(XScuGic *InstancePtr, u16 IntrID)
 	Xil_ExceptionEnable();
 
 	return XST_SUCCESS;
+}
+
+/**
+ * @brief InitializeGpio - 初始化GPIO控制器
+ * @return XST_SUCCESS on success, XST_FAILURE on failure
+ * @note 初始化GPIO控制器，并配置MIO50为输入引脚
+ */
+int InitializeGpio(void)
+{
+	XGpioPs_Config *ConfigPtr;
+	int Status;
+
+	// 查找GPIO配置
+	ConfigPtr = XGpioPs_LookupConfig(GPIO_DEVICE_ID);
+	if (ConfigPtr == NULL)
+	{
+		xil_printf("[GPIO错误] 无法找到GPIO配置\r\n");
+		return XST_FAILURE;
+	}
+
+	// 初始化GPIO驱动
+	Status = XGpioPs_CfgInitialize(&Gpio, ConfigPtr, ConfigPtr->BaseAddr);
+	if (Status != XST_SUCCESS)
+	{
+		xil_printf("[GPIO错误] GPIO初始化失败: %d\r\n", Status);
+		return XST_FAILURE;
+	}
+	// 配置MIO50为输入引脚（时基切换）
+	XGpioPs_SetDirectionPin(&Gpio, BUTTON_MIO_PIN_TIMEBASE, 0); // 0=输入，1=输出
+
+	// 配置MIO51为输入引脚（触发电平调节）
+	XGpioPs_SetDirectionPin(&Gpio, BUTTON_MIO_PIN_TRIGGER, 0); // 0=输入，1=输出
+
+	xil_printf("[GPIO] MIO%d配置为时基切换按键输入\r\n", BUTTON_MIO_PIN_TIMEBASE);
+	xil_printf("[GPIO] MIO%d配置为触发电平调节按键输入\r\n", BUTTON_MIO_PIN_TRIGGER);
+	return XST_SUCCESS;
+}
+
+/**
+ * @brief CheckButtonPress - 检测时基切换按键是否被按下
+ * @return 1 if button is pressed, 0 if not pressed
+ * @note 检测MIO50按键状态，包含防抖处理
+ */
+int CheckButtonPress(void)
+{
+	static u32 button_state = BUTTON_RELEASE_HIGH; // 上次按键状态
+	static u32 debounce_counter = 0;			   // 防抖计数器
+	static u32 press_detected = 0;				   // 按键按下检测标志
+
+	u32 current_state = XGpioPs_ReadPin(&Gpio, BUTTON_MIO_PIN_TIMEBASE);
+
+	// 如果状态发生变化，开始防抖计数
+	if (current_state != button_state)
+	{
+		debounce_counter++;
+
+		// 防抖延时：连续检测到相同状态一定次数后确认状态变化
+		if (debounce_counter >= 3)
+		{ // 约30ms防抖（10帧 * 3次检测）
+			button_state = current_state;
+			debounce_counter = 0;
+
+			// 检测按键从高电平变为低电平（按下动作）
+			if (button_state == BUTTON_PRESS_LOW && !press_detected)
+			{
+				press_detected = 1; // 标记已检测到按下
+				return 1;			// 返回按键按下
+			}
+
+			// 检测按键从低电平变为高电平（释放动作）
+			if (button_state == BUTTON_RELEASE_HIGH && press_detected)
+			{
+				press_detected = 0; // 清除按下标记
+			}
+		}
+	}
+	else
+	{
+		debounce_counter = 0; // 状态稳定，清除防抖计数
+	}
+
+	return 0; // 没有检测到按键按下
+}
+
+/**
+ * @brief CheckTriggerButtonPress - 检测触发电平调节按键是否被按下
+ * @return 1 if button is pressed, 0 if not pressed
+ * @note 检测MIO51按键状态，包含防抖处理
+ */
+int CheckTriggerButtonPress(void)
+{
+	static u32 button_state = BUTTON_RELEASE_HIGH; // 上次按键状态
+	static u32 debounce_counter = 0;			   // 防抖计数器
+	static u32 press_detected = 0;				   // 按键按下检测标志
+
+	u32 current_state = XGpioPs_ReadPin(&Gpio, BUTTON_MIO_PIN_TRIGGER);
+
+	// 如果状态发生变化，开始防抖计数
+	if (current_state != button_state)
+	{
+		debounce_counter++;
+
+		// 防抖延时：连续检测到相同状态一定次数后确认状态变化
+		if (debounce_counter >= 3)
+		{ // 约30ms防抖（10帧 * 3次检测）
+			button_state = current_state;
+			debounce_counter = 0;
+
+			// 检测按键从高电平变为低电平（按下动作）
+			if (button_state == BUTTON_PRESS_LOW && !press_detected)
+			{
+				press_detected = 1; // 标记已检测到按下
+				return 1;			// 返回按键按下
+			}
+
+			// 检测按键从低电平变为高电平（释放动作）
+			if (button_state == BUTTON_RELEASE_HIGH && press_detected)
+			{
+				press_detected = 0; // 清除按下标记
+			}
+		}
+	}
+	else
+	{
+		debounce_counter = 0; // 状态稳定，清除防抖计数
+	}
+
+	return 0; // 没有检测到按键按下
+}
+
+/**
+ * @brief 直接设置触发电平
+ * @param trigger_level 新的触发电平值 (0-255)
+ */
+void adjust_trigger_level_direct(u32 trigger_level)
+{
+	if (trigger_level > 255)
+		trigger_level = 255;
+
+	// 更新全局触发电平
+	extern u32 global_trigger_level;
+	global_trigger_level = trigger_level;
+
+	xil_printf("[触发] 触发电平设置为: %d (%.2fV)\r\n",
+			   trigger_level,
+			   ADC_CODE_TO_INPUT_VOLTAGE(trigger_level));
+}
+
+/**
+ * @brief 调节触发电平
+ * @param direction 调节方向：1为增加，-1为减少
+ */
+void adjust_trigger_level(int direction)
+{
+	static u32 current_trigger_level = 102; // 初始触发电平对应-1V（VAD=0.8V，ADC码值=102）
+
+	// 根据AD8056电路：VAD = (1/5)VIN + 1
+	// 每1V输入电压变化对应的ADC码值变化：(1V/5) / 2V * 255 = 25.5 ≈ 26
+	const u32 VOLTAGE_STEP = 26; // 每次调节1V对应的ADC码值步长
+
+	if (direction > 0)
+	{
+		// 增加触发电平（增加1V）
+		if (current_trigger_level <= (255 - VOLTAGE_STEP))
+		{
+			current_trigger_level += VOLTAGE_STEP;
+		}
+		else
+		{
+			current_trigger_level = 255; // 限制在最大值
+		}
+	}
+	else if (direction < 0)
+	{
+		// 减少触发电平（减少1V）
+		if (current_trigger_level >= VOLTAGE_STEP)
+		{
+			current_trigger_level -= VOLTAGE_STEP;
+		}
+		else
+		{
+			current_trigger_level = 0; // 限制在最小值
+		}
+	}
+
+	// 更新全局触发电平
+	extern u32 global_trigger_level;
+	global_trigger_level = current_trigger_level;
+
+	xil_printf("[触发] 触发电平调节为: %d (%.1fV)\r\n",
+			   current_trigger_level,
+			   ADC_CODE_TO_INPUT_VOLTAGE(current_trigger_level));
+}
+
+/**
+ * @brief 重置触发系统状态
+ * @param trigger_level 初始触发电平 (0-255)
+ */
+void reset_trigger_system(u32 trigger_level)
+{
+	extern u32 global_trigger_level;
+
+	// 确保触发电平在有效范围内
+	if (trigger_level > 255)
+		trigger_level = 255;
+
+	global_trigger_level = trigger_level;
+
+	xil_printf("[触发] 触发系统重置，初始电平: %d (%.2fV)\r\n",
+			   trigger_level,
+			   ADC_CODE_TO_INPUT_VOLTAGE(trigger_level));
+}
+
+/**
+ * @brief 直接设置触发电压（基于实际输入电压）
+ * @param voltage_v 触发电压值（-5V到+5V）
+ */
+void set_trigger_voltage(float voltage_v)
+{
+	// 限制电压范围
+	if (voltage_v > 5.0f)
+		voltage_v = 5.0f;
+	if (voltage_v < -5.0f)
+		voltage_v = -5.0f;
+
+	// 根据AD8056电路转换：VAD = (1/5)VIN + 1
+	float vad = (voltage_v / 5.0f) + 1.0f;
+
+	// 转换为ADC码值：ADC = (VAD / 2V) * 255
+	u32 adc_code = (u32)((vad / 2.0f) * 255.0f);
+	if (adc_code > 255)
+		adc_code = 255;
+
+	// 更新全局触发电平
+	extern u32 global_trigger_level;
+	global_trigger_level = adc_code;
+
+	xil_printf("[触发] 触发电压设置为: %.1fV (ADC码值: %d)\r\n", voltage_v, adc_code);
 }

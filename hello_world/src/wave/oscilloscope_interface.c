@@ -7,7 +7,6 @@
 #include "wave.h"
 #include <math.h>
 
-
 /**
  * 绘制完整的示波器界面
  */
@@ -16,26 +15,31 @@ void draw_complete_oscilloscope_interface(u8 *canvas, u32 canvas_width, u32 canv
                                           OscilloscopeParams *params)
 {
     // 1. 清空画布（黑色背景）
-    for (u32 i = 0; i < canvas_width * canvas_height * 3; i++) {
-        canvas[i] = 0;    }
-    
+    for (u32 i = 0; i < canvas_width * canvas_height * 3; i++)
+    {
+        canvas[i] = 0;
+    }
+
     // 2. 绘制网格
     draw_grid(canvas_width, canvas_height, canvas);
-    
+
     // 3. 绘制波形数据
-    if (waveform_data != NULL && waveform_length > 0) {
+    if (waveform_data != NULL && waveform_length > 0)
+    {
         // 使用wave.c中的draw_wave函数绘制波形
-        draw_wave(canvas_width, canvas_height, waveform_data, canvas, 
+        draw_wave(canvas_width, canvas_height, waveform_data, canvas,
                   UNSIGNEDCHAR, 8, 0, 1); // 黄色波形
     }
-    
+
     // 4. 绘制示波器信息面板
-    if (params != NULL) {
+    if (params != NULL)
+    {
         draw_oscilloscope_info(canvas, canvas_width, canvas_height, params);
     }
-    
+
     // 5. 绘制网格标签
-    if (params != NULL) {
+    if (params != NULL)
+    {
         draw_grid_labels(canvas, canvas_width, canvas_height, params);
     }
 }
@@ -49,7 +53,7 @@ void draw_cursor_measurements(u8 *canvas, u32 canvas_width, u32 canvas_height,
 
     /* 绘制垂直光标线 */
     for (u32 y = 0; y < canvas_height; y++)
-    {        // 光标1 - 黄色虚线
+    { // 光标1 - 黄色虚线
         if (y % 4 < 2)
         {
             draw_point(canvas, cursor1_x, y, canvas_width, 0, 255, 255); // 黄色 (B,G,R)
